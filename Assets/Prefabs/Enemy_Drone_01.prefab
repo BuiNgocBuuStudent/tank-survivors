@@ -182,6 +182,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _player: {fileID: 0}
   _moveSpeed: 1.5
+  _dmg: 1
 --- !u!61 &1241374044143755955
 BoxCollider2D:
   m_ObjectHideFlags: 0

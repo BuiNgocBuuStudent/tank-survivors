@@ -9,6 +9,7 @@ public class EnemyControllerBase : MonoBehaviour, IGetHit
     Rigidbody2D _rb;
 
     [SerializeField] float _moveSpeed;
+    [SerializeField] float _dmg;
 
     // Start is called before the first frame update
     void Start()
@@ -55,6 +56,6 @@ public class EnemyControllerBase : MonoBehaviour, IGetHit
         IGetHit isCanGetHit = collision.gameObject.GetComponent<IGetHit>();
         if (isCanGetHit == null)
             return;
-        isCanGetHit.GetHit(1);
+        isCanGetHit.GetHit(_dmg);
     }
 }

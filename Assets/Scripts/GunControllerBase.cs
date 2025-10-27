@@ -50,9 +50,10 @@ public abstract class GunControllerBase : MonoBehaviour
                 _enemy = target.transform;
                 return true;
             }
+            else
+                _enemy = null;
         }
 
-        _enemy = null;
         return false;
     }
     private void OnDrawGizmosSelected()
