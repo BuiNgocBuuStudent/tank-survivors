@@ -13,11 +13,6 @@ public abstract class GunControllerBase : MonoBehaviour
     [SerializeField] protected float _rotateSpeed, _cooldownTime, _detectTargetRadius;
     protected float _timer;
 
-    [Header("-----Bullet config-----")]
-    [SerializeField] protected float _bulletSpeed;
-    [SerializeField] protected float _bulletDmg;
-    [SerializeField] protected float _bulletLifeTime;
-
     // Start is called before the first frame update
     void Start()
     {

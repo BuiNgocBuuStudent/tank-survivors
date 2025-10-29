@@ -116,7 +116,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8067326763072987388}
   - component: {fileID: 6981159788778402679}
-  - component: {fileID: 8616251027994911589}
+  - component: {fileID: 529668619563063293}
   - component: {fileID: 1241374044143755955}
   m_Layer: 9
   m_Name: Enemy_Drone_01
@@ -168,7 +168,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &8616251027994911589
+--- !u!114 &529668619563063293
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -177,12 +177,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 3680402012277860845}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc6c78377af416d43847ea242b057006, type: 3}
+  m_Script: {fileID: 11500000, guid: 65baa192ba4f88748863905e1002a7f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _player: {fileID: 0}
+  _rb: {fileID: 6981159788778402679}
+  _gemPrefab: {fileID: 1240137637809547934, guid: 70b8ed7672ff1ac409c119f13ebf8141, type: 3}
   _moveSpeed: 1.5
   _dmg: 1
+  _initialHealth: 1
+  _currentHealth: 0
 --- !u!61 &1241374044143755955
 BoxCollider2D:
   m_ObjectHideFlags: 0

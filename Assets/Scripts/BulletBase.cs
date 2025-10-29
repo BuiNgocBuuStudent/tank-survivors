@@ -14,14 +14,13 @@ public abstract class BulletBase : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-    }
-    public void Init(float speed, float dmg, float lifeTime, Vector2 movement)
-    {
-        this._speed = speed;
-        this._dmg = dmg;
-        this._lifeTime = lifeTime;
-        this._movement = movement;
 
+    }
+    public void Init(Vector2 movement)
+    {
+        if (_rb == null)
+            _rb = this.GetComponent<Rigidbody2D>();
+        this._movement = movement;
     }
     // Update is called once per frame
     void Update()
@@ -31,9 +30,17 @@ public abstract class BulletBase : MonoBehaviour
 
     private void FixedUpdate()
     {
-        
+
     }
     protected abstract void Move();
-    protected abstract IEnumerator RepeatLifeTime();
+
+    protected IEnumerator RepeatLifeTime()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(_lifeTime);
+            this.gameObject.SetActive(false);
+        }
+    }
     public abstract void Boom(GameObject target);
 }

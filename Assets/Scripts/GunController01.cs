@@ -41,7 +41,7 @@ public class GunController01 : GunControllerBase
         this.transform.rotation = quaternion;
 
         BulletBase bullet = ObjectPooler.Instance.GetComp(_bulletPrefab);
-        bullet.Init(_bulletSpeed, _bulletDmg, _bulletLifeTime, this.transform.up);
+        bullet.Init(this.transform.up);
         bullet.transform.position = this.transform.position;
         bullet.transform.rotation = this.transform.rotation;
         bullet.gameObject.SetActive(true);

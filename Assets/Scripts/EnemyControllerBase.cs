@@ -5,27 +5,31 @@ using UnityEngine;
 
 public class EnemyControllerBase : MonoBehaviour, IGetHit
 {
-    [SerializeField] PlayerController _player;
-    Rigidbody2D _rb;
+    private PlayerController _player;
+    [SerializeField] private Rigidbody2D _rb;
+    [SerializeField] protected GameObject _gemPrefab;
 
-    [SerializeField] float _moveSpeed;
-    [SerializeField] float _dmg;
+    [SerializeField] protected float _moveSpeed;
+    [SerializeField] protected float _dmg, _initialHealth, _currentHealth;
 
     // Start is called before the first frame update
     void Start()
     {
-        _rb = this.GetComponent<Rigidbody2D>();
 
     }
-    public void Init (Vector2 randomSpawnPos)
+    public void Init(Vector2 randomSpawnPos)
     {
-       _player = GameManager.Instance.Player;
+        if (_rb == null)
+            _rb = this.GetComponent<Rigidbody2D>();
+        _player = GameManager.Instance.Player;
+
+        _currentHealth = _initialHealth;
         this.transform.position = randomSpawnPos;
     }
     // Update is called once per frame
     void Update()
     {
-        
+
     }
     private void FixedUpdate()
     {
@@ -39,7 +43,7 @@ public class EnemyControllerBase : MonoBehaviour, IGetHit
 
         float angle = Mathf.Atan2(movement.y, movement.x) * Mathf.Rad2Deg + 90;
         Quaternion quaternion = this.transform.rotation;
-        quaternion.eulerAngles = new Vector3(0,0,angle);
+        quaternion.eulerAngles = new Vector3(0, 0, angle);
         this.transform.rotation = quaternion;
 
         _rb.velocity = movement.normalized * _moveSpeed;
@@ -48,7 +52,20 @@ public class EnemyControllerBase : MonoBehaviour, IGetHit
 
     public void GetHit(float dmg)
     {
-        gameObject.SetActive(false);
+        _currentHealth -= dmg;
+        Debug.Log(_currentHealth);
+        if(_currentHealth <= 0)
+        {
+            this.gameObject.SetActive(false);
+            SpawnGem();
+        }
+    }
+
+    protected void SpawnGem()
+    {
+        GameObject gem = ObjectPooler.Instance.GetObject(_gemPrefab);
+        gem.transform.position = this.transform.position;
+        gem.gameObject.SetActive(true);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

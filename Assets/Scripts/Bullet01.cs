@@ -7,7 +7,6 @@ public class Bullet01 : BulletBase
     // Start is called before the first frame update
     void Start()
     {
-        _rb = this.GetComponent<Rigidbody2D>();
 
     }
     private void OnEnable()
@@ -46,15 +45,6 @@ public class Bullet01 : BulletBase
     protected override void Move()
     {
         _rb.velocity = _movement * _speed;
-    }
-
-    protected override IEnumerator RepeatLifeTime()
-    {
-        while (true)
-        {
-            yield return new WaitForSeconds(_lifeTime);
-            this.gameObject.SetActive(false);
-        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
