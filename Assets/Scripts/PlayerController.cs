@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour, IGetHit
     }
 
     [SerializeField] GunControllerBase _gun;
-    [SerializeField] HealthBar _healthBar;
+    [SerializeField] SlideBar _healthBar;
     [SerializeField] PlayerState _playerState;
     Rigidbody2D _rb;
 
@@ -25,7 +25,8 @@ public class PlayerController : MonoBehaviour, IGetHit
     }
     public void Init()
     {
-        _healthBar.SetMaxHealth(_hp);
+        _healthBar.SetMaxValue(_hp);
+        _healthBar.UpdateValue(_hp);
         if (_gun == null)
             _gun = this.GetComponentInChildren<GunControllerBase>();
         _gun.Init();
@@ -56,7 +57,7 @@ public class PlayerController : MonoBehaviour, IGetHit
     public void GetHit(float dmg)
     {
         _hp = _hp - (dmg * (1 - _armorPercent / 100));
-        _healthBar.SetHeath(_hp);
+        _healthBar.UpdateValue(_hp);
 
         if (_hp <= 0)
         {

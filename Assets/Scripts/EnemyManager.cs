@@ -5,17 +5,21 @@ using UnityEngine;
 public class EnemyManager : MonoBehaviour
 {
     [SerializeField] EnemyControllerBase _enemyPrefab;
+    [SerializeField] Gem _gemPrefab;
 
     float _enemySpawnRate;
     float _offset;
     // Start is called before the first frame update
     void Start()
     {
+        
+    }
+    public void Init()
+    {
         _enemySpawnRate = 1f;
         _offset = 2f;
         StartCoroutine(SpawnEnemy());
     }
-
     // Update is called once per frame
     void Update()
     {
@@ -34,6 +38,12 @@ public class EnemyManager : MonoBehaviour
         }
     }
 
+    public void SpawnExpGem(Vector2 enemyDiePos)
+    {
+        Gem gem = ObjectPooler.Instance.GetComp(_gemPrefab);
+        gem.transform.position = enemyDiePos;
+        gem.gameObject.SetActive(true);
+    }
     private Vector2 GetRandomSpawnPos()
     {
         Vector2 screenTopRight = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height)); // góc trên cùng phải

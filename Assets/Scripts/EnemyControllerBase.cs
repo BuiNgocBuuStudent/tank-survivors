@@ -7,7 +7,7 @@ public class EnemyControllerBase : MonoBehaviour, IGetHit
 {
     private PlayerController _player;
     [SerializeField] private Rigidbody2D _rb;
-    [SerializeField] protected GameObject _gemPrefab;
+    private EnemyManager _enemyManager;
 
     [SerializeField] protected float _moveSpeed;
     [SerializeField] protected float _dmg, _initialHealth, _currentHealth;
@@ -22,6 +22,7 @@ public class EnemyControllerBase : MonoBehaviour, IGetHit
         if (_rb == null)
             _rb = this.GetComponent<Rigidbody2D>();
         _player = GameManager.Instance.Player;
+        _enemyManager = GameManager.Instance.EnemyManager;
 
         _currentHealth = _initialHealth;
         this.transform.position = randomSpawnPos;
@@ -53,19 +54,11 @@ public class EnemyControllerBase : MonoBehaviour, IGetHit
     public void GetHit(float dmg)
     {
         _currentHealth -= dmg;
-        Debug.Log(_currentHealth);
         if(_currentHealth <= 0)
         {
             this.gameObject.SetActive(false);
-            SpawnGem();
+            _enemyManager.SpawnExpGem(this.transform.position);            
         }
-    }
-
-    protected void SpawnGem()
-    {
-        GameObject gem = ObjectPooler.Instance.GetObject(_gemPrefab);
-        gem.transform.position = this.transform.position;
-        gem.gameObject.SetActive(true);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
