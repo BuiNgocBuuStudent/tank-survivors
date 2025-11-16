@@ -15,8 +15,9 @@ public class GunController01 : GunControllerBase
     // Update is called once per frame
     void Update()
     {
-        _timer -= Time.deltaTime;
         this.transform.Rotate(new Vector3(0, 0, _rotateSpeed * Time.deltaTime));
+
+        _timer -= Time.deltaTime;
 
         if (DetectTarget(_detectTargetRadius))
         {
@@ -30,22 +31,16 @@ public class GunController01 : GunControllerBase
     }
     protected override void Fire()
     {
-        if (_timer >= 0)
+        if (_timer >= 0 || !AimTarget())
             return;
 
-        Vector2 movement = _enemy.transform.position - this.transform.position;
-
-        float angle = Mathf.Atan2(movement.y, movement.x) * Mathf.Rad2Deg - 90;
-        Quaternion quaternion = this.transform.rotation;
-        quaternion.eulerAngles = new Vector3(0, 0, angle);
-        this.transform.rotation = quaternion;
+        _timer = _cooldownTime;
 
         BulletBase bullet = ObjectPooler.Instance.GetComp(_bulletPrefab);
-        bullet.Init(this.transform.up);
+        bullet.Init(_bulletSpeed, _movement);
         bullet.transform.position = this.transform.position;
         bullet.transform.rotation = this.transform.rotation;
         bullet.gameObject.SetActive(true);
 
-        _timer = _cooldownTime;
     }
 }

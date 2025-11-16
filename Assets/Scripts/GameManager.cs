@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
 {
-    [SerializeField] PlayerController _player;
-    public PlayerController Player => _player;
+    [SerializeField] PlayerControllerBase _player;
+    public PlayerControllerBase Player => _player;
 
     [SerializeField] EnemyManager _enemyManager;
     public EnemyManager EnemyManager => _enemyManager;

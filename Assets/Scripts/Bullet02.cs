@@ -2,18 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet01 : BulletBase
+public class Bullet02 : BulletBase
 {
     // Start is called before the first frame update
     void Start()
     {
-       
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-      
+        
     }
     public override void Boom(GameObject target)
     {
@@ -31,5 +31,4 @@ public class Bullet01 : BulletBase
     {
         this.Boom(collision.gameObject);
     }
-
 }

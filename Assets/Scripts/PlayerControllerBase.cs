@@ -2,29 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour, IGetHit
+public class PlayerControllerBase : MonoBehaviour, IGetHit
 {
-    public enum PlayerState
-    {
-        IDLE,
-        MOVE
-    }
-
-    [SerializeField] GunControllerBase _gun;
+    [Header("-----Base config-----")]
+    [SerializeField] protected GunControllerBase _gun;
     [SerializeField] SlideBar _healthBar;
-    [SerializeField] PlayerState _playerState;
-    Rigidbody2D _rb;
+    [SerializeField] Rigidbody2D _rb;
 
-    [SerializeField] float _hp, _armorPercent;
-    [SerializeField] float _moveSpeed, _rotateSpeed;
+    
+    [SerializeField] protected float _hp, _armorPercent;
+    [SerializeField] protected float _moveSpeed, _rotateSpeed;
 
     // Start is called before the first frame update
     void Start()
     {
-        _rb = this.GetComponent<Rigidbody2D>();
+       
     }
     public void Init()
     {
+        if (_rb == null)
+            _rb = this.GetComponent<Rigidbody2D>();
         _healthBar.SetMaxValue(_hp);
         _healthBar.UpdateValue(_hp);
         if (_gun == null)
@@ -34,7 +31,7 @@ public class PlayerController : MonoBehaviour, IGetHit
     // Update is called once per frame
     void Update()
     {
-        UpdateState();
+        
     }
     private void FixedUpdate()
     {
@@ -46,14 +43,6 @@ public class PlayerController : MonoBehaviour, IGetHit
 
         this.transform.Rotate(new Vector3(0, 0, Input.GetAxis("Horizontal") * -_rotateSpeed));
     }
-    private void UpdateState()
-    {
-        if (_rb.velocity.y != 0)
-            _playerState = PlayerState.MOVE;
-        else
-            _playerState = PlayerState.IDLE;
-    }
-
     public void GetHit(float dmg)
     {
         _hp = _hp - (dmg * (1 - _armorPercent / 100));

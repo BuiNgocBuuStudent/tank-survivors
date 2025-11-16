@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class EnemyControllerBase : MonoBehaviour, IGetHit
+public abstract class EnemyControllerBase : MonoBehaviour, IGetHit
 {
-    private PlayerController _player;
+    private PlayerControllerBase _player;
     [SerializeField] private Rigidbody2D _rb;
     private EnemyManager _enemyManager;
 
