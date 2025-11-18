@@ -7,8 +7,8 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] EnemyControllerBase _enemyPrefab;
     [SerializeField] Gem _gemPrefab;
 
-    float _enemySpawnRate;
-    float _offset;
+    [SerializeField] float _enemySpawnRate;
+    [SerializeField] float _offset;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,8 +16,6 @@ public class EnemyManager : MonoBehaviour
     }
     public void Init()
     {
-        _enemySpawnRate = 1f;
-        _offset = 2f;
         StartCoroutine(SpawnEnemy());
     }
     // Update is called once per frame

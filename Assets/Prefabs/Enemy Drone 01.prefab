@@ -119,7 +119,7 @@ GameObject:
   - component: {fileID: 529668619563063293}
   - component: {fileID: 1241374044143755955}
   m_Layer: 9
-  m_Name: Enemy_Drone_01
+  m_Name: Enemy Drone 01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

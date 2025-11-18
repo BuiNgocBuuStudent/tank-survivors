@@ -10,11 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 4882102794445561844}
   - component: {fileID: 9149698379365210685}
+  - component: {fileID: 268695674567509447}
   - component: {fileID: 8441221223264147281}
   - component: {fileID: 3260195200175979516}
-  - component: {fileID: 268695674567509447}
   m_Layer: 8
-  m_Name: Bullet_02
+  m_Name: Bullet 02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30,8 +30,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.6991876, y: -2.1812754, z: 0}
-  m_LocalScale: {x: 0.21102, y: 0.13758, z: 0.2}
-  m_ConstrainProportionsScale: 1
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -87,6 +87,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &268695674567509447
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1998697431240182972}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c43c831fc026737498736391d5b3d99f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _lifeTime: 3
+  _dmg: 1
 --- !u!50 &8441221223264147281
 Rigidbody2D:
   serializedVersion: 4
@@ -146,30 +160,16 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.045435727, y: 0.0000011324883}
+  m_Offset: {x: 0.00027310848, y: -0.003151834}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 6.4, y: 6.4}
+    oldSize: {x: 1.28, y: 1.28}
     newSize: {x: 0.18, y: 0.44}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.6183399, y: 3.2224917}
+  m_Size: {x: 0.115544915, y: 0.65100443}
   m_EdgeRadius: 0
---- !u!114 &268695674567509447
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1998697431240182972}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c43c831fc026737498736391d5b3d99f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _lifeTime: 3
-  _dmg: 1

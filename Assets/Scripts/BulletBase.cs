@@ -8,7 +8,9 @@ public abstract class BulletBase : MonoBehaviour
     
     protected Rigidbody2D _rb;
 
-    [SerializeField] protected float _lifeTime, _dmg;
+    [Header("-----Base config-----")]
+    [SerializeField] protected float _lifeTime;
+    [SerializeField] protected float _dmg;
     protected float _speed;
     protected Vector2 _movement = Vector2.zero;
     protected Coroutine _deactivateWait = null;
