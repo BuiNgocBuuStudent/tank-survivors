@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,6 +9,7 @@ public abstract class GunControllerBase : MonoBehaviour
     protected PlayerControllerBase _player;
     [SerializeField] private LayerMask _enemyLayerMask;
     protected Transform _enemy;
+    [SerializeField] protected GunState _gunState;
 
     [SerializeField] protected float _cooldownTime, _rotateSpeed, _detectTargetRadius;
     protected float _timer;
@@ -16,6 +17,12 @@ public abstract class GunControllerBase : MonoBehaviour
 
     [Header("-----Bullet config-----")]
     [SerializeField] protected float _bulletSpeed;
+
+    protected enum GunState
+    {
+        ROTATE,
+        SHOOT
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -25,7 +32,6 @@ public abstract class GunControllerBase : MonoBehaviour
     public void Init()
     {
         _player = GameManager.Instance.Player;
-
         _timer = 0;
     }
     // Update is called once per frame
@@ -33,26 +39,43 @@ public abstract class GunControllerBase : MonoBehaviour
     {
 
     }
+    private void FixedUpdate()
+    {
+        if (_gunState != GunState.SHOOT)
+            this.transform.Rotate(new Vector3(0, 0, _rotateSpeed * Time.deltaTime));
+        _timer -= Time.deltaTime;
 
+    }
     protected abstract void Fire();
 
     protected virtual bool DetectTarget(float radius)
     {
+        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, radius, _enemyLayerMask);
 
-        Collider2D[] targetList = Physics2D.OverlapCircleAll(transform.position, radius, _enemyLayerMask);
-
-        foreach (Collider2D target in targetList)
+        if (hits.Length == 0)
         {
-            if (target != null)
-            {
-                _enemy = target.transform;
-                return true;
-            }
-            else
-                _enemy = null;
+            _enemy = null;
+            _gunState = GunState.ROTATE;
+            return false;
         }
 
-        return false;
+        // Ưu tiên mục tiêu gần nhất
+        Collider2D closestTarget = null;
+        float closestDistance = Mathf.Infinity;
+
+        foreach (Collider2D hit in hits)
+        {
+            if (hit == null) continue;
+            float distance = Vector2.Distance(transform.position, hit.transform.position);
+            if (distance < closestDistance)
+            {
+                closestDistance = distance;
+                closestTarget = hit;
+            }
+        }
+
+        _enemy = closestTarget.transform;
+        return true;
     }
 
     protected bool AimTarget()

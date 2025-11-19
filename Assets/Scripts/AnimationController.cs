@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using PlayerState = PlayerControllerBase.PlayerState;
 
 public class AnimationController : MonoBehaviour
 {
@@ -16,5 +17,11 @@ public class AnimationController : MonoBehaviour
     {
 
     }
+    public void UpdatePlayerAnim(PlayerState state)
+    {
+        if(state == PlayerState.IDLE)
+        {
 
+        }
+    }
 }

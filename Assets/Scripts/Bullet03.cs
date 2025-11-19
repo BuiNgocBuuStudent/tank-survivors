@@ -6,7 +6,6 @@ public class Bullet03 : BulletBase
 {
     [Header("-----AOE Config-----")]
     [SerializeField] float _damageRange;
-    [SerializeField] int _enemiesTakeDamage;
     private static Collider2D[] _buffer = new Collider2D[50];
     public override void Boom(GameObject target)
     {
@@ -14,7 +13,7 @@ public class Bullet03 : BulletBase
 
         //OverlapCircleNonAlloc chỉ còn hổ trợ đến phiên bản 2022.3
         int hitCount = Physics2D.OverlapCircleNonAlloc(this.transform.position, _damageRange, _buffer);
-        for (int i = 0; i < hitCount && i < _enemiesTakeDamage; i++)
+        for (int i = 0; i < hitCount ; i++)
         {
             IGetHit isCanGetHit = _buffer[i].GetComponent<IGetHit>();
             if (isCanGetHit != null)

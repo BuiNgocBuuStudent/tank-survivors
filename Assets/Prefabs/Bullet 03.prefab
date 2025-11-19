@@ -101,8 +101,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _lifeTime: 3
   _dmg: 3
-  _damageRange: 2
-  _enemiesTakeDamage: 4
+  _damageRange: 1.5
 --- !u!50 &-7734819530292499447
 Rigidbody2D:
   serializedVersion: 4

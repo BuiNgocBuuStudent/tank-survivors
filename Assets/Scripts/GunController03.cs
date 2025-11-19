@@ -14,19 +14,16 @@ public class GunController03 : GunControllerBase
     // Update is called once per frame
     void Update()
     {
-        this.transform.Rotate(new Vector3(0, 0, _rotateSpeed * Time.deltaTime));
+        if (!DetectTarget(_detectTargetRadius))
+            return;
 
-        this._timer -= Time.deltaTime;
+        Vector2 dir = _enemy.transform.position - this.transform.position;
 
-        if (DetectTarget(_detectTargetRadius))
-        {
-            Vector2 dir = _enemy.transform.position - this.transform.position;
+        RaycastHit2D hit = Physics2D.Raycast(this.transform.position, dir, dir.magnitude);
+        Debug.DrawRay(this.transform.position, dir, Color.red);
 
-            RaycastHit2D hit = Physics2D.Raycast(this.transform.position, dir, dir.magnitude);
-            Debug.DrawRay(this.transform.position, dir, Color.red);
+        Fire();
 
-            Fire();
-        }
     }
 
     protected override void Fire()
@@ -34,6 +31,7 @@ public class GunController03 : GunControllerBase
         if (_timer >= 0 || !AimTarget())
             return;
 
+        _gunState = GunState.SHOOT;
         _timer = _cooldownTime;
 
         BulletBase bullet = ObjectPooler.Instance.GetComp(_bulletPrefab);
@@ -41,6 +39,8 @@ public class GunController03 : GunControllerBase
         bullet.transform.position = this.transform.position;
         bullet.transform.rotation = this.transform.rotation;
         bullet.gameObject.SetActive(true);
+
+        _gunState = GunState.ROTATE;
     }
 
 }
