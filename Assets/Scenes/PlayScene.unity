@@ -384,7 +384,7 @@ RectTransform:
   m_Father: {fileID: 1247660248}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -406,7 +406,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!61 &223002690
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1525,7 +1525,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 143b7ee630be31647af6ee9b33ef9666, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _player: {fileID: 223002694}
+  _player: {fileID: 1121284530}
   _enemyManager: {fileID: 919801890}
   _expManager: {fileID: 2054312829}
 --- !u!4 &919801888
@@ -1569,7 +1569,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemyPrefab: {fileID: 529668619563063293, guid: b749f3f9575068d4eb71d213e2fac6f6, type: 3}
   _gemPrefab: {fileID: 1020351347292387989, guid: 70b8ed7672ff1ac409c119f13ebf8141, type: 3}
-  _enemySpawnRate: 0.5
+  _enemySpawnRate: 1
   _offset: 2
 --- !u!1 &961281047
 GameObject:
@@ -1839,7 +1839,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!61 &1121284529
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3271,7 +3271,7 @@ RectTransform:
   m_Father: {fileID: 860163252}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -3325,7 +3325,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3017074695002152148, guid: ca4f65880f4aed541b0a1463123fcc96, type: 3}
       propertyPath: _bulletSpeed
-      value: 2
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 6780406392748910499, guid: ca4f65880f4aed541b0a1463123fcc96, type: 3}
       propertyPath: m_Name
@@ -3333,7 +3333,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6780406392748910499, guid: ca4f65880f4aed541b0a1463123fcc96, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3410,7 +3410,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6081406666188054475, guid: c50666f0065c719459cecb7bb39f1d39, type: 3}
       propertyPath: _bulletSpeed
-      value: 17
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 6081406666188054475, guid: c50666f0065c719459cecb7bb39f1d39, type: 3}
       propertyPath: _rotateSpeed
@@ -3470,8 +3470,16 @@ PrefabInstance:
       value: Gun 03
       objectReference: {fileID: 0}
     - target: {fileID: 7636230642652108657, guid: a56690099ede8eb40917a7392891edcb, type: 3}
+      propertyPath: _bulletSpeed
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7636230642652108657, guid: a56690099ede8eb40917a7392891edcb, type: 3}
       propertyPath: _cooldownTime
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7636230642652108657, guid: a56690099ede8eb40917a7392891edcb, type: 3}
+      propertyPath: _detectTargetRadius
+      value: 5.5
       objectReference: {fileID: 0}
     - target: {fileID: 8047285885254919818, guid: a56690099ede8eb40917a7392891edcb, type: 3}
       propertyPath: m_LocalPosition.x

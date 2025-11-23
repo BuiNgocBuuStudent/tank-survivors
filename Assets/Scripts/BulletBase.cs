@@ -52,7 +52,7 @@ public abstract class BulletBase : MonoBehaviour
     }
     protected virtual void Move()
     {
-        _rb.velocity = _movement * _speed;
+        _rb.velocity = _movement.normalized * _speed;
     }
 
     protected IEnumerator RepeatLifeTime()

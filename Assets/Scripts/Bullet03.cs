@@ -5,17 +5,15 @@ using UnityEngine;
 public class Bullet03 : BulletBase
 {
     [Header("-----AOE Config-----")]
-    [SerializeField] float _damageRange;
-    private static Collider2D[] _buffer = new Collider2D[50];
+    [SerializeField] float _damageRadius;
     public override void Boom(GameObject target)
     {
         this.gameObject.SetActive(false);
 
-        //OverlapCircleNonAlloc chỉ còn hổ trợ đến phiên bản 2022.3
-        int hitCount = Physics2D.OverlapCircleNonAlloc(this.transform.position, _damageRange, _buffer);
-        for (int i = 0; i < hitCount ; i++)
+        Collider2D[] hits = Physics2D.OverlapCircleAll(this.transform.position, _damageRadius);
+        foreach (Collider2D hit in hits)
         {
-            IGetHit isCanGetHit = _buffer[i].GetComponent<IGetHit>();
+            IGetHit isCanGetHit = hit.GetComponent<IGetHit>();
             if (isCanGetHit != null)
             {
                 isCanGetHit.GetHit(this._dmg);
@@ -42,6 +40,6 @@ public class Bullet03 : BulletBase
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(this.transform.position, _damageRange);
+        Gizmos.DrawWireSphere(this.transform.position, _damageRadius);
     }
 }

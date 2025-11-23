@@ -6,8 +6,9 @@ using UnityEngine;
 public abstract class EnemyControllerBase : MonoBehaviour, IGetHit
 {
     private PlayerControllerBase _player;
-    [SerializeField] private Rigidbody2D _rb;
     private EnemyManager _enemyManager;
+    [SerializeField] private Rigidbody2D _rb;
+    [SerializeField] FlashEffect _flashEffect;
 
     [SerializeField] protected float _moveSpeed;
     [SerializeField] protected float _dmg, _initialHealth, _currentHealth;
@@ -21,6 +22,7 @@ public abstract class EnemyControllerBase : MonoBehaviour, IGetHit
     {
         if (_rb == null)
             _rb = this.GetComponent<Rigidbody2D>();
+        _flashEffect = this.GetComponentInChildren<FlashEffect>();
         _player = GameManager.Instance.Player;
         _enemyManager = GameManager.Instance.EnemyManager;
 
@@ -53,10 +55,12 @@ public abstract class EnemyControllerBase : MonoBehaviour, IGetHit
 
     public void GetHit(float dmg)
     {
+        _flashEffect.Flash();
         _currentHealth -= dmg;
         if(_currentHealth <= 0)
         {
             this.gameObject.SetActive(false);
+            _flashEffect.ResetMaterial();
             _enemyManager.SpawnExpGem(this.transform.position);            
         }
     }
