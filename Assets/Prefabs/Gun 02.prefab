@@ -45,14 +45,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 548f964584fe2e6458ccfb47ed6f366c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bulletPrefab: {fileID: 0}
+  _bulletPrefab: {fileID: 268695674567509447, guid: 95bc93424cc5f094293086b351ce2bca, type: 3}
   _enemyLayerMask:
     serializedVersion: 2
-    m_Bits: 0
-  _cooldownTime: 0
-  _rotateSpeed: 0
-  _detectTargetRadius: 0
-  _bulletSpeed: 0
+    m_Bits: 512
+  _gunState: 0
+  _cooldownTime: 1
+  _rotateSpeed: 20
+  _detectTargetRadius: 5
+  _bulletSpeed: 15
+  _numberBullet: 4
+  _attackRange: 45
 --- !u!1 &1278996424307660005
 GameObject:
   m_ObjectHideFlags: 0
@@ -131,8 +134,8 @@ SpriteRenderer:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_DrawMode: 1
+  m_Size: {x: 0.6, y: 1.6}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1

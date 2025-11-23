@@ -5,7 +5,6 @@ using UnityEngine;
 
 public abstract class BulletBase : MonoBehaviour
 {
-    
     protected Rigidbody2D _rb;
 
     [Header("-----Base config-----")]
@@ -18,7 +17,7 @@ public abstract class BulletBase : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
     public void Init(float speed, Vector2 movement)
     {

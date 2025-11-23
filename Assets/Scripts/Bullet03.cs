@@ -6,11 +6,13 @@ public class Bullet03 : BulletBase
 {
     [Header("-----AOE Config-----")]
     [SerializeField] float _damageRadius;
+    [SerializeField] LayerMask _targetMask;
+
     public override void Boom(GameObject target)
     {
         this.gameObject.SetActive(false);
 
-        Collider2D[] hits = Physics2D.OverlapCircleAll(this.transform.position, _damageRadius);
+        Collider2D[] hits = Physics2D.OverlapCircleAll(this.transform.position, _damageRadius, _targetMask);
         foreach (Collider2D hit in hits)
         {
             IGetHit isCanGetHit = hit.GetComponent<IGetHit>();

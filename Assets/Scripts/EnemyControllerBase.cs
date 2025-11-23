@@ -52,7 +52,6 @@ public abstract class EnemyControllerBase : MonoBehaviour, IGetHit
         _rb.velocity = movement.normalized * _moveSpeed;
     }
 
-
     public void GetHit(float dmg)
     {
         _flashEffect.Flash();
