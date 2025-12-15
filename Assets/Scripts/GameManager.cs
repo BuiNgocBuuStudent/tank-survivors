@@ -11,7 +11,12 @@ public class GameManager : Singleton<GameManager>
 
     [SerializeField] ExpManager _expManager;
     public ExpManager ExpManager => _expManager;
-    // Start is called before the first frame update
+
+    [SerializeField] BoostManager _boostManager;
+    public BoostManager BoostManager => _boostManager;
+
+
+     // Start is called before the first frame update
     void Start()
     {
         this.Init();
@@ -21,12 +26,6 @@ public class GameManager : Singleton<GameManager>
         Player.Init();
         EnemyManager.Init();
         ExpManager.Init();
+        BoostManager.Init();
     }
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
-   
 }

@@ -4,33 +4,25 @@ using UnityEngine;
 
 public class ExpManager : MonoBehaviour
 {
+    private BoostManager _boostManager;
     [SerializeField] SlideBar _expBar;
 
     [SerializeField] float _maxExp;
     [SerializeField] float _currentExp;
     public float expIncPercentage;
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
     public void Init()
     {
         _expBar.SetMaxValue(_maxExp);
         _expBar.UpdateValue(_currentExp);
-    }
-    // Update is called once per frame
-    void Update()
-    {
 
+        _boostManager = GameManager.Instance.BoostManager;
     }
-
     public void UpdateExp(float value)
     {
         _currentExp += value;
         if (_currentExp >= _maxExp)
         {
+            _boostManager.showBoostPopup();
             Debug.Log("Level up!!!");
             _currentExp = 0;
             _maxExp *= (1 + expIncPercentage / 100);

@@ -8,7 +8,6 @@ public class PlayerControllerBase : MonoBehaviour, IGetHit
     [SerializeField] protected GunControllerBase _gun;
     [SerializeField] SlideBar _healthBar;
     [SerializeField] Rigidbody2D _rb;
-    [SerializeField] FlashEffect _flashEffect;
     [SerializeField] PlayerState _playerState;
     
     [SerializeField] protected float _hp, _armorPercent;
@@ -31,7 +30,6 @@ public class PlayerControllerBase : MonoBehaviour, IGetHit
         _healthBar.SetMaxValue(_hp);
         _healthBar.UpdateValue(_hp);
         _playerState = PlayerState.IDLE;
-        _flashEffect = this.GetComponentInChildren<FlashEffect>();
         if (_gun == null)
             _gun = this.GetComponentInChildren<GunControllerBase>();
         _gun.Init();
@@ -62,7 +60,6 @@ public class PlayerControllerBase : MonoBehaviour, IGetHit
     {
         _hp = _hp - (dmg * (1 - _armorPercent / 100));
         _healthBar.UpdateValue(_hp);
-        _flashEffect.Flash();
         if (_hp <= 0)
         {
             this.gameObject.SetActive(false);

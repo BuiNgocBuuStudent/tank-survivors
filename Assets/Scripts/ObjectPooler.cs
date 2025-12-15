@@ -6,17 +6,6 @@ using UnityEngine;
 public class ObjectPooler : Singleton<ObjectPooler>
 {
     Dictionary<GameObject, List<GameObject>> _pool = new Dictionary<GameObject, List<GameObject>>();
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
     public GameObject GetObject(GameObject prefab)
     {
         List<GameObject> listObj = new List<GameObject>();
