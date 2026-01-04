@@ -754,9 +754,9 @@ MonoBehaviour:
   _healthBar: {fileID: 860163251}
   _rb: {fileID: 0}
   _playerState: 0
-  _hp: 10
+  _currentHealth: 0
   _armorPercent: 0
-  _moveSpeed: 2.5
+  _moveSpeed: 0
   _rotateSpeed: 2
 --- !u!1 &230344288
 GameObject:
@@ -2094,9 +2094,9 @@ MonoBehaviour:
   _healthBar: {fileID: 1712290421}
   _rb: {fileID: 0}
   _playerState: 0
-  _hp: 100
+  _currentHealth: 0
   _armorPercent: 0
-  _moveSpeed: 2.5
+  _moveSpeed: 0
   _rotateSpeed: 2
 --- !u!50 &661379145
 Rigidbody2D:
@@ -2486,9 +2486,9 @@ MonoBehaviour:
   _healthBar: {fileID: 511652554}
   _rb: {fileID: 0}
   _playerState: 0
-  _hp: 10
+  _currentHealth: 0
   _armorPercent: 0
-  _moveSpeed: 2.5
+  _moveSpeed: 0
   _rotateSpeed: 2
 --- !u!1 &860163250
 GameObject:
@@ -3251,6 +3251,52 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!1 &1086404528
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1086404530}
+  - component: {fileID: 1086404529}
+  m_Layer: 0
+  m_Name: Data Persistence Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1086404529
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1086404528}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 143fdee4ccfff9542b78a6a32dc14435, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _fileName: data.game
+  _useEncryption: 0
+--- !u!4 &1086404530
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1086404528}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1113493347
 GameObject:
   m_ObjectHideFlags: 0
@@ -3399,9 +3445,9 @@ MonoBehaviour:
   _healthBar: {fileID: 1247660247}
   _rb: {fileID: 0}
   _playerState: 0
-  _hp: 10
+  _currentHealth: 0
   _armorPercent: 0
-  _moveSpeed: 2.5
+  _moveSpeed: 0
   _rotateSpeed: 2
 --- !u!50 &1121284531
 Rigidbody2D:
@@ -5830,6 +5876,7 @@ SceneRoots:
   m_Roots:
   - {fileID: 519420032}
   - {fileID: 919801888}
+  - {fileID: 1086404530}
   - {fileID: 1113493350}
   - {fileID: 821160304}
   - {fileID: 223002693}
