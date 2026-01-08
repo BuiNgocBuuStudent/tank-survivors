@@ -23,7 +23,6 @@ public class GameManager : Singleton<GameManager>
     }
     public void Init()
     {
-        DataPersistenceManager.Instance.Init();
         Player.Init();
         EnemyManager.Init();
         ExpManager.Init();

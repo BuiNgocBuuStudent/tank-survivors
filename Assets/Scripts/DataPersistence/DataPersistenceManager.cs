@@ -2,22 +2,54 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class DataPersistenceManager : Singleton<DataPersistenceManager>
+public class DataPersistenceManager : MonoBehaviour
 {
+    public static DataPersistenceManager Instance { get; private set; }
     private GameData _gameData;
     private List<IDataPersistence> _dataPersistenceObjects;
     private FileDataHandler _fileDataHandler;
 
+    [Header("Debug")]
+    [SerializeField] bool _initializeDataIfNull;
+
     [Header("File Storage Config")]
     [SerializeField] string _fileName;
     [SerializeField] bool _useEncryption;
-    
-    public void Init()
+
+    private void Awake()
     {
+        if(Instance != null)
+        {
+            Destroy(this.gameObject);
+            return;
+        }
+        Instance = this;
         this._fileDataHandler = new FileDataHandler(Application.persistentDataPath, _fileName, _useEncryption);
+        DontDestroyOnLoad(this.gameObject);
+    }
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+        SceneManager.sceneUnloaded += OnSceneUnLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+        SceneManager.sceneUnloaded -= OnSceneUnLoaded;
+    }
+
+    public void OnSceneLoaded(Scene scene, LoadSceneMode mdoe)
+    {
         this._dataPersistenceObjects = FindAllDataPersistenceObjects();
         LoadGame();
+    }
+
+    public void OnSceneUnLoaded(Scene scene)
+    {
+        SaveGame();
     }
     public void NewGame()
     {
@@ -27,10 +59,13 @@ public class DataPersistenceManager : Singleton<DataPersistenceManager>
     {
         this._gameData = _fileDataHandler.Load();
 
+        if(this._gameData == null && _initializeDataIfNull)
+            NewGame();
+
         if (this._gameData == null)
         {
             Debug.LogWarning("No data was found. Need to start NEW GAME before load data");
-            NewGame();
+            return;
         }
 
         foreach (IDataPersistence dataPersistenceObject in this._dataPersistenceObjects)
@@ -54,7 +89,6 @@ public class DataPersistenceManager : Singleton<DataPersistenceManager>
 
         _fileDataHandler.Save(_gameData);
     }
-
     private void OnApplicationQuit()
     {
         SaveGame();
@@ -65,5 +99,10 @@ public class DataPersistenceManager : Singleton<DataPersistenceManager>
         IEnumerable<IDataPersistence> dataPersistenceObjects = FindObjectsOfType<MonoBehaviour>().OfType<IDataPersistence>();
 
         return new List<IDataPersistence>(dataPersistenceObjects);
+    }
+
+    public bool HasGameData()
+    {
+        return _gameData != null;
     }
 }
