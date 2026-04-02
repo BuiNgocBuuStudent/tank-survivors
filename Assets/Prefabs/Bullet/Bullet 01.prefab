@@ -101,9 +101,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _targetMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 512
   _lifeTime: 3
   _dmg: 1
+  _speed: 15
 --- !u!50 &8441221223264147281
 Rigidbody2D:
   serializedVersion: 4

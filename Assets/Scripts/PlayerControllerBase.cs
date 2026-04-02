@@ -79,7 +79,7 @@ public class PlayerControllerBase : MonoBehaviour, IGetHit, IDataPersistence
         this.transform.rotation = quaternion;
     }
 
-    public void SaveData(ref GameData data)
+    public void SaveData(GameData data)
     {
         data.currentHealth = this._currentHealth;
         data.armorPercentage = this._armorPercent;

@@ -9,7 +9,7 @@ public class FileDataHandler
     private string _dataDirPath = "";
     private string _dataFileName = "";
     private bool _useEncryption = false;
-    private readonly string _encryptionCodeWord = "bnb";
+    private readonly string _encryptionCodeWord = "code";
 
     public FileDataHandler(string dataDirPath, string dataFileName, bool useEncryption)
     {

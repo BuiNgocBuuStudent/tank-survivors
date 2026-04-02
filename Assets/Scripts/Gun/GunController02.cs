@@ -9,28 +9,18 @@ public class GunController02 : GunControllerBase
     [SerializeField] float _attackRange;
     void Update()
     {
-
-        if (!DetectTarget(_detectTargetRadius))
-            return;
-
-        Vector2 dir = _enemy.transform.position - this.transform.position;
-
-        RaycastHit2D hit = Physics2D.Raycast(this.transform.position, dir, dir.magnitude);
-        Debug.DrawRay(this.transform.position, dir, Color.red);
-
         Fire();
     }
 
     protected override void Fire()
     {
-        if (_timer >= 0 || !AimTarget())
+        if (_timer >= 0)
             return;
 
         _timer = _cooldownTime;
-        _gunState = GunState.SHOOT;
 
         //góc giữa 2 game object
-        float centerAngle = Mathf.Atan2(_movement.y, _movement.x) * Mathf.Rad2Deg;
+        float centerAngle = Mathf.Atan2(_player.transform.position.y, _player.transform.position.x) * Mathf.Rad2Deg;
 
         float anglePerBullet = _attackRange / (_numberBullet - 1);
         float startSpawnAngle = centerAngle + _attackRange / 2;
@@ -46,6 +36,5 @@ public class GunController02 : GunControllerBase
             bullet.gameObject.SetActive(true);
         }
 
-        _gunState = GunState.ROTATE;
     }
 }
