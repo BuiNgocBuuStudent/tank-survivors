@@ -20,7 +20,7 @@ public class GunController02 : GunControllerBase
         _timer = _cooldownTime;
 
         //góc giữa 2 game object
-        float centerAngle = Mathf.Atan2(_player.transform.position.y, _player.transform.position.x) * Mathf.Rad2Deg;
+        float centerAngle = Mathf.Atan2(this.transform.up.y, this.transform.up.x) * Mathf.Rad2Deg;
 
         float anglePerBullet = _attackRange / (_numberBullet - 1);
         float startSpawnAngle = centerAngle + _attackRange / 2;

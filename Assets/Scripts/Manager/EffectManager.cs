@@ -28,6 +28,6 @@ public class EffectManager : Singleton<EffectManager>
         {
            hit.GetComponent<IGetHit>()?.GetHit(dmg);
         }
-        //effect tự động diable
+        //effect tự động disable
     }
 }
