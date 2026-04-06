@@ -26,6 +26,6 @@ public class GameManager : Singleton<GameManager>
         Player.Init();
         EnemyManager.Init();
         ExpManager.Init();
-        //BoostManager.Init();
+        BoostManager.Init();
     }
 }

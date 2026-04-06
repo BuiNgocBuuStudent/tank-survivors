@@ -22,7 +22,7 @@ public class ExpManager : MonoBehaviour
         _currentExp += value;
         if (_currentExp >= _maxExp)
         {
-            //_boostManager.showBoostPopup();
+            _boostManager.showBoostPopup();
             Debug.Log("Level up!!!");
             _currentExp = 0;
             _maxExp *= (1 + expIncPercentage / 100);

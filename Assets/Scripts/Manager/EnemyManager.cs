@@ -45,11 +45,19 @@ public class EnemyManager : MonoBehaviour
         Vector2 randomPos = Vector2.zero;
 
         // Chọn ngẫu nhiên 1 trong 4 cạnh
-        int side = Random.Range(0, 2);
+        int side = Random.Range(0, 4);
 
         switch (side)
         {
-            case 1: // Trái
+            case 0: // Trên
+                randomPos.x = Random.Range(screenBottomLeft.x, screenTopRight.x);
+                randomPos.y = screenTopRight.y + _offset;
+                break;
+            case 1: // Dưới
+                randomPos.x = Random.Range(screenBottomLeft.x, screenTopRight.x);
+                randomPos.y = screenBottomLeft.y - _offset;
+                break;
+            case 2: // Trái
                 randomPos.x = screenBottomLeft.x - _offset;
                 randomPos.y = Random.Range(screenBottomLeft.y, screenTopRight.y);
                 break;

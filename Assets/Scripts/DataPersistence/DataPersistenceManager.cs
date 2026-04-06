@@ -59,7 +59,7 @@ public class DataPersistenceManager : MonoBehaviour
     {
         this._gameData = _fileDataHandler.Load();
 
-        if(this._gameData == null || _initializeDataIfNull)
+        if(this._gameData == null && _initializeDataIfNull)
             NewGame();
 
         if (this._gameData == null)

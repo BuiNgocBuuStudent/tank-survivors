@@ -41,20 +41,23 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Background
+  - name: Platform
     uniqueID: 530217201
-    locked: 0
-  - name: Track
-    uniqueID: 1098592603
     locked: 0
   - name: ExpGem
     uniqueID: 852727487
+    locked: 0
+  - name: Track
+    uniqueID: 1098592603
     locked: 0
   - name: Bullet
     uniqueID: 4022693993
     locked: 0
   - name: Player
     uniqueID: 704310819
+    locked: 0
+  - name: Gun
+    uniqueID: 832517147
     locked: 0
   - name: Enemy
     uniqueID: 127245801
