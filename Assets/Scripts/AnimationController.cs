@@ -19,9 +19,13 @@ public class AnimationController : MonoBehaviour
     }
     public void UpdatePlayerAnim(PlayerState state)
     {
-        if(state == PlayerState.IDLE)
+        if (state == PlayerState.IDLE)
         {
-
+            _anim.SetBool("move", false);
+        }
+        else if (state == PlayerState.MOVE)
+        {
+            _anim.SetBool("move", true);
         }
     }
 }

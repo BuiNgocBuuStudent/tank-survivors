@@ -11,6 +11,7 @@ public class PlayerControllerBase : MonoBehaviour, IGetHit, IDataPersistence
     [SerializeField] FlashEffect _flashEffect;
     [SerializeField] Rigidbody2D _rb;
     [SerializeField] PlayerState _playerState;
+    [SerializeField] AnimationController _animController;
     private Coroutine _rechargeCoroutine;
 
     protected float _initialHealth, _normalSpeed, _accelerateSpeed, _initialEnergy;
@@ -33,6 +34,12 @@ public class PlayerControllerBase : MonoBehaviour, IGetHit, IDataPersistence
     {
         if (_rb == null)
             _rb = this.GetComponent<Rigidbody2D>();
+        if (_animController == null)
+            _animController = this.GetComponentInChildren<AnimationController>();
+        if (_gun == null)
+            _gun = this.GetComponentInChildren<GunControllerBase>();
+        if(_flashEffect == null)
+            _flashEffect = this.GetComponentInChildren<FlashEffect>();
 
         _isFullEnergy = true;
         _healthBar.SetMaxValue(_initialHealth);
@@ -42,11 +49,6 @@ public class PlayerControllerBase : MonoBehaviour, IGetHit, IDataPersistence
         _energyBar.UpdateValue(_currentEnergy);
 
         _playerState = PlayerState.IDLE;
-
-        _flashEffect = this.GetComponentInChildren<FlashEffect>();
-        if (_gun == null)
-            _gun = this.GetComponentInChildren<GunControllerBase>();
-
         _gun.Init();
     }
     // Update is called once per frame
@@ -58,12 +60,11 @@ public class PlayerControllerBase : MonoBehaviour, IGetHit, IDataPersistence
     {
         _movement = Input.GetAxis("Vertical");
         _moveSpeed = _normalSpeed;
-
-
-        Accelerate();
         Move();
+        Accelerate();
 
         UpdateState();
+        _animController.UpdatePlayerAnim(_playerState);
 
         CheckEnergy();
 
