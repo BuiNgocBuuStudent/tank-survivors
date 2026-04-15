@@ -99,14 +99,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3f584e9e7bc8dd469e5b625a8e845ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _rb: {fileID: 0}
   _targetMask:
     serializedVersion: 2
     m_Bits: 512
-  _lifeTime: 3
+  _lifeTime: 2
   _dmg: 1
+  _speed: 0
+  _movement: {x: 0, y: 0}
   _burningPrefab: {fileID: 4425129568585013132, guid: bbeeb0ddc21369746aaaae5c5c1c09cf, type: 3}
   _burningRange: 2
-  _burningDmg: 5
   _burningSpeed: 1
   _burningTime: 3
 --- !u!50 &6614671820435423062

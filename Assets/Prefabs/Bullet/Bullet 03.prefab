@@ -99,11 +99,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 798e9b14fd0a35849a8f47bd3ed172d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _rb: {fileID: 0}
   _targetMask:
     serializedVersion: 2
     m_Bits: 512
-  _lifeTime: 3
+  _lifeTime: 2
   _dmg: 2
+  _speed: 0
+  _movement: {x: 0, y: 0}
   _explosionPrefab: {fileID: 2433282508537954060, guid: 3ef3ae421f71c5c4e97fe12dc2fc6312, type: 3}
   _damageRadius: 3
 --- !u!50 &-7734819530292499447

@@ -25,7 +25,7 @@ public class GameData
         currentEnergy = initialEnergy;
         normalSpeed = 2f;
         moveSpeed = normalSpeed;
-        accelerateSpeed = 4f;
+        accelerateSpeed = 3f;
         playerPos = Vector3.zero;
         playerRotation = Vector3.zero;
     }

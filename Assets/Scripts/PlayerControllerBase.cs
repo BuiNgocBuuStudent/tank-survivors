@@ -5,11 +5,14 @@ using UnityEngine;
 public class PlayerControllerBase : MonoBehaviour, IGetHit, IDataPersistence
 {
     [Header("-----Base config-----")]
+    [SerializeField] Rigidbody2D _rb;
+
+    [SerializeField] GameObject _exhaustObjectLeft;
+    [SerializeField] GameObject _exhaustObjectRight;
     [SerializeField] protected GunControllerBase _gun;
     [SerializeField] SlideBar _healthBar;
     [SerializeField] SlideBar _energyBar;
     [SerializeField] FlashEffect _flashEffect;
-    [SerializeField] Rigidbody2D _rb;
     [SerializeField] PlayerState _playerState;
     [SerializeField] AnimationController _animController;
     private Coroutine _rechargeCoroutine;
@@ -38,7 +41,7 @@ public class PlayerControllerBase : MonoBehaviour, IGetHit, IDataPersistence
             _animController = this.GetComponentInChildren<AnimationController>();
         if (_gun == null)
             _gun = this.GetComponentInChildren<GunControllerBase>();
-        if(_flashEffect == null)
+        if (_flashEffect == null)
             _flashEffect = this.GetComponentInChildren<FlashEffect>();
 
         _isFullEnergy = true;
@@ -59,7 +62,6 @@ public class PlayerControllerBase : MonoBehaviour, IGetHit, IDataPersistence
     private void FixedUpdate()
     {
         _movement = Input.GetAxis("Vertical");
-        _moveSpeed = _normalSpeed;
         Move();
         Accelerate();
 
@@ -91,6 +93,7 @@ public class PlayerControllerBase : MonoBehaviour, IGetHit, IDataPersistence
 
     private void Accelerate()
     {
+        _moveSpeed = _normalSpeed;
         if (_currentEnergy <= 0)
         {
             _currentEnergy = 0;
@@ -100,7 +103,7 @@ public class PlayerControllerBase : MonoBehaviour, IGetHit, IDataPersistence
         if (Input.GetKey(KeyCode.Space) && _movement > 0)
         {
             _moveSpeed = _accelerateSpeed;
-            _currentEnergy -= 5 * Time.deltaTime;
+            _currentEnergy -= 2 * Time.deltaTime;
             _isFullEnergy = false;
         }
     }
