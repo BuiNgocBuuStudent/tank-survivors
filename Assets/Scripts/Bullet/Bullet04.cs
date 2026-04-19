@@ -10,7 +10,7 @@ public class Bullet04 : BulletBase
     [SerializeField] float _burningRange;
     [SerializeField] float _burningSpeed;
     [SerializeField] float _burningTime;
-    public override void Boom(GameObject target)
+    protected override void Boom(GameObject target)
     {
         this.gameObject.SetActive(false);
 

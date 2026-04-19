@@ -15,7 +15,10 @@ public class GameData
     public float currentEnergy;
     public Vector3 playerPos;
     public Vector3 playerRotation;
-
+    public Dictionary<string, int> statLevels;
+    public List<int> unlockedSkills;
+    public List<int> unlockedTanks;
+    public int playerCoins;
     public GameData()
     {
         initialHealth = 50f;

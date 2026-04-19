@@ -103,10 +103,12 @@ MonoBehaviour:
   _targetMask:
     serializedVersion: 2
     m_Bits: 512
-  _lifeTime: 2
+  _lifeTime: 5
   _dmg: 1
   _speed: 15
   _movement: {x: 0, y: 0}
+  _numberEnemy: 0
+  _isUpgraded: 1
 --- !u!50 &8441221223264147281
 Rigidbody2D:
   serializedVersion: 4

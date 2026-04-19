@@ -9,7 +9,7 @@ public class Bullet03 : BulletBase
 
     [SerializeField] float _damageRadius;
 
-    public override void Boom(GameObject target)
+    protected override void Boom(GameObject target)
     {
         this.gameObject.SetActive(false);
 

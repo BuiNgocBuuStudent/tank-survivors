@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89dbb8ce1bb85ae4387c2c3a1f74785e, type: 3}
+  m_Name: SkillUpgrade05
+  m_EditorClassIdentifier: 
+  skillName: Napalm Strike
+  description: "V\u1EE5 n\u1ED5 \u0111\u1EC3 l\u1EA1i v\xF9ng l\u1EEDa t\u1EA1i ch\u1ED7
+    n\u1ED5, g\xE2y 15% damage \u0111\u1ED1t ch\xE1y k\u1EBB \u0111\u1ECBch trong
+    v\xF2ng 4 gi\xE2y"
+  tier: 5
+  cost: 3500
+  tankId: tank04

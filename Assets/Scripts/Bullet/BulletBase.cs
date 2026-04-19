@@ -16,6 +16,7 @@ public abstract class BulletBase : MonoBehaviour
     [SerializeField] protected float _speed;
     [SerializeField] protected Vector2 _movement;
 
+
     public void Init(float speed, Vector2 movement)
     {
         if (_rb == null)
@@ -53,5 +54,5 @@ public abstract class BulletBase : MonoBehaviour
             this.gameObject.SetActive(false);
         }
     }
-    public abstract void Boom(GameObject target);
+    protected abstract void Boom(GameObject target);
 }

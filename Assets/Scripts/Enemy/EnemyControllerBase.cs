@@ -9,9 +9,10 @@ public abstract class EnemyControllerBase : MonoBehaviour, IGetHit
     private EnemyManager _enemyManager;
     [SerializeField] private Rigidbody2D _rb;
     [SerializeField] FlashEffect _flashEffect;
-    [SerializeField] EnemyDataBase _enemyDataBase;
+    [SerializeField] EnemyConfig _enemyDataBase;
 
     [SerializeField] float _currentHealth;
+
 
     // Start is called before the first frame update
     void Start()

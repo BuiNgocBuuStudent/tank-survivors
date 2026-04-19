@@ -171,8 +171,10 @@ MonoBehaviour:
   _enemyLayerMask:
     serializedVersion: 2
     m_Bits: 512
-  _cooldownTime: 0.2
-  _bulletSpeed: 10
+  _cooldownTime: 1
+  _bulletSpeed: 5
+  _isDoubleBullet: 0
+  _angle: 0
 --- !u!1 &183665451
 GameObject:
   m_ObjectHideFlags: 0
@@ -1448,7 +1450,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &696675341
 Transform:
   m_ObjectHideFlags: 0
@@ -1742,7 +1744,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &821160304
 Transform:
   m_ObjectHideFlags: 0
@@ -2117,7 +2119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 143b7ee630be31647af6ee9b33ef9666, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _player: {fileID: 1371168840}
+  _player: {fileID: 821160307}
   _enemyManager: {fileID: 919801890}
   _expManager: {fileID: 919801893}
   _boostManager: {fileID: 919801892}
@@ -3639,7 +3641,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!61 &1371168839
 BoxCollider2D:
   m_ObjectHideFlags: 0
