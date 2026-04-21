@@ -31,6 +31,11 @@ public class GameData
         accelerateSpeed = 3f;
         playerPos = Vector3.zero;
         playerRotation = Vector3.zero;
+
+        statLevels = new Dictionary<string, int>();
+        unlockedSkills = new List<int>();
+        unlockedTanks = new List<int>();
+        playerCoins = 0;
     }
 
 

@@ -15,6 +15,7 @@ MonoBehaviour:
   statName: Health
   maxLevel: 10
   values:
+  - 20
   - 24
   - 28
   - 33

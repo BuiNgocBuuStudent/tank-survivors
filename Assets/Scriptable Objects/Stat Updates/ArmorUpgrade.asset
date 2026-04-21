@@ -15,6 +15,7 @@ MonoBehaviour:
   statName: Armor
   maxLevel: 10
   values:
+  - 0
   - 5
   - 10
   - 15

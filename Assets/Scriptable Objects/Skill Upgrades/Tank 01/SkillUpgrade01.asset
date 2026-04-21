@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89dbb8ce1bb85ae4387c2c3a1f74785e, type: 3}
   m_Name: SkillUpgrade01
   m_EditorClassIdentifier: 
-  skillName: Rapid Fi
+  skillName: Rapid Fire
   description: "Gi\u1EA3m cooldown b\u1EAFn 25%\t"
   tier: 1
   cost: 100
