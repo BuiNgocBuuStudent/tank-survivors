@@ -7,8 +7,6 @@ public class PlayerControllerBase : MonoBehaviour, IGetHit, IDataPersistence
     [Header("-----Base config-----")]
     [SerializeField] Rigidbody2D _rb;
 
-    [SerializeField] GameObject _exhaustObjectLeft;
-    [SerializeField] GameObject _exhaustObjectRight;
     [SerializeField] protected GunControllerBase _gun;
     [SerializeField] SlideBar _healthBar;
     [SerializeField] SlideBar _energyBar;
@@ -165,9 +163,10 @@ public class PlayerControllerBase : MonoBehaviour, IGetHit, IDataPersistence
         this._normalSpeed = data.normalSpeed;
         this._accelerateSpeed = data.accelerateSpeed;
 
-        this.transform.position = data.playerPos;
+        this.transform.position = new Vector3(data.playerPosX, data.playerPosY, data.playerPosZ);
+
         Quaternion quaternion = this.transform.rotation;
-        quaternion.eulerAngles = new Vector3(data.playerRotation.x, data.playerRotation.y, data.playerRotation.z);
+        quaternion.eulerAngles = new Vector3(data.playerRotationX, data.playerRotationY, data.playerRotationZ);
         this.transform.rotation = quaternion;
     }
 
@@ -177,8 +176,12 @@ public class PlayerControllerBase : MonoBehaviour, IGetHit, IDataPersistence
         data.armorPercentage = this._armorPercent;
         data.moveSpeed = this._moveSpeed;
         data.currentEnergy = this._currentEnergy;
-        data.playerPos = this.transform.position;
+        data.playerPosX = this.transform.position.x;
+        data.playerPosY = this.transform.position.y;
+        data.playerPosZ = this.transform.position.z;
         Quaternion quaternion = this.transform.rotation;
-        data.playerRotation.Set(quaternion.eulerAngles.x, quaternion.eulerAngles.y, quaternion.eulerAngles.z);
+        data.playerRotationX = quaternion.eulerAngles.x;
+        data.playerRotationY = quaternion.eulerAngles.y;
+        data.playerRotationZ = quaternion.eulerAngles.z;
     }
 }

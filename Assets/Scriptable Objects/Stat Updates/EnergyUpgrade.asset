@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bea7cf22ef0fa6941aa9dc1f96703942, type: 3}
   m_Name: EnergyUpgrade
   m_EditorClassIdentifier: 
-  statName: Health
+  statName: Energy
   maxLevel: 10
   values:
   - 20

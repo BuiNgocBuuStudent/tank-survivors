@@ -7,18 +7,29 @@ public class GameData
 {
     public float initialHealth;
     public float currentHealth;
+
     public float armorPercentage;
+
     public float normalSpeed;
     public float accelerateSpeed;
     public float moveSpeed;
+
     public float initialEnergy;
     public float currentEnergy;
-    public Vector3 playerPos;
-    public Vector3 playerRotation;
+
+    public float playerPosX;
+    public float playerPosY;
+    public float playerPosZ;
+
+    public float playerRotationX;
+    public float playerRotationY;
+    public float playerRotationZ;
+
     public Dictionary<string, int> statLevels;
     public List<int> unlockedSkills;
     public List<int> unlockedTanks;
     public int playerCoins;
+    public int selectedTankId;
     public GameData()
     {
         initialHealth = 50f;
@@ -29,13 +40,14 @@ public class GameData
         normalSpeed = 2f;
         moveSpeed = normalSpeed;
         accelerateSpeed = 3f;
-        playerPos = Vector3.zero;
-        playerRotation = Vector3.zero;
+        playerPosX = playerPosY = playerPosZ = 0f;
+        playerRotationX = playerRotationY = playerRotationZ = 0f;
 
         statLevels = new Dictionary<string, int>();
         unlockedSkills = new List<int>();
         unlockedTanks = new List<int>();
-        playerCoins = 0;
+        playerCoins = 10000;
+        selectedTankId = 0;
     }
 
 

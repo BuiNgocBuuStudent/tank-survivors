@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,11 +11,9 @@ public class UpgradeManager : Singleton<UpgradeManager>, IDataPersistence
     // ===========================================
 
     [Header("===== Stat Upgrade Configs =====")]
-    [Tooltip("Kéo 4 file SO: Health, Energy, Armor, Damage")]
     [SerializeField] StatUpgradeConfig[] _statConfigs;
 
     [Header("===== Skill Upgrade Configs =====")]
-    [Tooltip("Kéo 20 file SO: 5 skills × 4 tanks")]
     [SerializeField] SkillUpgradeConfig[] _skillConfigs;
 
     [Header("===== Tank Unlock =====")]
@@ -28,8 +27,7 @@ public class UpgradeManager : Singleton<UpgradeManager>, IDataPersistence
     // RUNTIME STATE — Được lưu/load qua GameData
     // ===========================================
 
-    // Level hiện tại của mỗi stat. Key = statName ("Health"), Value = level (0 đến 10)
-    // Level 0 = chưa nâng cấp (dùng giá trị base)
+
     private Dictionary<string, int> _statLevels = new Dictionary<string, int>();
 
     // Danh sách index của skill đã unlock (index trong mảng _skillConfigs)
@@ -41,21 +39,25 @@ public class UpgradeManager : Singleton<UpgradeManager>, IDataPersistence
     // Coin hiện tại của player
     [SerializeField] int _playerCoins;
 
+    // Id tank hiện tại
+    [SerializeField] int _selectedTankId;
+
     // ===========================================
     // EVENTS — UI sẽ đăng ký lắng nghe để tự cập nhật
     // ===========================================
 
     // Phát khi stat/skill/tank thay đổi → UI refresh
-    public event System.Action OnUpgradeChanged;
+    public event Action OnUpgradeChanged;
 
     // Phát khi coin thay đổi → cập nhật text coin
-    public event System.Action OnCoinsChanged;
+    public event Action OnCoinsChanged;
 
     // ===========================================
     // PROPERTIES — Cho UI và script khác đọc giá trị
     // ===========================================
 
     public int PlayerCoins => _playerCoins;
+    public int SelectedTankId => _selectedTankId;
     public StatUpgradeConfig[] StatConfigs => _statConfigs;
     public SkillUpgradeConfig[] SkillConfigs => _skillConfigs;
 
@@ -65,7 +67,6 @@ public class UpgradeManager : Singleton<UpgradeManager>, IDataPersistence
 
     void Start()
     {
-        _player = GameManager.Instance.Player;
     }
 
     // ===========================================
@@ -158,7 +159,7 @@ public class UpgradeManager : Singleton<UpgradeManager>, IDataPersistence
     //public bool CanUpgradeStat(string statName)
     //{
     //    int cost = GetStatUpgradeCosts(statName);
-    //    return cost >= 0 && _playerCoins >= cost;
+    //    return cost >= 0 && _coins >= cost;
     //}
 
     /// <summary>
@@ -219,6 +220,15 @@ public class UpgradeManager : Singleton<UpgradeManager>, IDataPersistence
         return _unlockedTanksId.Contains(tankIndex);
     }
 
+    public bool SetSelectedTankId(int tankIndex)
+    {
+        if (!IsTankUnlocked(tankIndex))
+            return false;
+
+        _selectedTankId = tankIndex;
+        return true;
+
+    }
     /// <summary>
     /// Chi phí unlock tank. Return 0 nếu đã owned, -1 nếu index sai.
     /// </summary>
@@ -250,7 +260,7 @@ public class UpgradeManager : Singleton<UpgradeManager>, IDataPersistence
         }
 
         _unlockedTanksId.Add(tankIndex);
-        Debug.Log($"[UpgradeManager] ✅ Unlock Tank {tankIndex}! (-{cost} coin)");
+        Debug.Log($"[UpgradeManager] Unlock Tank {tankIndex}! (-{cost} coin)");
 
         OnUpgradeChanged?.Invoke();
         return true;
@@ -369,7 +379,7 @@ public class UpgradeManager : Singleton<UpgradeManager>, IDataPersistence
 
         // 6. Mark unlocked
         _unlockedSkills.Add(skillIndex);
-        Debug.Log($"[UpgradeManager] ✅ Unlock '{skill.skillName}' (Tier {skill.tier})! (-{skill.cost} coin)");
+        Debug.Log($"[UpgradeManager] Unlock '{skill.skillName}' (Tier {skill.tier})! (-{skill.cost} coin)");
 
         // 7. Thông báo UI
         OnUpgradeChanged?.Invoke();
@@ -419,7 +429,8 @@ public class UpgradeManager : Singleton<UpgradeManager>, IDataPersistence
     {
         // Load coin
         _playerCoins = data.playerCoins;
-
+        // Load tank hiện tại
+        _selectedTankId = data.selectedTankId;
         // Load stat levels (Dictionary)
         _statLevels.Clear();
         if (data.statLevels != null)
@@ -444,10 +455,12 @@ public class UpgradeManager : Singleton<UpgradeManager>, IDataPersistence
         Debug.Log($"[UpgradeManager] Loaded: {_playerCoins} coins, " +
                   $"{_statLevels.Count} stats, {_unlockedSkills.Count} skills, " +
                   $"{_unlockedTanksId.Count} tanks");
+
     }
 
     public void SaveData(GameData data)
     {
+        data.selectedTankId = _selectedTankId;
         data.playerCoins = _playerCoins;
         data.statLevels = new Dictionary<string, int>(_statLevels);
         data.unlockedSkills = new List<int>(_unlockedSkills);
