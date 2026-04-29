@@ -16,4 +16,4 @@ MonoBehaviour:
   description: "V\xF9ng \u0111\u1ED9c t\u1ED3n t\u1EA1i l\xE2u h\u01A1n 50%"
   tier: 2
   cost: 250
-  tankId: tank04
+  tankId: Tank04

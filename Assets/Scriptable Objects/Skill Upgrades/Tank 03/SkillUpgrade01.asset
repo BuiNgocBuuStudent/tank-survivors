@@ -16,4 +16,4 @@ MonoBehaviour:
   description: "T\u0103ng b\xE1n k\xEDnh n\u1ED5 30%"
   tier: 1
   cost: 100
-  tankId: tank04
+  tankId: Tank03

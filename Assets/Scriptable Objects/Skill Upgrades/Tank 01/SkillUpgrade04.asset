@@ -16,4 +16,4 @@ MonoBehaviour:
   description: "\u0110\u1EA1n g\xE2y th\xEAm 20% damage trong 2 gi\xE2y"
   tier: 4
   cost: 1500
-  tankId: tank01
+  tankId: Tank01

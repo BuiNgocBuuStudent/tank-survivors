@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SkillUpgrade03
   m_EditorClassIdentifier: 
   skillName: Double Barrel
-  description: "B\u1EAFn 2 vi\xEAn \u0111\u1EA1n song song\t"
+  description: "B\u1EAFn 2 vi\xEAn \u0111\u1EA1n song song"
   tier: 3
   cost: 600
-  tankId: tank01
+  tankId: Tank01

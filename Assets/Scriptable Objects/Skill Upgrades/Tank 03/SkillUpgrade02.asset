@@ -16,4 +16,4 @@ MonoBehaviour:
   description: "Gi\u1EA3m cooldown 20%"
   tier: 2
   cost: 250
-  tankId: tank04
+  tankId: Tank03

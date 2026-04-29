@@ -17,4 +17,4 @@ MonoBehaviour:
     tr\xEAn \u0111\u01B0\u1EDDng bay, g\xE2y 30% damage trong v\xF2ng 1.5s"
   tier: 4
   cost: 1500
-  tankId: tank04
+  tankId: Tank04

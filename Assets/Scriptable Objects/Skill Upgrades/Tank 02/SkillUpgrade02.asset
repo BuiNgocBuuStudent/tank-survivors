@@ -16,4 +16,4 @@ MonoBehaviour:
   description: "T\u0103ng th\xEAm 3 vi\xEAn \u0111\u1EA1n"
   tier: 2
   cost: 250
-  tankId: tank02
+  tankId: Tank02

@@ -15,10 +15,11 @@ public class PlayerControllerBase : MonoBehaviour, IGetHit, IDataPersistence
     [SerializeField] AnimationController _animController;
     private Coroutine _rechargeCoroutine;
 
-    protected float _initialHealth, _normalSpeed, _accelerateSpeed, _initialEnergy;
+    protected float _initialHealth, _initialSpeed, _accelerateSpeed, _initialEnergy;
     [SerializeField] protected float _currentHealth, _currentEnergy;
     [SerializeField] protected float _moveSpeed, _rotateSpeed, _armorPercent;
     [SerializeField] protected bool _isFullEnergy;
+    public float dmgMult;
     protected float _movement;
     public enum PlayerState
     {
@@ -91,7 +92,7 @@ public class PlayerControllerBase : MonoBehaviour, IGetHit, IDataPersistence
 
     private void Accelerate()
     {
-        _moveSpeed = _normalSpeed;
+        _moveSpeed = _initialSpeed;
         if (_currentEnergy <= 0)
         {
             _currentEnergy = 0;
@@ -150,6 +151,15 @@ public class PlayerControllerBase : MonoBehaviour, IGetHit, IDataPersistence
         }
     }
 
+    public void ApplyStatUpgrades(float health, float energy, float armor, float dmgMult)
+    {
+        this._initialHealth = health;
+        this._armorPercent = armor;
+        this._initialEnergy = energy;
+        this.dmgMult = dmgMult;
+    }
+
+    #region Save/Load Data
     public void LoadData(GameData data)
     {
         this._initialHealth = data.initialHealth;
@@ -160,8 +170,10 @@ public class PlayerControllerBase : MonoBehaviour, IGetHit, IDataPersistence
         this._initialEnergy = data.initialEnergy;
         this._currentEnergy = data.currentEnergy;
 
-        this._normalSpeed = data.normalSpeed;
+        this._initialSpeed = data.initialSpeed;
         this._accelerateSpeed = data.accelerateSpeed;
+
+        this.dmgMult = data.dmgMult;
 
         this.transform.position = new Vector3(data.playerPosX, data.playerPosY, data.playerPosZ);
 
@@ -172,16 +184,26 @@ public class PlayerControllerBase : MonoBehaviour, IGetHit, IDataPersistence
 
     public void SaveData(GameData data)
     {
+        data.initialHealth = this._initialHealth;
         data.currentHealth = this._currentHealth;
+
         data.armorPercentage = this._armorPercent;
+        
         data.moveSpeed = this._moveSpeed;
+        
+        data.initialEnergy= this._initialEnergy;
         data.currentEnergy = this._currentEnergy;
+
+        data.dmgMult = this.dmgMult;
+
         data.playerPosX = this.transform.position.x;
         data.playerPosY = this.transform.position.y;
         data.playerPosZ = this.transform.position.z;
+
         Quaternion quaternion = this.transform.rotation;
         data.playerRotationX = quaternion.eulerAngles.x;
         data.playerRotationY = quaternion.eulerAngles.y;
         data.playerRotationZ = quaternion.eulerAngles.z;
     }
+    #endregion
 }

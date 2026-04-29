@@ -12,16 +12,18 @@ public abstract class BulletBase : MonoBehaviour
 
     [Header("-----Base config-----")]
     [SerializeField] protected float _lifeTime;
-    [SerializeField] protected float _dmg;
-    [SerializeField] protected float _speed;
-    [SerializeField] protected Vector2 _movement;
+    [SerializeField] protected float _baseDmg;
+    protected float _dmg;
+    protected float _speed;
+    protected Vector2 _movement;
 
 
     public void Init(float speed, Vector2 movement)
     {
         if (_rb == null)
             _rb = this.GetComponent<Rigidbody2D>();
-         
+        
+        _dmg = _baseDmg * GameManager.Instance.Player.dmgMult;
         this._speed = speed;
         this._movement = movement;
     }
