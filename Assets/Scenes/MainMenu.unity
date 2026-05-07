@@ -702,8 +702,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1420920134}
-        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+      - m_Target: {fileID: 802035899}
+        m_TargetAssemblyTypeName: TankUnlockController, Assembly-CSharp
         m_MethodName: OnRightArrowClicked
         m_Mode: 1
         m_Arguments:
@@ -1606,6 +1606,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 07104d88737858b4b9199b34a9ac168c, type: 3}
   - {fileID: 21300000, guid: 50f0368847bca444ab869b871fb487dd, type: 3}
   - {fileID: 21300000, guid: a2025e5e9db0af5429cf9e20d79fa67e, type: 3}
+  _tankImage: {fileID: 1627987562}
   _animator: {fileID: 1627987561}
   _unlockTankCostText: {fileID: 930418848}
   _selectTankText: {fileID: 1498503929}
@@ -1981,8 +1982,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1420920134}
-        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+      - m_Target: {fileID: 802035899}
+        m_TargetAssemblyTypeName: TankUnlockController, Assembly-CSharp
         m_MethodName: OnLeftArrowClicked
         m_Mode: 1
         m_Arguments:
@@ -2538,8 +2539,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1420920134}
-        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+      - m_Target: {fileID: 802035899}
+        m_TargetAssemblyTypeName: TankUnlockController, Assembly-CSharp
         m_MethodName: OnUnlockTankButtonClicked
         m_Mode: 1
         m_Arguments:
@@ -6549,8 +6550,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "B\u1EAFt \u0111\u1EA7u"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 4a8b22f2cf01d4644980581eb253e33d, type: 2}
+  m_sharedMaterial: {fileID: -8810925074855268474, guid: 4a8b22f2cf01d4644980581eb253e33d, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -6707,8 +6708,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1420920134}
-        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+      - m_Target: {fileID: 802035899}
+        m_TargetAssemblyTypeName: TankUnlockController, Assembly-CSharp
         m_MethodName: OnSelectButtonClicked
         m_Mode: 1
         m_Arguments:

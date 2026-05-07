@@ -22,7 +22,7 @@ public class SkillController : MonoBehaviour
     {
         _upgradeManager = UpgradeManager.Instance;
 
-        _upgradeManager.OnUpgradeChanged += RefreshSkills;
+        _upgradeManager.OnUnlockSkillChanged += RefreshSkills;
         _upgradeManager.OnCoinsChanged += OnCoinsChanged;
 
         LoadSkills();
@@ -32,7 +32,7 @@ public class SkillController : MonoBehaviour
     {
         if (_upgradeManager != null)
         {
-            _upgradeManager.OnUpgradeChanged -= RefreshSkills;
+            _upgradeManager.OnUnlockSkillChanged -= RefreshSkills;
             _upgradeManager.OnCoinsChanged -= OnCoinsChanged;
         }
     }
@@ -44,6 +44,7 @@ public class SkillController : MonoBehaviour
     /// </summary>
     private void RefreshSkills()
     {
+        Debug.Log("Test unlock skill event");
         if (_upgradeManager.PreviewTankId != _lastPreviewTankId)
             LoadSkills();
         else

@@ -15,7 +15,7 @@ public class StatItemUI : MonoBehaviour
     {
         _upgradeManager = UpgradeManager.Instance;
 
-        _upgradeManager.OnUpgradeChanged += RefreshUI;
+        _upgradeManager.OnUpgradeStatChanged += RefreshUI;
         _upgradeManager.OnCoinsChanged += OnCoinsChanged;
         RefreshUI();
     }
@@ -24,7 +24,7 @@ public class StatItemUI : MonoBehaviour
     {
         if (_upgradeManager != null)
         {
-            _upgradeManager.OnUpgradeChanged -= RefreshUI;
+            _upgradeManager.OnUpgradeStatChanged -= RefreshUI;
             _upgradeManager.OnCoinsChanged -= OnCoinsChanged;
         }
     }
@@ -38,6 +38,7 @@ public class StatItemUI : MonoBehaviour
 
     private void RefreshUI()
     {
+        Debug.Log("Test upgrade stat event");
         _statValueText.text = _upgradeManager.GetStatValue(_statName).ToString();
 
         if (_upgradeManager.IsStatMaxLevel(_statName))

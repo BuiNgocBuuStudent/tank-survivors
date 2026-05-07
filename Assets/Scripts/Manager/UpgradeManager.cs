@@ -49,7 +49,8 @@ public class UpgradeManager : Singleton<UpgradeManager>, IDataPersistence
     // ===========================================
 
     // Phát khi stat/skill/tank thay đổi → UI refresh
-    public event Action OnUpgradeChanged;
+    public event Action OnUnlockSkillChanged;
+    public event Action OnUpgradeStatChanged;
 
     // Phát khi coin thay đổi → cập nhật text coin
     public event Action<int> OnCoinsChanged;
@@ -210,7 +211,7 @@ public class UpgradeManager : Singleton<UpgradeManager>, IDataPersistence
 
         ApplyAllStats();
 
-        OnUpgradeChanged?.Invoke();
+        OnUpgradeStatChanged?.Invoke();
 
         return true;
     }
@@ -240,7 +241,8 @@ public class UpgradeManager : Singleton<UpgradeManager>, IDataPersistence
     public void PreviewTank(int tankIndex)
     {
         _previewTankId = tankIndex;
-        OnUpgradeChanged?.Invoke();
+        OnUpgradeStatChanged?.Invoke();
+        OnUnlockSkillChanged?.Invoke();
     }
 
     /// <summary>
@@ -254,7 +256,7 @@ public class UpgradeManager : Singleton<UpgradeManager>, IDataPersistence
 
         _selectedTankId = tankIndex;
         _previewTankId = tankIndex;
-        OnUpgradeChanged?.Invoke();
+        OnUnlockSkillChanged?.Invoke();
         return true;
     }
     /// <summary>
@@ -290,7 +292,8 @@ public class UpgradeManager : Singleton<UpgradeManager>, IDataPersistence
         _unlockedTanksId.Add(tankIndex);
         Debug.Log($"[UpgradeManager] Unlock Tank {tankIndex}! (-{cost} coin)");
 
-        OnUpgradeChanged?.Invoke();
+        //Cập nhập skill cho tank mới unlock
+        OnUnlockSkillChanged.Invoke();
         return true;
     }
 
@@ -344,7 +347,7 @@ public class UpgradeManager : Singleton<UpgradeManager>, IDataPersistence
     /// <summary>
     /// Tìm index trong _skillConfigs từ 1 SkillUpgradeConfig reference.
     /// UI sẽ dùng: int idx = GetSkillIndex(mySkillConfig);
-    ///             TryUnlockSkill(idx);
+    ///             UnlockSkill(idx);
     /// </summary>
     public int GetSkillIndex(SkillUpgradeConfig skill)
     {
@@ -362,7 +365,7 @@ public class UpgradeManager : Singleton<UpgradeManager>, IDataPersistence
     ///   1. Validate → 2. Check đã unlock → 3. Check tier trước → 
     ///   4. Check tank unlocked → 5. Check coin → 6. Mark unlock → 7. Fire event
     /// </summary>
-    public bool TryUnlockSkill(int skillIndex)
+    public bool UnlockSkill(int skillIndex)
     {
         // 1. Validate
         if (skillIndex < 0 || skillIndex >= _skillConfigs.Length)
@@ -410,7 +413,7 @@ public class UpgradeManager : Singleton<UpgradeManager>, IDataPersistence
         Debug.Log($"[UpgradeManager] Unlock '{skill.skillName}' (Tier {skill.tier})! (-{skill.cost} coin)");
 
         // 7. Thông báo UI
-        OnUpgradeChanged?.Invoke();
+        OnUnlockSkillChanged?.Invoke();
 
         return true;
     }

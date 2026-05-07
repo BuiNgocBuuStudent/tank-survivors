@@ -38,7 +38,7 @@ public class SkillItemUI : MonoBehaviour
     /// </summary>
     public void OnUnlockButtonClicked()
     {
-        _upgradeManager.TryUnlockSkill(_skillIndex);
+        _upgradeManager.UnlockSkill(_skillIndex);
         // UI sẽ refresh qua SkillController lắng nghe RefreshSkills
     }
 
