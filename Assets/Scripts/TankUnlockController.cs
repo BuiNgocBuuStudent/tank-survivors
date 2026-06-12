@@ -75,7 +75,7 @@ public class TankUnlockController : MonoBehaviour
 
     public void OnSelectButtonClicked()
     {
-        if (_upgradeManager.SetSelectedTankId(_currentSpriteIndex))
+        if (_upgradeManager.SetSelectedTank(_currentSpriteIndex))
         {
             _selectedTank = _currentSpriteIndex;
             SetSelectTankText();

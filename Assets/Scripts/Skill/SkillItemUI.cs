@@ -2,10 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-/// <summary>
-/// Gắn lên mỗi Skill Item prefab trong Scroll View.
-/// Hiển thị: tên skill, mô tả, tier, chi phí, trạng thái (locked/available/unlocked).
-/// </summary>
+
 public class SkillItemUI : MonoBehaviour
 {
     [Header("UI References")]
@@ -43,7 +40,7 @@ public class SkillItemUI : MonoBehaviour
     }
 
     /// <summary>
-    /// Cập nhật visual state: Unlocked / Available / Locked.
+    /// Cập nhật visual state: Unlocked / Available / Locked
     /// </summary>
     public void RefreshState()
     {

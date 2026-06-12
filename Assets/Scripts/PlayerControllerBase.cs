@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,8 +9,6 @@ public class PlayerControllerBase : MonoBehaviour, IGetHit, IDataPersistence
     [SerializeField] Rigidbody2D _rb;
 
     [SerializeField] protected GunControllerBase _gun;
-    [SerializeField] SlideBar _healthBar;
-    [SerializeField] SlideBar _energyBar;
     [SerializeField] FlashEffect _flashEffect;
     [SerializeField] PlayerState _playerState;
     [SerializeField] AnimationController _animController;
@@ -21,19 +20,27 @@ public class PlayerControllerBase : MonoBehaviour, IGetHit, IDataPersistence
     [SerializeField] protected bool _isFullEnergy;
     public float dmgMult;
     protected float _movement;
+
+    public event Action<float> OnMaxHealthSet;
+    public event Action<float> OnHealthChanged;
+
+    public event Action<float> OnMaxEnergySet;
+    public event Action<float> OnEnergyChanged;
+
     public enum PlayerState
     {
         IDLE,
         MOVE,
         ACCELERATE
     }
-    // Start is called before the first frame update
+
     void Start()
     {
 
     }
     public void Init()
     {
+        Debug.LogWarning("Calling");
         if (_rb == null)
             _rb = this.GetComponent<Rigidbody2D>();
         if (_animController == null)
@@ -44,20 +51,15 @@ public class PlayerControllerBase : MonoBehaviour, IGetHit, IDataPersistence
             _flashEffect = this.GetComponentInChildren<FlashEffect>();
 
         _isFullEnergy = true;
-        _healthBar.SetMaxValue(_initialHealth);
-        _healthBar.UpdateValue(_currentHealth);
-
-        _energyBar.SetMaxValue(_initialEnergy);
-        _energyBar.UpdateValue(_currentEnergy);
-
         _playerState = PlayerState.IDLE;
         _gun.Init();
     }
-    // Update is called once per frame
+
     void Update()
     {
 
     }
+
     private void FixedUpdate()
     {
         _movement = Input.GetAxis("Vertical");
@@ -69,8 +71,7 @@ public class PlayerControllerBase : MonoBehaviour, IGetHit, IDataPersistence
 
         CheckEnergy();
 
-        _energyBar.UpdateValue(_currentEnergy);
-
+        OnEnergyChanged?.Invoke(_currentEnergy);
     }
 
 
@@ -82,11 +83,10 @@ public class PlayerControllerBase : MonoBehaviour, IGetHit, IDataPersistence
         if (_moveSpeed == _accelerateSpeed)
             _playerState = PlayerState.ACCELERATE;
     }
+
     private void Move()
     {
-
         _rb.velocity = this.transform.up * _movement * _moveSpeed;
-
         this.transform.Rotate(new Vector3(0, 0, Input.GetAxis("Horizontal") * -_rotateSpeed));
     }
 
@@ -106,6 +106,7 @@ public class PlayerControllerBase : MonoBehaviour, IGetHit, IDataPersistence
             _isFullEnergy = false;
         }
     }
+
     private void CheckEnergy()
     {
         if (_isFullEnergy || _currentEnergy >= _initialEnergy)
@@ -121,6 +122,7 @@ public class PlayerControllerBase : MonoBehaviour, IGetHit, IDataPersistence
             _rechargeCoroutine = StartCoroutine(RechargeEnergy());
         }
     }
+
     private IEnumerator RechargeEnergy()
     {
         while (_currentEnergy < _initialEnergy)
@@ -137,27 +139,57 @@ public class PlayerControllerBase : MonoBehaviour, IGetHit, IDataPersistence
         _isFullEnergy = true;
     }
 
-
     public void GetHit(float dmg)
     {
         if (gameObject.activeSelf)
             _flashEffect.Flash();
 
         _currentHealth = _currentHealth - (dmg * (1 - _armorPercent / 100));
-        _healthBar.UpdateValue(_currentHealth);
+
+        OnHealthChanged?.Invoke(_currentHealth);
+
         if (_currentHealth <= 0)
         {
             this.gameObject.SetActive(false);
         }
     }
 
-    public void ApplyStatUpgrades(float health, float energy, float armor, float dmgMult)
+    /// <summary>
+    /// ★ HÀM CHÍNH khi chuyển scene: đọc PlayerSessionData DTO → ghi đè stats,
+    /// phát events để HUDController cập nhật SlideBar, apply skills vào gun.
+    /// Phải gọi SAU Init() để _gun đã được resolve.
+    /// </summary>
+    public void ApplySessionData(PlayerSessionData sessionData)
     {
-        this._initialHealth = health;
-        this._armorPercent = armor;
-        this._initialEnergy = energy;
-        this.dmgMult = dmgMult;
+        if (sessionData == null)
+        {
+            Debug.LogError("[PlayerControllerBase] sessionData là null!");
+            return;
+        }
+
+        // Ghi đè stats
+        _initialHealth = sessionData.health;
+        _currentHealth = sessionData.health;
+        _initialEnergy = sessionData.energy;
+        _currentEnergy = sessionData.energy;
+        _armorPercent  = sessionData.armor;
+        dmgMult        = sessionData.dmgMult;
+
+        OnMaxHealthSet?.Invoke(_initialHealth);
+        OnMaxEnergySet?.Invoke(_initialEnergy);
+
+        OnHealthChanged?.Invoke(_currentHealth);
+        OnEnergyChanged?.Invoke(_currentEnergy);
+
+        // Apply skills vào gun
+        if (_gun != null)
+            _gun.ApplySkills(sessionData.activeSkills);
+
+        Debug.Log($"[PlayerControllerBase] ApplySessionData: HP={_initialHealth}, " +
+                  $"EN={_initialEnergy}, AR={_armorPercent}, DMG={dmgMult}, " +
+                  $"Skills=[{string.Join(", ", sessionData.activeSkills)}]");
     }
+
 
     #region Save/Load Data
     public void LoadData(GameData data)
@@ -188,10 +220,10 @@ public class PlayerControllerBase : MonoBehaviour, IGetHit, IDataPersistence
         data.currentHealth = this._currentHealth;
 
         data.armorPercentage = this._armorPercent;
-        
+
         data.moveSpeed = this._moveSpeed;
-        
-        data.initialEnergy= this._initialEnergy;
+
+        data.initialEnergy = this._initialEnergy;
         data.currentEnergy = this._currentEnergy;
 
         data.dmgMult = this.dmgMult;

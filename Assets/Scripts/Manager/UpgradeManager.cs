@@ -19,8 +19,13 @@ public class UpgradeManager : Singleton<UpgradeManager>, IDataPersistence
     [Tooltip("Chi phí mở khóa mỗi tank. Index 0 = Tank01 (0 = miễn phí)")]
     [SerializeField] int[] _tankUnlockCosts = { 0, 500, 1200, 2000 };
 
-    [Header("===== References =====")]
+    [Header("===== Session Data (Scene Transfer) =====")]
+    [Tooltip("ScriptableObject DTO để truyền data sang GameScene")]
+    [SerializeField] PlayerSessionData _sessionData;
+
     [SerializeField] PlayerControllerBase _player;
+    [SerializeField] List<PlayerControllerBase> _playerPrefabs;
+
 
     // ===========================================
     // RUNTIME STATE — Được lưu/load qua GameData
@@ -38,7 +43,7 @@ public class UpgradeManager : Singleton<UpgradeManager>, IDataPersistence
     // Coin hiện tại của player
     [SerializeField] int _playerCoins;
 
-    // Tank được chọn để CHƠI (saved to disk)
+    // Tank được chọn để CHƠI
     [SerializeField] int _selectedTankId;
 
     // Tank đang xem trên UI (tạm thời, không save)
@@ -66,14 +71,10 @@ public class UpgradeManager : Singleton<UpgradeManager>, IDataPersistence
     public StatUpgradeConfig[] StatConfigs => _statConfigs;
     public SkillUpgradeConfig[] SkillConfigs => _skillConfigs;
 
-    // ===========================================
-    // INIT
-    // ===========================================
-
-    void Start()
+    private void Start()
     {
+        _player = _playerPrefabs[_selectedTankId];
     }
-
     // ===========================================
     // COIN MANAGEMENT
     // ===========================================
@@ -90,7 +91,7 @@ public class UpgradeManager : Singleton<UpgradeManager>, IDataPersistence
         {
             Debug.LogWarning("Coin must positive!!!");
             return;
-        }       
+        }
         _playerCoins += amount;
         OnCoinsChanged?.Invoke(_playerCoins);
     }
@@ -115,11 +116,20 @@ public class UpgradeManager : Singleton<UpgradeManager>, IDataPersistence
 
     /// <summary>
     /// Tạo key per-tank: "Tank0_Health", "Tank1_Armor", ...
-    /// Tank mới unlock sẽ không có key → GetStatLevel trả về 0 (base).
+    /// Tank mới unlock sẽ không có key → GetStatLevel trả về 0 (base)
     /// </summary>
     private string GetStatKey(string statName)
     {
+        // Dùng _previewTankId cho UI preview
         return $"Tank{_previewTankId}_{statName}";
+    }
+
+    /// <summary>
+    /// Tạo key cho tank đang CHỌN CHƠI thực tế 
+    /// </summary>
+    private string GetSelectedStatKey(string statName)
+    {
+        return $"Tank{_selectedTankId}_{statName}";
     }
 
     /// <summary>
@@ -208,9 +218,6 @@ public class UpgradeManager : Singleton<UpgradeManager>, IDataPersistence
         _statLevels[key] = currentLevel + 1;
         Debug.Log($"[UpgradeManager] Tank{_selectedTankId}.{statName} → Lv.{currentLevel + 1} (-{cost} coin)");
 
-
-        ApplyAllStats();
-
         OnUpgradeStatChanged?.Invoke();
 
         return true;
@@ -249,13 +256,15 @@ public class UpgradeManager : Singleton<UpgradeManager>, IDataPersistence
     /// Chọn tank để CHƠI (chỉ tank đã unlocked).
     /// Khác PreviewTank: hàm này yêu cầu tank phải unlocked.
     /// </summary>
-    public bool SetSelectedTankId(int tankIndex)
+    public bool SetSelectedTank(int tankIndex)
     {
         if (!IsTankUnlocked(tankIndex))
             return false;
 
         _selectedTankId = tankIndex;
         _previewTankId = tankIndex;
+        _player = _playerPrefabs[_selectedTankId];
+
         OnUnlockSkillChanged?.Invoke();
         return true;
     }
@@ -423,19 +432,56 @@ public class UpgradeManager : Singleton<UpgradeManager>, IDataPersistence
     #region Apply Stats
 
     /// <summary>
-    /// Đọc tất cả stat levels → lấy giá trị → ghi vào Player.
-    /// Gọi khi: upgrade stat, load game, bắt đầu chơi.
+    /// Lấy giá trị stat cho một tank cụ thể theo tankId chứ không phụ thuộc _previewTankId.
     /// </summary>
-    private void ApplyAllStats()
+    private float GetStatValueForTank(string statName, int tankId)
     {
-        if (_player == null) return;
+        StatUpgradeConfig config = FindStatConfig(statName);
+        if (config == null)
+        {
+            Debug.LogWarning($"[UpgradeManager] Không tìm thấy config: {statName}");
+            return 0f;
+        }
 
-        float health  = GetStatValue("Health");
-        float energy  = GetStatValue("Energy");
-        float armor   = GetStatValue("Armor");
-        float dmgMult = GetStatValue("Damage");
+        string key = $"Tank{tankId}_{statName}";
+        int level = _statLevels.TryGetValue(key, out int lv) ? lv : 0;
+        if (level >= config.values.Length)
+            level = config.values.Length - 1;
+        return config.values[level];
+    }
 
-        _player.ApplyStatUpgrades(health, energy, armor, dmgMult);
+    /// <summary>
+    /// ★ Gọi từ MainMenu trước khi LoadScene("PlayScene").
+    /// Tổng hợp toàn bộ stat và skill vào PlayerSessionData ScriptableObject,
+    /// GameManager sẽ đọc từ đó để khởi tạo player — không phụ thuộc thứ tự Awake/Start.
+    /// </summary>
+    public void PrepareForGame()
+    {
+        if (_sessionData == null)
+        {
+            Debug.LogError("[UpgradeManager] _sessionData chưa được gán! Kéo PlayerSessionData asset vào Inspector.");
+            return;
+        }
+
+        _sessionData.Reset();
+        _sessionData.selectedTankId = _selectedTankId;
+        _sessionData.health   = GetStatValueForTank("Health",  _selectedTankId);
+        _sessionData.energy   = GetStatValueForTank("Energy",  _selectedTankId);
+        _sessionData.armor    = GetStatValueForTank("Armor",   _selectedTankId);
+        _sessionData.dmgMult  = GetStatValueForTank("Damage",  _selectedTankId);
+
+        // Collect tất cả skill đã unlock của tank đang chọn
+        string tankId = $"Tank{_selectedTankId + 1:D2}";
+        for (int i = 0; i < _skillConfigs.Length; i++)
+        {
+            if (_skillConfigs[i].tankId == tankId && IsSkillUnlocked(i))
+                _sessionData.activeSkills.Add(_skillConfigs[i].skillName);
+        }
+
+        Debug.Log($"[UpgradeManager] PrepareForGame → Tank{_selectedTankId}: " +
+                  $"HP={_sessionData.health}, EN={_sessionData.energy}, " +
+                  $"AR={_sessionData.armor}, DMG={_sessionData.dmgMult}, " +
+                  $"Skills=[{string.Join(", ", _sessionData.activeSkills)}]");
     }
 
     #endregion
@@ -452,6 +498,7 @@ public class UpgradeManager : Singleton<UpgradeManager>, IDataPersistence
         _playerCoins = data.playerCoins;
         _selectedTankId = data.selectedTankId;
         _previewTankId = _selectedTankId;
+
         // Load stat levels (Dictionary)
         _statLevels.Clear();
         if (data.statLevels != null)
@@ -470,8 +517,6 @@ public class UpgradeManager : Singleton<UpgradeManager>, IDataPersistence
             ? new List<int>(data.unlockedTanks)
             : new List<int>();
 
-        // Áp dụng stats ngay sau khi load
-        ApplyAllStats();
 
         Debug.Log($"[UpgradeManager] Loaded: {_playerCoins} coins, " +
                   $"{_statLevels.Count} stats, {_unlockedSkills.Count} skills, " +
@@ -489,10 +534,6 @@ public class UpgradeManager : Singleton<UpgradeManager>, IDataPersistence
     }
 
     #endregion
-
-    // =====================================================
-    //   HELPER — Tìm config
-    // =====================================================
 
     /// <summary>
     /// Tìm StatUpgradeConfig theo tên. Return null nếu không tìm thấy.

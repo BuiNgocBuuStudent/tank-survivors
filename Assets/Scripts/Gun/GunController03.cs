@@ -1,14 +1,31 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class GunController03 : GunControllerBase
 {
+    [Header("-----Cluster Bomb Config-----")]
+    [Tooltip("Prefab cho mảnh đạn nhỏ (Cluster Bomb Tier 3). Dùng Bullet01 prefab.")]
+    [SerializeField] BulletBase _clusterBulletPrefab;
 
-    // Update is called once per frame
+    private bool _hasClusterBomb;
+
     void Update()
     {
         Fire();
+    }
+
+    public override void ApplySkills(List<string> skills)
+    {
+        base.ApplySkills(skills);
+
+        // Tier 2: Faster Reload — giảm cooldown 20%
+        if (HasSkill("Faster Reload"))
+        {
+            _cooldownTime *= 0.8f;
+        }
+
+        // Tier 3: Cluster Bomb — flag để Bullet03 biết spawn mảnh đạn
+        _hasClusterBomb = HasSkill("Cluster Bomb");
     }
 
     protected override void Fire()
@@ -21,7 +38,18 @@ public class GunController03 : GunControllerBase
         BulletBase bullet = ObjectPooler.Instance.GetComp(_bulletPrefab);
         bullet.Init(_bulletSpeed, this.transform.up);
         bullet.transform.SetPositionAndRotation(this.transform.position, this.transform.rotation);
+
+        // Tier 1: Bigger Boom — truyền flag vào Bullet03
+        Bullet03 bullet03 = bullet as Bullet03;
+        if (bullet03 != null)
+        {
+            bullet03.SetSkillFlags(
+                HasSkill("Bigger Boom"),
+                _hasClusterBomb,
+                _clusterBulletPrefab
+            );
+        }
+
         bullet.gameObject.SetActive(true);
     }
-
 }

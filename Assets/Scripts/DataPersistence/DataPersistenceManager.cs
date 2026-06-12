@@ -105,4 +105,10 @@ public class DataPersistenceManager : MonoBehaviour
     {
         return _gameData != null;
     }
+
+    public void RegisterAndLoad(IDataPersistence dataPersistenceObject)
+    {
+        _dataPersistenceObjects.Add(dataPersistenceObject);
+        dataPersistenceObject.LoadData(_gameData);
+    }
 }

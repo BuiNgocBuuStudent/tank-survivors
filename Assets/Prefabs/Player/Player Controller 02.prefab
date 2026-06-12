@@ -50,6 +50,7 @@ MonoBehaviour:
     m_Bits: 512
   _cooldownTime: 1
   _bulletSpeed: 10
+  _activeSkills: []
   _numberBullet: 4
   _attackRange: 40
 --- !u!1 &5150117226864979664
@@ -70,7 +71,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4686832789968749266
 Transform:
   m_ObjectHideFlags: 0
@@ -130,19 +131,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3bf1b631f603a94e9c3b6d245fbceb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rb: {fileID: 0}
-  _gun: {fileID: 0}
-  _healthBar: {fileID: 0}
-  _energyBar: {fileID: 0}
-  _flashEffect: {fileID: 0}
+  _rb: {fileID: 3451896095484587191}
+  _gun: {fileID: 2098577480551014799}
+  _healthBar: {fileID: 6834197207918482475, guid: 5f799debc8f5dbb4bb92e62f0ffcfe48, type: 3}
+  _energyBar: {fileID: 1634702287976823509, guid: 405ae81254769a1459aab55a1b6bb45d, type: 3}
+  _flashEffect: {fileID: 325967778555941394}
   _playerState: 0
-  _animController: {fileID: 0}
+  _animController: {fileID: 1649947861650761924}
   _currentHealth: 0
   _currentEnergy: 0
   _moveSpeed: 0
   _rotateSpeed: 2
   _armorPercent: 0
   _isFullEnergy: 0
+  dmgMult: 1
 --- !u!61 &8822413499092768443
 BoxCollider2D:
   m_ObjectHideFlags: 0

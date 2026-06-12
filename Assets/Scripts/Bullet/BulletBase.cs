@@ -1,6 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public abstract class BulletBase : MonoBehaviour
@@ -16,16 +14,28 @@ public abstract class BulletBase : MonoBehaviour
     protected float _dmg;
     protected float _speed;
     protected Vector2 _movement;
+    private float _damageMultiplier = 1f;
 
 
     public void Init(float speed, Vector2 movement)
     {
         if (_rb == null)
             _rb = this.GetComponent<Rigidbody2D>();
-        
+
         _dmg = _baseDmg * GameManager.Instance.Player.dmgMult;
+        _damageMultiplier = 1f; // Reset mỗi lần lấy từ pool
         this._speed = speed;
         this._movement = movement;
+    }
+
+    /// <summary>
+    /// Nhân thêm hệ số damage. Gọi SAU Init().
+    /// VD: Slug Round (×2), Cluster Fragment (×0.3)
+    /// </summary>
+    public void SetDamageMultiplier(float multiplier)
+    {
+        _damageMultiplier = multiplier;
+        _dmg = _baseDmg * GameManager.Instance.Player.dmgMult * _damageMultiplier;
     }
     private void OnEnable()
     {
@@ -48,7 +58,7 @@ public abstract class BulletBase : MonoBehaviour
         _rb.velocity = _movement.normalized * _speed;
     }
 
-    protected IEnumerator RepeatLifeTime()
+    protected virtual IEnumerator RepeatLifeTime()
     {
         while (true)
         {

@@ -1174,7 +1174,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 50, y: 0}
+  m_AnchoredPosition: {x: 25, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &619736611
@@ -3591,7 +3591,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -50}
+  m_AnchoredPosition: {x: 0, y: -70}
   m_SizeDelta: {x: 300, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1420920129
@@ -4723,7 +4723,13 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f10ef3f0e8fd6ab4db394ccaba9ff62c, type: 2}
   - {fileID: 11400000, guid: f7a620852b248a8478c532a8511170fa, type: 2}
   _tankUnlockCosts: 00000000f4010000b0040000d0070000
-  _player: {fileID: 4199107683402926379, guid: eb2eebe65094a584f9470ec1d4eaa916, type: 3}
+  _sessionData: {fileID: 11400000, guid: 98414b7bc507cef45af7fb0d477eb4d2, type: 2}
+  _player: {fileID: 0}
+  _playerPrefabs:
+  - {fileID: 4199107683402926379, guid: eb2eebe65094a584f9470ec1d4eaa916, type: 3}
+  - {fileID: 3042811553038635131, guid: 7943d4a018d39c94593416d8a461ae2c, type: 3}
+  - {fileID: 5532417409474752934, guid: 415dded03a63d0f49963c08a50f640f8, type: 3}
+  - {fileID: 5487394442646664401, guid: 887128857f603c9478e84f85f867602f, type: 3}
   _playerCoins: 0
   _selectedTankId: 0
 --- !u!4 &1588138937

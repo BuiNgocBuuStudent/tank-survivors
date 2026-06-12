@@ -335,7 +335,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &7618187286227643922
 Transform:
   m_ObjectHideFlags: 0
@@ -395,19 +395,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3bf1b631f603a94e9c3b6d245fbceb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rb: {fileID: 0}
-  _gun: {fileID: 0}
-  _healthBar: {fileID: 0}
-  _energyBar: {fileID: 0}
-  _flashEffect: {fileID: 0}
+  _rb: {fileID: 7301755450842267608}
+  _gun: {fileID: 3925410604791716619}
+  _flashEffect: {fileID: 1894452110433110626}
   _playerState: 0
-  _animController: {fileID: 0}
+  _animController: {fileID: 1831944113991228462}
   _currentHealth: 0
   _currentEnergy: 0
   _moveSpeed: 0
   _rotateSpeed: 2
   _armorPercent: 0
   _isFullEnergy: 0
+  dmgMult: 1
 --- !u!61 &2678187661344930175
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -618,6 +617,8 @@ MonoBehaviour:
     m_Bits: 512
   _cooldownTime: 3
   _bulletSpeed: 6
+  _activeSkills: []
+  _clusterBulletPrefab: {fileID: 3329290608771731238, guid: 11250c12e1b5bfb4dad60a54aa3c7680, type: 3}
 --- !u!1 &8897846397362839959
 GameObject:
   m_ObjectHideFlags: 0
