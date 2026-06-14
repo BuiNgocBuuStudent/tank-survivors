@@ -6,8 +6,11 @@ public class GunController01 : GunControllerBase
     [SerializeField] bool _isDoubleBullet;
     [SerializeField] float _angle;
 
-    // Skill: Overcharge Shot (Tier 5) — counter
+    private bool _hasIncendiaryAmmo;
+
     private int _shotCounter;
+    private bool _hasOverchargeShot;
+    private const int OverchargeInterval = 5;
 
     void Update()
     {
@@ -18,17 +21,24 @@ public class GunController01 : GunControllerBase
     {
         base.ApplySkills(skills);
 
-        // Tier 1: Rapid Fire — giảm cooldown 25%
+        // Tier 1: Rapid Fire
         if (HasSkill("Rapid Fire"))
         {
             _cooldownTime *= 0.75f;
         }
 
-        // Tier 3: Double Barrel — bật chế độ bắn 2 viên
+        // Tier 3: Double Barrel
         if (HasSkill("Double Barrel"))
         {
             _isDoubleBullet = true;
         }
+
+        // Tier 4: Incendiary Ammo
+        _hasIncendiaryAmmo = HasSkill("Incendiary Ammo");
+
+        // Tier 5: Overcharge Shot
+        _hasOverchargeShot = HasSkill("Overcharge Shot");
+
     }
 
     protected override void Fire()
@@ -37,6 +47,13 @@ public class GunController01 : GunControllerBase
             return;
 
         _timer = _cooldownTime;
+        _shotCounter++;
+
+        // Tier 5: Overcharge Shot
+        if (_hasOverchargeShot && _shotCounter % OverchargeInterval == 0)
+        {
+            SpawnOverchargeBullet(this.transform.up, this.transform.position);
+        }
 
         if (_isDoubleBullet)
         {
@@ -49,23 +66,51 @@ public class GunController01 : GunControllerBase
         {
             SpawnBullet(this.transform.up, this.transform.position);
         }
-
-        _shotCounter++;
     }
 
     private void SpawnBullet(Vector2 direction, Vector3 spawnPos)
     {
         BulletBase bullet = ObjectPooler.Instance.GetComp(_bulletPrefab);
 
-        // Tier 2: Piercing Rounds — set pierce count
         Bullet01 bullet01 = bullet as Bullet01;
-        if (bullet01 != null && HasSkill("Piercing Rounds"))
+        if (bullet01 != null)
         {
-            bullet01.SetPierceCount(1);
+            // Tier 2: Piercing Rounds
+            if (HasSkill("Piercing Rounds"))
+                bullet01.SetPierceCount(1);
+
+            // Tier 4: Incendiary Ammo
+            bullet01.SetIncendiaryAmmo(_hasIncendiaryAmmo);
         }
 
         bullet.Init(_bulletSpeed, direction);
         bullet.transform.SetPositionAndRotation(spawnPos, this.transform.rotation);
+        bullet.gameObject.SetActive(true);
+    }
+
+    // Tier 5 — Overcharge Shot
+    private void SpawnOverchargeBullet(Vector2 direction, Vector3 spawnPos)
+    {
+        BulletBase bullet = ObjectPooler.Instance.GetComp(_bulletPrefab);
+
+        Bullet01 bullet01 = bullet as Bullet01;
+        if (bullet01 != null)
+        {
+            // Piercing vẫn áp dụng nếu có
+            if (HasSkill("Piercing Rounds"))
+                bullet01.SetPierceCount(1);
+
+            // Incendiary vẫn áp dụng nếu có
+            bullet01.SetIncendiaryAmmo(_hasIncendiaryAmmo);
+        }
+
+        bullet.Init(_bulletSpeed, direction);
+        bullet.transform.SetPositionAndRotation(spawnPos, this.transform.rotation);
+
+        bullet.SetDamageMultiplier(3f);
+
+        bullet.transform.localScale = Vector3.one * 1.5f;
+
         bullet.gameObject.SetActive(true);
     }
 }

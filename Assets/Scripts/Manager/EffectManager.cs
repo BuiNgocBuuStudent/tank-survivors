@@ -10,8 +10,8 @@ using UnityEngine;
 public class EffectManager : Singleton<EffectManager>
 {
     /// <summary>
-    /// Burning zone: gây DOT mỗi tick cho mọi enemy trong vùng
-    /// Dùng cho: Tank04 Toxic Cloud
+    /// Burning zone: gây DOT mỗi tick cho mọi enemy trong vùng,
+    /// dùng cho: Tank04 Toxic Cloud
     /// </summary>
     public IEnumerator Burning(GameObject effect, float dmg, float range, float time, float speed, LayerMask mask)
     {
@@ -31,8 +31,8 @@ public class EffectManager : Singleton<EffectManager>
     }
 
     /// <summary>
-    /// Nổ tức thì: gây damage 1 lần cho mọi enemy trong bán kính
-    /// Dùng cho: Tank03 Cannon, Chain Reaction (T02-T5)
+    /// Nổ tức thì: gây damage 1 lần cho mọi enemy trong bán kính,
+    /// dùng cho: Tank03 Cannon, Chain Reaction (T02-T5)
     /// </summary>
     public void TriggerExplosion(GameObject effect, float dmg, float range, LayerMask mask)
     {
@@ -45,9 +45,9 @@ public class EffectManager : Singleton<EffectManager>
     }
 
     /// <summary>
-    /// Burning + Corrosive Cloud: enemy trong vùng bị giảm armor -> nhận thêm damage
-    /// armorReduction = 20 -> enemy mất 20% armor khi ở trong vùng
-    /// Thực hiện bằng cách tăng damage lên thay vì sửa armor enemy
+    /// Burning + Corrosive Cloud: enemy trong vùng bị giảm armor -> nhận thêm damage,
+    /// armorReduction = 20 -> enemy mất 20% armor khi ở trong vùng,
+    /// thực hiện bằng cách tăng damage lên thay vì sửa armor enemy
     /// </summary>
     public IEnumerator CorrosiveBurning(GameObject effect, float dmg, float range,
         float time, float speed, LayerMask mask, float armorReduction)
@@ -75,8 +75,8 @@ public class EffectManager : Singleton<EffectManager>
     //            Toxic Trail (T04-T4)
 
     /// <summary>
-    /// Gắn DOT (Damage Over Time) trực tiếp lên một enemy
-    /// Tick damage mỗi <tickInterval> giây trong <duration> giây
+    /// Gắn DOT (Damage Over Time) trực tiếp lên một enemy.
+    /// Tick damage mỗi <tickInterval> giây trong <duration> giây.
     /// Nếu enemy đã có DOT thì làm mới thời gian (không stack)
     /// </summary>
     public void ApplyDOT(GameObject target, float dmgPerTick, float tickInterval, float duration)
@@ -91,7 +91,7 @@ public class EffectManager : Singleton<EffectManager>
     }
 
     /// <summary>
-    /// Gắn DOT lên mọi enemy trong bán kính (dùng cho vùng lửa / nổ).
+    /// Gắn DOT lên mọi enemy trong bán kính (dùng cho vùng lửa / nổ)
     /// </summary>
     public void ApplyDOTInRadius(Vector2 center, float radius, LayerMask mask,
                                  float dmgPerTick, float tickInterval, float duration)
@@ -105,8 +105,8 @@ public class EffectManager : Singleton<EffectManager>
     //  Dùng cho: Shockwave (T03-T4)
 
     /// <summary>
-    /// Giảm tốc độ di chuyển của enemy trong một khoảng thời gian
-    /// Không stack, chỉ làm mới
+    /// Giảm tốc độ di chuyển của enemy trong một khoảng thời gian;
+    /// không stack, chỉ làm mới
     /// </summary>
     /// <param name="slowFactor">Tỉ lệ giảm tốc</param>
     public void ApplySlow(GameObject target, float slowFactor, float duration)
@@ -121,7 +121,7 @@ public class EffectManager : Singleton<EffectManager>
     }
 
     /// <summary>
-    /// Slow mọi enemy trong bán kính (dùng sau vụ nổ Shockwave).
+    /// Slow mọi enemy trong bán kính (dùng sau vụ nổ Shockwave)
     /// </summary>
     public void ApplySlowInRadius(Vector2 center, float radius, LayerMask mask,
                                    float slowFactor, float duration)
@@ -140,14 +140,14 @@ public class EffectManager : Singleton<EffectManager>
 
 /// <summary>
 /// Component DOT: gắn lên enemy, tự tick damage và tự hủy.
-/// Nhiều nguồn DOT có thể gọi Apply() để làm mới thay vì stack.
+/// Nhiều nguồn DOT có thể gọi Apply() để làm mới thay vì stack
 /// </summary>
 public class EnemyDOTState : MonoBehaviour
 {
     private Coroutine _dotCoroutine;
 
     /// <summary>
-    /// Bắt đầu (hoặc làm mới) DOT với thông số mới.
+    /// Bắt đầu (hoặc làm mới) DOT với thông số mới
     /// </summary>
     public void Apply(float dmgPerTick, float tickInterval, float duration)
     {
@@ -188,7 +188,7 @@ public class EnemyDOTState : MonoBehaviour
 
 /// <summary>
 /// Component Slow: giảm tốc độ enemy, tự restore và tự hủy.
-/// Không stack — gọi Apply() nhiều lần sẽ làm mới duration.
+/// Không stack — gọi Apply() nhiều lần sẽ làm mới duration
 /// </summary>
 public class EnemySlowState : MonoBehaviour
 {
@@ -201,7 +201,7 @@ public class EnemySlowState : MonoBehaviour
     }
 
     /// <summary>
-    /// Áp dụng (hoặc làm mới) slow.
+    /// Áp dụng (hoặc làm mới) slow
     /// </summary>
     public void Apply(float slowFactor, float duration)
     {

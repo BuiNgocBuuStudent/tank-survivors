@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89dbb8ce1bb85ae4387c2c3a1f74785e, type: 3}
   m_Name: SkillUpgrade05
   m_EditorClassIdentifier: 
-  skillName: "Overcharge Shot\t"
+  skillName: Overcharge Shot
   description: "M\u1ED7i 5 ph\xE1t b\u1EAFn th\u01B0\u1EDDng, ph\xE1t th\u1EE9 5
     g\xE2y \xD73 damage v\xE0 \u0111\u1EA1n to h\u01A1n 1.5 l\u1EA7n"
   tier: 5

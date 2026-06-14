@@ -5,6 +5,9 @@ public class Bullet01 : BulletBase
     // Tier 2: Piercing Rounds — đạn xuyên qua enemy
     private int _pierceCount;
 
+    // Tier 4: Incendiary Ammo — bật/tắt bởi GunController01
+    private bool _hasIncendiaryAmmo;
+
     /// <summary>
     /// Set số lần xuyên. Gọi bởi GunController01 trước khi Init().
     /// 0 = không xuyên (mặc định), 1 = xuyên qua 1 enemy.
@@ -14,25 +17,28 @@ public class Bullet01 : BulletBase
         _pierceCount = count;
     }
 
-    //private void OnEnable()
-    //{
-    //    // Reset pierce count mỗi lần bullet được tái sử dụng từ pool
-    //    // (nếu không có skill, _pierceCount sẽ vẫn = 0 từ lần Init trước)
-    //}
+    public void SetIncendiaryAmmo(bool active)
+    {
+        _hasIncendiaryAmmo = active;
+    }
 
     protected override void Boom(GameObject target)
     {
         _isCanGetHit = target.GetComponent<IGetHit>();
         _isCanGetHit?.GetHit(this._dmg);
+        // Tier 4: Incendiary Ammo
+        if (_hasIncendiaryAmmo)
+        {
+            float dotDmgPerTick = _dmg * 0.2f;
+            EffectManager.Instance.ApplyDOT(target, dotDmgPerTick, tickInterval: 0.5f, duration: 2f);
+        }
 
         if (_pierceCount > 0)
         {
-            // Xuyên qua — giảm pierce count, không tắt bullet
             _pierceCount--;
         }
         else
         {
-            // Không còn pierce → tắt bullet
             this.gameObject.SetActive(false);
         }
     }
