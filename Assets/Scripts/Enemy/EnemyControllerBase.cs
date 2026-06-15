@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -9,15 +10,20 @@ public abstract class EnemyControllerBase : MonoBehaviour, IGetHit
     private EnemyManager _enemyManager;
     [SerializeField] private Rigidbody2D _rb;
     [SerializeField] FlashEffect _flashEffect;
-    [SerializeField] EnemyDataBase _enemyDataBase;
+    [SerializeField] EnemyConfig _enemyDataBase;
 
     [SerializeField] float _currentHealth;
+    /// <summary>EnemySlowState sẽ điều chỉnh field này</summary>
+    [SerializeField] float _speedMultiplier = 1f;
 
-    // Start is called before the first frame update
-    void Start()
-    {
 
-    }
+    /// <summary>
+    /// Phát ra khi enemy chết. Truyền vị trí và damage của đòn cuối
+    /// Bullet/Skill subscribe vào event này để trigger chain effects
+    /// </summary>
+    public static event Action<Vector3, float> OnEnemyDeath;
+
+
     public void Init(Vector2 randomSpawnPos)
     {
         if (_rb == null)
@@ -29,11 +35,7 @@ public abstract class EnemyControllerBase : MonoBehaviour, IGetHit
         _currentHealth = _enemyDataBase.intialHealth;
         this.transform.position = randomSpawnPos;
     }
-    // Update is called once per frame
-    void Update()
-    {
 
-    }
     private void FixedUpdate()
     {
         ChaseTarget();
@@ -41,7 +43,6 @@ public abstract class EnemyControllerBase : MonoBehaviour, IGetHit
 
     private void ChaseTarget()
     {
-
         Vector2 movement = _player.transform.position - this.transform.position;
 
         float angle = Mathf.Atan2(movement.y, movement.x) * Mathf.Rad2Deg + 90;
@@ -49,7 +50,7 @@ public abstract class EnemyControllerBase : MonoBehaviour, IGetHit
         quaternion.eulerAngles = new Vector3(0, 0, angle);
         this.transform.rotation = quaternion;
 
-        _rb.velocity = movement.normalized * _enemyDataBase.moveSpeed;
+        _rb.velocity = movement.normalized * (_enemyDataBase.moveSpeed * _speedMultiplier);
     }
 
     public void GetHit(float dmg)
@@ -60,6 +61,8 @@ public abstract class EnemyControllerBase : MonoBehaviour, IGetHit
         _currentHealth -= dmg;
         if (_currentHealth <= 0)
         {
+            OnEnemyDeath?.Invoke(this.transform.position, dmg);
+
             this.gameObject.SetActive(false);
             _flashEffect.ResetMaterial();
             _enemyManager.SpawnExpGem(this.transform.position);
@@ -72,5 +75,13 @@ public abstract class EnemyControllerBase : MonoBehaviour, IGetHit
         if (isCanGetHit == null)
             return;
         isCanGetHit.GetHit(_enemyDataBase.damage);
+    }
+
+    /// <summary>
+    /// Được gọi bởi EnemySlowState để giảm/restore tốc độ
+    /// </summary>
+    public void SetSpeedMultiplier(float multiplier)
+    {
+        _speedMultiplier = Mathf.Clamp(multiplier, 0.1f, 2f);
     }
 }

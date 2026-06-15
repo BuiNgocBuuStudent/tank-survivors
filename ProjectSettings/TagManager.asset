@@ -62,3 +62,6 @@ TagManager:
   - name: Enemy
     uniqueID: 127245801
     locked: 0
+  - name: Animation
+    uniqueID: 2513281335
+    locked: 0

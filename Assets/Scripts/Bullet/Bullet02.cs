@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Bullet02 : BulletBase
 {
-    public override void Boom(GameObject target)
+    protected override void Boom(GameObject target)
     {
         this.gameObject.SetActive(false);
 

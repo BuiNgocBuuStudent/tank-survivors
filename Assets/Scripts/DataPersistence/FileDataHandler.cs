@@ -1,8 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.IO;
 using UnityEngine;
 using System;
+using Newtonsoft.Json;
 
 public class FileDataHandler
 {
@@ -42,7 +41,7 @@ public class FileDataHandler
                     dataToLoad = EncryptDecrypt(dataToLoad);
 
                 //deserialize từ JSON sang C# data game
-                loadedData = JsonUtility.FromJson<GameData>(dataToLoad);
+                loadedData = JsonConvert.DeserializeObject<GameData>(dataToLoad);
             }
             catch (Exception e)
             {
@@ -64,7 +63,7 @@ public class FileDataHandler
 
 
             //serialize C# data game sang JSON
-            string dataToSave = JsonUtility.ToJson(data, true);
+            string dataToSave = JsonConvert.SerializeObject(data, Formatting.Indented);
 
             //mã hóa hay không??
             if (_useEncryption)

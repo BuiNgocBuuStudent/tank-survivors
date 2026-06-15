@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89dbb8ce1bb85ae4387c2c3a1f74785e, type: 3}
+  m_Name: SkillUpgrade05
+  m_EditorClassIdentifier: 
+  skillName: Overcharge Shot
+  description: "M\u1ED7i 10 ph\xE1t b\u1EAFn th\u01B0\u1EDDng, b\u1EAFn th\xEAm 1
+    vi\xEAn \u0111\u1EA1n g\xE2y damage g\u1EA5p 3 l\u1EA7n"
+  tier: 5
+  cost: 3500
+  tankId: Tank01

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,87 +6,236 @@ using UnityEngine;
 public class PlayerControllerBase : MonoBehaviour, IGetHit, IDataPersistence
 {
     [Header("-----Base config-----")]
-    [SerializeField] protected GunControllerBase _gun;
-    [SerializeField] SlideBar _healthBar;
     [SerializeField] Rigidbody2D _rb;
-    [SerializeField] PlayerState _playerState;
 
-    private float _initialealth;
-    [SerializeField] protected float _currentHealth, _armorPercent;
-    [SerializeField] protected float _moveSpeed, _rotateSpeed;
+    [SerializeField] protected GunControllerBase _gun;
+    [SerializeField] FlashEffect _flashEffect;
+    [SerializeField] PlayerState _playerState;
+    [SerializeField] AnimationController _animController;
+    private Coroutine _rechargeCoroutine;
+
+    protected float _initialHealth, _initialSpeed, _accelerateSpeed, _initialEnergy;
+    [SerializeField] protected float _currentHealth, _currentEnergy;
+    [SerializeField] protected float _moveSpeed, _rotateSpeed, _armorPercent;
+    [SerializeField] protected bool _isFullEnergy;
+    public float dmgMult;
+    protected float _movement;
+
+    public event Action<float> OnMaxHealthSet;
+    public event Action<float> OnHealthChanged;
+
+    public event Action<float> OnMaxEnergySet;
+    public event Action<float> OnEnergyChanged;
 
     public enum PlayerState
     {
         IDLE,
         MOVE,
+        ACCELERATE
     }
-    // Start is called before the first frame update
+
     void Start()
     {
-        if (_rb == null)
-            _rb = this.GetComponent<Rigidbody2D>();
+
     }
     public void Init()
     {
-
-        _healthBar.SetMaxValue(_initialealth);
-        _healthBar.UpdateValue(_currentHealth);
-        _playerState = PlayerState.IDLE;
+        Debug.LogWarning("Calling");
+        if (_rb == null)
+            _rb = this.GetComponent<Rigidbody2D>();
+        if (_animController == null)
+            _animController = this.GetComponentInChildren<AnimationController>();
         if (_gun == null)
             _gun = this.GetComponentInChildren<GunControllerBase>();
+        if (_flashEffect == null)
+            _flashEffect = this.GetComponentInChildren<FlashEffect>();
+
+        _isFullEnergy = true;
+        _playerState = PlayerState.IDLE;
         _gun.Init();
     }
-    // Update is called once per frame
+
     void Update()
     {
-        UpdateState();
+
     }
+
     private void FixedUpdate()
     {
+        _movement = Input.GetAxis("Vertical");
         Move();
+        Accelerate();
+
+        UpdateState();
+        _animController.UpdatePlayerAnim(_playerState);
+
+        CheckEnergy();
+
+        OnEnergyChanged?.Invoke(_currentEnergy);
     }
+
 
     private void UpdateState()
     {
         _playerState = PlayerState.IDLE;
-        if(_rb.velocity.x != 0)
+        if (_rb.velocity.x != 0)
             _playerState = PlayerState.MOVE;
+        if (_moveSpeed == _accelerateSpeed)
+            _playerState = PlayerState.ACCELERATE;
     }
+
     private void Move()
     {
-        _rb.velocity = this.transform.up * Input.GetAxis("Vertical") * _moveSpeed;
-
+        _rb.velocity = this.transform.up * _movement * _moveSpeed;
         this.transform.Rotate(new Vector3(0, 0, Input.GetAxis("Horizontal") * -_rotateSpeed));
     }
+
+    private void Accelerate()
+    {
+        _moveSpeed = _initialSpeed;
+        if (_currentEnergy <= 0)
+        {
+            _currentEnergy = 0;
+            return;
+        }
+
+        if (Input.GetKey(KeyCode.Space) && _movement > 0)
+        {
+            _moveSpeed = _accelerateSpeed;
+            _currentEnergy -= 2 * Time.deltaTime;
+            _isFullEnergy = false;
+        }
+    }
+
+    private void CheckEnergy()
+    {
+        if (_isFullEnergy || _currentEnergy >= _initialEnergy)
+        {
+            Debug.Log("Full energy");
+            _rechargeCoroutine = null;
+            return;
+        }
+
+        if (_currentEnergy < _initialEnergy && _rechargeCoroutine == null)
+        {
+            Debug.Log("Start recharge");
+            _rechargeCoroutine = StartCoroutine(RechargeEnergy());
+        }
+    }
+
+    private IEnumerator RechargeEnergy()
+    {
+        while (_currentEnergy < _initialEnergy)
+        {
+            Debug.Log("Recharging");
+            yield return new WaitForSeconds(Time.deltaTime);
+            _currentEnergy += Time.deltaTime;
+        }
+
+        if (_initialEnergy - _currentEnergy < 0.2f)
+            _currentEnergy = _initialEnergy;
+
+        _rechargeCoroutine = null;
+        _isFullEnergy = true;
+    }
+
     public void GetHit(float dmg)
     {
+        if (gameObject.activeSelf)
+            _flashEffect.Flash();
+
         _currentHealth = _currentHealth - (dmg * (1 - _armorPercent / 100));
-        _healthBar.UpdateValue(_currentHealth);
+
+        OnHealthChanged?.Invoke(_currentHealth);
+
         if (_currentHealth <= 0)
         {
             this.gameObject.SetActive(false);
         }
     }
 
+    /// <summary>
+    /// ★ HÀM CHÍNH khi chuyển scene: đọc PlayerSessionData DTO → ghi đè stats,
+    /// phát events để HUDController cập nhật SlideBar, apply skills vào gun.
+    /// Phải gọi SAU Init() để _gun đã được resolve.
+    /// </summary>
+    public void ApplySessionData(PlayerSessionData sessionData)
+    {
+        if (sessionData == null)
+        {
+            Debug.LogError("[PlayerControllerBase] sessionData là null!");
+            return;
+        }
+
+        // Ghi đè stats
+        _initialHealth = sessionData.health;
+        _currentHealth = sessionData.health;
+        _initialEnergy = sessionData.energy;
+        _currentEnergy = sessionData.energy;
+        _armorPercent  = sessionData.armor;
+        dmgMult        = sessionData.dmgMult;
+
+        OnMaxHealthSet?.Invoke(_initialHealth);
+        OnMaxEnergySet?.Invoke(_initialEnergy);
+
+        OnHealthChanged?.Invoke(_currentHealth);
+        OnEnergyChanged?.Invoke(_currentEnergy);
+
+        // Apply skills vào gun
+        if (_gun != null)
+            _gun.ApplySkills(sessionData.activeSkills);
+
+        Debug.Log($"[PlayerControllerBase] ApplySessionData: HP={_initialHealth}, " +
+                  $"EN={_initialEnergy}, AR={_armorPercent}, DMG={dmgMult}, " +
+                  $"Skills=[{string.Join(", ", sessionData.activeSkills)}]");
+    }
+
+
+    #region Save/Load Data
     public void LoadData(GameData data)
     {
-        this._initialealth = data.initialHealth;
+        this._initialHealth = data.initialHealth;
         this._currentHealth = data.currentHealth;
+
         this._armorPercent = data.armorPercentage;
-        this._moveSpeed = data.moveSpeed;
-        this.transform.position = data.playerPos;
+
+        this._initialEnergy = data.initialEnergy;
+        this._currentEnergy = data.currentEnergy;
+
+        this._initialSpeed = data.initialSpeed;
+        this._accelerateSpeed = data.accelerateSpeed;
+
+        this.dmgMult = data.dmgMult;
+
+        this.transform.position = new Vector3(data.playerPosX, data.playerPosY, data.playerPosZ);
+
         Quaternion quaternion = this.transform.rotation;
-        quaternion.eulerAngles = new Vector3(data.playerRotation.x, data.playerRotation.y, data.playerRotation.z);
+        quaternion.eulerAngles = new Vector3(data.playerRotationX, data.playerRotationY, data.playerRotationZ);
         this.transform.rotation = quaternion;
     }
 
     public void SaveData(GameData data)
     {
+        data.initialHealth = this._initialHealth;
         data.currentHealth = this._currentHealth;
+
         data.armorPercentage = this._armorPercent;
+
         data.moveSpeed = this._moveSpeed;
-        data.playerPos = this.transform.position;
+
+        data.initialEnergy = this._initialEnergy;
+        data.currentEnergy = this._currentEnergy;
+
+        data.dmgMult = this.dmgMult;
+
+        data.playerPosX = this.transform.position.x;
+        data.playerPosY = this.transform.position.y;
+        data.playerPosZ = this.transform.position.z;
+
         Quaternion quaternion = this.transform.rotation;
-        data.playerRotation.Set(quaternion.eulerAngles.x, quaternion.eulerAngles.y, quaternion.eulerAngles.z);
+        data.playerRotationX = quaternion.eulerAngles.x;
+        data.playerRotationY = quaternion.eulerAngles.y;
+        data.playerRotationZ = quaternion.eulerAngles.z;
     }
+    #endregion
 }

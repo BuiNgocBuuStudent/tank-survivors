@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 1.5
   damage: 1
-  intialHealth: 5
+  intialHealth: 10
