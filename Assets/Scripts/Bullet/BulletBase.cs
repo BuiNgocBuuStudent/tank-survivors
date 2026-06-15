@@ -23,7 +23,11 @@ public abstract class BulletBase : MonoBehaviour
             _rb = this.GetComponent<Rigidbody2D>();
 
         _dmg = _baseDmg * GameManager.Instance.Player.dmgMult;
-        _damageMultiplier = 1f; // Reset mỗi lần lấy từ pool
+
+        // Reset mỗi lần lấy từ pool
+        _damageMultiplier = 1f;
+        this.transform.localScale = Vector3.one;
+
         this._speed = speed;
         this._movement = movement;
     }

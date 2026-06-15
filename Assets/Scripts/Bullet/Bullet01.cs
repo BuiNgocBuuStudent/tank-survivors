@@ -26,6 +26,7 @@ public class Bullet01 : BulletBase
     {
         _isCanGetHit = target.GetComponent<IGetHit>();
         _isCanGetHit?.GetHit(this._dmg);
+
         // Tier 4: Incendiary Ammo
         if (_hasIncendiaryAmmo)
         {
@@ -33,6 +34,7 @@ public class Bullet01 : BulletBase
             EffectManager.Instance.ApplyDOT(target, dotDmgPerTick, tickInterval: 0.5f, duration: 2f);
         }
 
+        //Tier 2: Piercing Rounds
         if (_pierceCount > 0)
         {
             _pierceCount--;

@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: SkillUpgrade05
   m_EditorClassIdentifier: 
   skillName: Overcharge Shot
-  description: "M\u1ED7i 5 ph\xE1t b\u1EAFn th\u01B0\u1EDDng, ph\xE1t th\u1EE9 5
-    g\xE2y \xD73 damage v\xE0 \u0111\u1EA1n to h\u01A1n 1.5 l\u1EA7n"
+  description: "M\u1ED7i 10 ph\xE1t b\u1EAFn th\u01B0\u1EDDng, b\u1EAFn th\xEAm 1
+    vi\xEAn \u0111\u1EA1n g\xE2y damage g\u1EA5p 3 l\u1EA7n"
   tier: 5
   cost: 3500
   tankId: Tank01

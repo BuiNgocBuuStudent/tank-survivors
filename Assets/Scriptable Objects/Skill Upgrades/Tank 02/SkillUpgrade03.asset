@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: SkillUpgrade03
   m_EditorClassIdentifier: 
   skillName: Slug Round
-  description: "M\u1ED7i l\u1EA7n b\u1EAFn t\u1ECFa, vi\xEAn \u0111\u1EA1n trung
-    t\xE2m g\xE2y \xD72 damage v\xE0 bay xa h\u01A1n 50%"
+  description: "Vi\xEAn \u0111\u1EA1n trung t\xE2m g\xE2y \xD72 damage v\xE0 bay
+    xa h\u01A1n 50%"
   tier: 3
   cost: 600
   tankId: Tank02

@@ -73,7 +73,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 127245801
-  m_SortingLayer: 7
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 44e170df313ff5b4e8b2fc0c8451980b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -148,14 +148,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3680402012277860845}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0.67049134, w: 0.74191743}
-  m_LocalPosition: {x: -8.38, y: 0.43, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 911570679768972636}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 84.21}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &6981159788778402679
 Rigidbody2D:
   serializedVersion: 4
@@ -199,6 +199,7 @@ MonoBehaviour:
   _flashEffect: {fileID: 0}
   _enemyDataBase: {fileID: 11400000, guid: 2ce25f750aebcec48a56618e13773b5e, type: 2}
   _currentHealth: 0
+  _speedMultiplier: 1
 --- !u!61 &1241374044143755955
 BoxCollider2D:
   m_ObjectHideFlags: 0

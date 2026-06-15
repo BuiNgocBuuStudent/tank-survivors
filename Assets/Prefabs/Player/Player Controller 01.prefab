@@ -49,10 +49,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   _cooldownTime: 1
-  _bulletSpeed: 5
+  _bulletSpeed: 7
   _activeSkills: []
   _isDoubleBullet: 0
-  _angle: 0
 --- !u!1 &1535376653716283842
 GameObject:
   m_ObjectHideFlags: 0
@@ -133,8 +132,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rb: {fileID: 8424265776306769849}
   _gun: {fileID: 6451903165297268572}
-  _healthBar: {fileID: 6834197207918482475, guid: 5f799debc8f5dbb4bb92e62f0ffcfe48, type: 3}
-  _energyBar: {fileID: 1634702287976823509, guid: 405ae81254769a1459aab55a1b6bb45d, type: 3}
   _flashEffect: {fileID: 109029703928823840}
   _playerState: 0
   _animController: {fileID: 0}

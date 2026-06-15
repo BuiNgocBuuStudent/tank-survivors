@@ -4,13 +4,14 @@ using UnityEngine;
 public class GunController01 : GunControllerBase
 {
     [SerializeField] bool _isDoubleBullet;
-    [SerializeField] float _angle;
 
+    // Tier 4: Incendiary Ammo
     private bool _hasIncendiaryAmmo;
 
+    // Tier 5: Overcharge Shot
     private int _shotCounter;
     private bool _hasOverchargeShot;
-    private const int OverchargeInterval = 5;
+    private const int OverchargeInterval = 10;
 
     void Update()
     {
@@ -51,24 +52,20 @@ public class GunController01 : GunControllerBase
 
         // Tier 5: Overcharge Shot
         if (_hasOverchargeShot && _shotCounter % OverchargeInterval == 0)
-        {
             SpawnOverchargeBullet(this.transform.up, this.transform.position);
-        }
 
         if (_isDoubleBullet)
         {
             // Bắn 2 viên lệch nhẹ sang 2 bên
             Vector3 offset = this.transform.right * 0.15f;
-            SpawnBullet(this.transform.up, this.transform.position + offset);
-            SpawnBullet(this.transform.up, this.transform.position - offset);
+            SpawnBaseBullet(this.transform.up, this.transform.position + offset);
+            SpawnBaseBullet(this.transform.up, this.transform.position - offset);
         }
         else
-        {
-            SpawnBullet(this.transform.up, this.transform.position);
-        }
+            SpawnBaseBullet(this.transform.up, this.transform.position);
     }
 
-    private void SpawnBullet(Vector2 direction, Vector3 spawnPos)
+    private void SpawnBaseBullet(Vector2 direction, Vector3 spawnPos)
     {
         BulletBase bullet = ObjectPooler.Instance.GetComp(_bulletPrefab);
 
@@ -108,8 +105,7 @@ public class GunController01 : GunControllerBase
         bullet.transform.SetPositionAndRotation(spawnPos, this.transform.rotation);
 
         bullet.SetDamageMultiplier(3f);
-
-        bullet.transform.localScale = Vector3.one * 1.5f;
+        bullet.transform.localScale = Vector3.one * 2;
 
         bullet.gameObject.SetActive(true);
     }

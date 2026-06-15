@@ -48,7 +48,7 @@ public class GameData
         statLevels = new Dictionary<string, int>();
         unlockedSkills = new List<int>();
         unlockedTanks = new List<int>();
-        playerCoins = 10000;
+        playerCoins = 100000;
         selectedTankId = 0;
     }
 

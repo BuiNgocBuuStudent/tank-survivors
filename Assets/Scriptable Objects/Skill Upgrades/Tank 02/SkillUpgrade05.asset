@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: SkillUpgrade05
   m_EditorClassIdentifier: 
   skillName: Chain Reaction
-  description: "Khi \u0111\u1EA1n gi\u1EBFt k\u1EBB \u0111\u1ECBch, k\u1EBB \u0111\u1ECBch
-    \u0111\xF3 ph\xE1t n\u1ED5 g\xE2y 50% damage cho enemy xung quanh"
+  description: "K\u1EBB \u0111\u1ECBch b\u1ECB ti\xEAu di\u1EC7t ph\xE1t n\u1ED5
+    g\xE2y 50% damage cho enemy xung quanh"
   tier: 5
   cost: 3500
   tankId: Tank02

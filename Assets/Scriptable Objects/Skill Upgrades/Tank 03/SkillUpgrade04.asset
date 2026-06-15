@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: SkillUpgrade04
   m_EditorClassIdentifier: 
   skillName: Shockwave
-  description: "V\u1EE5 n\u1ED5 l\xE0m ch\u1EADm 30% cho t\u1EA5t c\u1EA3 enemy trong
-    b\xE1n k\xEDnh trong 2 gi\xE2y"
+  description: "V\u1EE5 n\u1ED5 l\xE0m ch\u1EADm 30% t\u1EA5t c\u1EA3 k\u1EBB \u0111\u1ECBch
+    trong ph\u1EA1m vi trong 2s"
   tier: 4
   cost: 1500
   tankId: Tank03

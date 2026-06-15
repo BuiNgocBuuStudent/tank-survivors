@@ -13,9 +13,8 @@ MonoBehaviour:
   m_Name: SkillUpgrade03
   m_EditorClassIdentifier: 
   skillName: Cluster Bomb
-  description: "Khi \u0111\u1EA1n n\u1ED5, t\u1EA1o th\xEAm 3 m\u1EA3nh \u0111\u1EA1n
-    nh\u1ECF b\u1EAFn ra 3 h\u01B0\u1EDBng ng\u1EABu nhi\xEAn, m\u1ED7i m\u1EA3nh
-    g\xE2y 30% damage g\u1ED1c"
+  description: "\u0110\u1EA1n ph\xE1t n\u1ED5 t\u1EA1o th\xEAm 5 m\u1EA3nh \u0111\u1EA1n
+    nh\u1ECF g\xE2y 30% damage g\u1ED1c"
   tier: 3
   cost: 600
   tankId: Tank03
