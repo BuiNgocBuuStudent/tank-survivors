@@ -41,7 +41,7 @@ public class Bullet03 : BulletBase
         prefab.SetActive(true);
         EffectManager.Instance.TriggerExplosion(prefab, _dmg, _damageRadius, _targetMask);
 
-        // Tier 3: Cluster Bomb — spawn 3 mảnh đạn nhỏ bay ra 3 hướng
+        // Tier 3: Cluster Bomb — spawn 5 mảnh đạn nhỏ bay ra 5 hướng
         if (_hasClusterBomb && _clusterBulletPrefab != null)
         {
             SpawnClusterFragments();
@@ -83,11 +83,21 @@ public class Bullet03 : BulletBase
         {
             yield return new WaitForSeconds(_lifeTime);
             this.gameObject.SetActive(false);
-            SpawnClusterFragments();
+            if (_hasClusterBomb)
+                SpawnClusterFragments();
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         this.Boom(collision.gameObject);
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = new Color(1f, 0.4f, 0f, 0.3f);
+        Gizmos.DrawSphere(transform.position, _damageRadius);
+
+        Gizmos.color = new Color(1f, 0.4f, 0f, 1f);
+        Gizmos.DrawWireSphere(transform.position, _damageRadius);
     }
 }

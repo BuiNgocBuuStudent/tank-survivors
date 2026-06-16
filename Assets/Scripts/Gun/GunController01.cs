@@ -93,11 +93,9 @@ public class GunController01 : GunControllerBase
         Bullet01 bullet01 = bullet as Bullet01;
         if (bullet01 != null)
         {
-            // Piercing vẫn áp dụng nếu có
             if (HasSkill("Piercing Rounds"))
                 bullet01.SetPierceCount(1);
 
-            // Incendiary vẫn áp dụng nếu có
             bullet01.SetIncendiaryAmmo(_hasIncendiaryAmmo);
         }
 

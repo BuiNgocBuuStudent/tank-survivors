@@ -5,9 +5,6 @@ using UnityEngine;
 
 public class UpgradeManager : Singleton<UpgradeManager>, IDataPersistence
 {
-    // ===========================================
-    // CONFIG — Kéo thả ScriptableObject vào Inspector
-    // ===========================================
 
     [Header("===== Stat Upgrade Configs =====")]
     [SerializeField] StatUpgradeConfig[] _statConfigs;

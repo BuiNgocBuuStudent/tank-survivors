@@ -58,6 +58,7 @@ public class Bullet04 : BulletBase
         }
         else
         {
+            //Đạn bình thường chưa có skill
             EffectManager.Instance.StartCoroutine(
                 EffectManager.Instance.Burning(
                     prefab, _dmg, _burningRange, _burningTime, _burningSpeed, _targetMask

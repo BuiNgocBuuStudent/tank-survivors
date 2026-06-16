@@ -105,8 +105,8 @@ MonoBehaviour:
     m_Bits: 512
   _lifeTime: 2
   _baseDmg: 1
-  _explosionPrefab: {fileID: 2433282508537954060, guid: 3ef3ae421f71c5c4e97fe12dc2fc6312, type: 3}
-  _damageRadius: 3
+  _explosionPrefab: {fileID: 8194992990867289339, guid: 99bc28c0d45f51c4fbac01080b73edc7, type: 3}
+  _damageRadius: 2
 --- !u!50 &-7734819530292499447
 Rigidbody2D:
   serializedVersion: 4
@@ -170,7 +170,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.49, y: 1.5}
+    oldSize: {x: 0.375, y: 0.6225}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0

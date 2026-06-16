@@ -7,9 +7,16 @@ public class GunController02 : GunControllerBase
     [SerializeField] int _numberBullet;
     [SerializeField] float _attackRange;
 
+    [Header("Tier 4 — Knockback Blast")]
+    [SerializeField] GameObject _knockbackPrefab;
+    [SerializeField] LayerMask _enemyLayerMaskForKnockback;
+    [SerializeField] float _knockbackRadius = 2f;
+    [SerializeField] float _knockbackForce = 400f;
+
     private int _baseNumberBullet;
     private float _baseAttackRange;
     private bool _hasSlugRound;
+    private bool _hasKnockbackBlast;
 
     public override void Init()
     {
@@ -46,6 +53,9 @@ public class GunController02 : GunControllerBase
 
         // Tier 3: Slug Round — viên giữa gây ×2 damage
         _hasSlugRound = HasSkill("Slug Round");
+
+        // Tier 4: Knockback Blast
+        _hasKnockbackBlast = HasSkill("Knockback Blast");
     }
 
     protected override void Fire()
@@ -54,6 +64,10 @@ public class GunController02 : GunControllerBase
             return;
 
         _timer = _cooldownTime;
+
+        // Tier 4: Knockback Blast — đẩy lùi tất cả enemy gần nơi bắn
+        if (_hasKnockbackBlast)
+            ApplyKnockback(this.transform.position);
 
         //góc giữa 2 game object
         float baseAngle = Mathf.Atan2(this.transform.up.y, this.transform.up.x) * Mathf.Rad2Deg;
@@ -81,9 +95,50 @@ public class GunController02 : GunControllerBase
                 bullet.Init(_bulletSpeed, direction);
             }
 
+            // Tier 5: Chain Reaction — truyền flag vào bullet
+            Bullet02 bullet02 = bullet as Bullet02;
+            if (bullet02 != null)
+                bullet02.SetChainReaction(HasSkill("Chain Reaction"), _enemyLayerMask);
+
             bullet.transform.SetPositionAndRotation(this.transform.position, this.transform.rotation);
             bullet.gameObject.SetActive(true);
         }
+    }
 
+    /// <summary>
+    /// Tier 4 — Knockback Blast
+    /// Dùng EffectManager.ApplyKnockback() thay vì AddForce() trực tiếp
+    /// vì ChaseTarget() override velocity mỗi FixedUpdate.
+    /// </summary>
+    private void ApplyKnockback(Vector2 origin)
+    {
+
+        Collider2D[] hits = Physics2D.OverlapCircleAll(origin, _knockbackRadius, _enemyLayerMaskForKnockback);
+        foreach (Collider2D hit in hits)
+        {
+            if (hit == null) continue;
+
+            GameObject knockbackEffect = ObjectPooler.Instance.GetObject(_knockbackPrefab);
+            knockbackEffect.transform.position = this.transform.position;
+            knockbackEffect.SetActive(true);
+
+            // Hướng đẩy = từ tâm ra phía enemy
+            Vector2 pushDir = (hit.transform.position - (Vector3)origin).normalized;
+            if (pushDir == Vector2.zero)
+                pushDir = Random.insideUnitCircle.normalized;
+
+            // Chuyển force thành velocity và giao cho EffectManager quản lý
+            Vector2 knockbackVelocity = pushDir * _knockbackForce;
+            EffectManager.Instance.ApplyKnockback(hit.gameObject, knockbackVelocity, duration: 0.25f);
+        }
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = new Color(1f, 0.4f, 0f, 0.3f);
+        Gizmos.DrawSphere(transform.position, _knockbackRadius);
+
+        Gizmos.color = new Color(1f, 0.4f, 0f, 1f);
+        Gizmos.DrawWireSphere(transform.position, _knockbackRadius);
     }
 }
