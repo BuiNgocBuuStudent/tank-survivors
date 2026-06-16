@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class HUDController : MonoBehaviour
+public class HUDController : MonoBehaviour // HUD: toàn bộ phần UI hiển thị trong khi chơi
 {
     [SerializeField] SlideBar _healthBar;
     [SerializeField] SlideBar _energyBar;

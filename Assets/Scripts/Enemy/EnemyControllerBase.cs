@@ -16,6 +16,9 @@ public abstract class EnemyControllerBase : MonoBehaviour, IGetHit
     /// <summary>EnemySlowState sẽ điều chỉnh field này</summary>
     [SerializeField] float _speedMultiplier = 1f;
 
+    /// <summary>Khi true: ChaseTarget() bị bỏ qua, nhường cho knockback velocity</summary>
+    private bool _isKnockedBack;
+
 
     /// <summary>
     /// Phát ra khi enemy chết. Truyền vị trí và damage của đòn cuối
@@ -43,6 +46,9 @@ public abstract class EnemyControllerBase : MonoBehaviour, IGetHit
 
     private void ChaseTarget()
     {
+        // Khi đang bị knockback: không ghi đè velocity, để physics tự xử lý
+        if (_isKnockedBack) return;
+
         Vector2 movement = _player.transform.position - this.transform.position;
 
         float angle = Mathf.Atan2(movement.y, movement.x) * Mathf.Rad2Deg + 90;
@@ -51,6 +57,22 @@ public abstract class EnemyControllerBase : MonoBehaviour, IGetHit
         this.transform.rotation = quaternion;
 
         _rb.velocity = movement.normalized * (_enemyDataBase.moveSpeed * _speedMultiplier);
+    }
+
+    /// <summary>
+    /// Inject knockback velocity trực tiếp vào Rigidbody.
+    /// Gọi bởi EnemyKnockbackState — thay thế AddForce() vì ChaseTarget overwrite velocity.
+    /// </summary>
+    public void SetKnockbackVelocity(Vector2 velocity)
+    {
+        _isKnockedBack = true;
+        _rb.velocity = velocity;
+    }
+
+    /// <summary>Restore chase sau khi knockback kết thúc</summary>
+    public void ClearKnockback()
+    {
+        _isKnockedBack = false;
     }
 
     public void GetHit(float dmg)

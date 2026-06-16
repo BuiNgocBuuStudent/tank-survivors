@@ -105,6 +105,9 @@ MonoBehaviour:
     m_Bits: 0
   _lifeTime: 2
   _baseDmg: 1
+  _explosionPrefab: {fileID: 2433282508537954060, guid: 3ef3ae421f71c5c4e97fe12dc2fc6312, type: 3}
+  _chainDamageMultiplier: 0.5
+  _chainRadius: 1.2
 --- !u!50 &8441221223264147281
 Rigidbody2D:
   serializedVersion: 4

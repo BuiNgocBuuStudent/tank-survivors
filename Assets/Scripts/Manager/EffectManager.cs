@@ -101,7 +101,8 @@ public class EffectManager : Singleton<EffectManager>
             ApplyDOT(hit.gameObject, dmgPerTick, tickInterval, duration);
     }
     #endregion
-    //  2. DEBUFF EFFECT — SLOW
+
+    #region DEBUFF EFFECT — SLOW
     //  Dùng cho: Shockwave (T03-T4)
 
     /// <summary>
@@ -129,6 +130,23 @@ public class EffectManager : Singleton<EffectManager>
         Collider2D[] hits = Physics2D.OverlapCircleAll(center, radius, mask);
         foreach (Collider2D hit in hits)
             ApplySlow(hit.gameObject, slowFactor, duration);
+    }
+
+    #endregion
+
+    /// <summary>
+    /// Dùng cho: Knockback Blast (T02-T4).
+    /// Đẩy lùi 1 enemy: inject velocity rồi restore movement sau duration.
+    /// </summary>
+    public void ApplyKnockback(GameObject target, Vector2 force, float duration)
+    {
+        if (target == null || !target.activeInHierarchy) return;
+
+        EnemyKnockbackState kb = target.GetComponent<EnemyKnockbackState>();
+        if (kb == null)
+            kb = target.AddComponent<EnemyKnockbackState>();
+
+        kb.Apply(force, duration);
     }
 }
 
@@ -232,6 +250,55 @@ public class EnemySlowState : MonoBehaviour
         {
             StopCoroutine(_slowCoroutine);
             _slowCoroutine = null;
+        }
+    }
+}
+
+/// <summary>
+/// Component Knockback: inject velocity vào enemy, tắt ChaseTarget() trong thời gian ngắn.
+/// Không dùng AddForce() vì ChaseTarget() ghi đè velocity mỗi FixedUpdate.
+/// Không stack — gọi Apply() nhiều lần sẽ làm mới.
+/// </summary>
+public class EnemyKnockbackState : MonoBehaviour
+{
+    private Coroutine _kbCoroutine;
+    private EnemyControllerBase _enemy;
+
+    private void Awake()
+    {
+        _enemy = GetComponent<EnemyControllerBase>();
+    }
+
+    public void Apply(Vector2 force, float duration)
+    {
+        if (_enemy == null) return;
+
+        if (_kbCoroutine != null)
+            StopCoroutine(_kbCoroutine);
+
+        _kbCoroutine = StartCoroutine(KnockbackRoutine(force, duration));
+    }
+
+    private IEnumerator KnockbackRoutine(Vector2 force, float duration)
+    {
+        // Inject velocity — ChaseTarget() sẽ bị skip khi _isKnockedBack = true
+        _enemy.SetKnockbackVelocity(force);
+        yield return new WaitForSeconds(duration);
+
+        if (gameObject.activeInHierarchy)
+            _enemy.ClearKnockback(); // Trả quyền điều khiển về ChaseTarget
+
+        Destroy(this);
+    }
+
+    private void OnDisable()
+    {
+        // Restore ngay khi enemy bị disable/chết
+        _enemy?.ClearKnockback();
+        if (_kbCoroutine != null)
+        {
+            StopCoroutine(_kbCoroutine);
+            _kbCoroutine = null;
         }
     }
 }

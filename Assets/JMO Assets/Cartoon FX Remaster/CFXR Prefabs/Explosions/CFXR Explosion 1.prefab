@@ -123,8 +123,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.70710677}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 2433282509751658719}
   - {fileID: 2433282510014370362}
@@ -4832,7 +4832,7 @@ ParticleSystemRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1781685961
-  m_SortingLayer: 7
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_RenderMode: 4
   m_MeshDistribution: 0
@@ -4884,9 +4884,9 @@ MonoBehaviour:
     useMainCamera: 1
     cameras: []
     delay: 0.05
-    duration: 0.6
+    duration: 0.5
     shakeSpace: 1
-    shakeStrength: {x: 0.1, y: 0.1, z: 0.5}
+    shakeStrength: {x: 0.02, y: 0.02, z: 0.02}
     shakeCurve:
       serializedVersion: 2
       m_Curve:
@@ -9787,7 +9787,7 @@ ParticleSystemRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1781685961
-  m_SortingLayer: 7
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_RenderMode: 1
   m_MeshDistribution: 0
@@ -14507,7 +14507,7 @@ ParticleSystemRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1781685961
-  m_SortingLayer: 7
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_RenderMode: 0
   m_MeshDistribution: 0
@@ -19299,7 +19299,7 @@ ParticleSystemRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1781685961
-  m_SortingLayer: 7
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_RenderMode: 1
   m_MeshDistribution: 0
@@ -24046,7 +24046,7 @@ ParticleSystemRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1781685961
-  m_SortingLayer: 7
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_RenderMode: 4
   m_MeshDistribution: 0
@@ -28946,7 +28946,7 @@ ParticleSystemRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1781685961
-  m_SortingLayer: 7
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_RenderMode: 4
   m_MeshDistribution: 0
