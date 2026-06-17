@@ -51,6 +51,10 @@ public class Bullet03 : BulletBase
             _damageRadius = _baseDamageRadius * 1.3f;
             _explosionPrefab.transform.localScale = Vector3.one * 2.6f;
         }
+        else
+        {
+            _damageRadius = _baseDamageRadius;
+        }
     }
 
     protected override void Boom(GameObject target)

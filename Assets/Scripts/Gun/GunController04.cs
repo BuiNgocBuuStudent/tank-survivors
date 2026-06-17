@@ -11,8 +11,6 @@ public class GunController04 : GunControllerBase
     public override void ApplySkills(List<string> skills)
     {
         base.ApplySkills(skills);
-        // Tier 1-2 skill effects được xử lý bên Bullet04
-        // Tier 3: Corrosive Cloud cũng ở Bullet04 (ảnh hưởng vùng burning)
     }
 
     protected override void Fire()
@@ -33,7 +31,9 @@ public class GunController04 : GunControllerBase
             bullet04.SetSkillFlags(
                 HasSkill("Toxic Expansion"),
                 HasSkill("Lingering Fumes"),
-                HasSkill("Corrosive Cloud")
+                HasSkill("Corrosive Cloud"),
+                HasSkill("Toxic Trail"),
+                HasSkill("Plague Carrier")
             );
         }
 

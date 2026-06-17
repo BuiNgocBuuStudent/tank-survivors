@@ -69,8 +69,9 @@ public class Bullet02 : BulletBase
         EffectManager.Instance.TriggerExplosion(explosionEffect, chainDmg, _chainRadius, _enemyMask);
     }
 
-    private void OnDisable()
+    protected override void OnDisable()
     {
+        base.OnDisable();
         EnemyControllerBase.OnEnemyDeath -= OnEnemyDeathHandler;
     }
 
