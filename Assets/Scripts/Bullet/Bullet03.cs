@@ -11,8 +11,22 @@ public class Bullet03 : BulletBase
 
     // Skill flags — set bởi GunController03 trước khi SetActive
     private bool _hasBiggerBoom;
+
     private bool _hasClusterBomb;
     private BulletBase _clusterBulletPrefab;
+
+    private bool _hasShockwave;
+    [Header("-----Tier 4: Shockwave Config-----")]
+    [SerializeField] private float _shockwaveSlowFactor;
+    [SerializeField] private float _shockwaveSlowDuration;
+
+    private bool _hasNapalmStrike;
+    [Header("-----Tier 5: Napalm Strike Config-----")]
+    [SerializeField] private GameObject _burningZonePrefab;
+    [SerializeField] private float _napalmRange;
+    [SerializeField] private float _napalmTickInterval;
+    [SerializeField] private float _napalmDuration;
+    [SerializeField] private float _napalmDmgMultiplier;
 
     private void Awake()
     {
@@ -22,22 +36,31 @@ public class Bullet03 : BulletBase
     /// <summary>
     /// Được gọi bởi GunController03 trước mỗi lần bắn.
     /// </summary>
-    public void SetSkillFlags(bool biggerBoom, bool clusterBomb, BulletBase clusterPrefab)
+    public void SetSkillFlags(bool biggerBoom, bool clusterBomb, BulletBase clusterPrefab,
+                               bool shockwave, bool napalmStrike)
     {
         _hasBiggerBoom = biggerBoom;
         _hasClusterBomb = clusterBomb;
         _clusterBulletPrefab = clusterPrefab;
+        _hasShockwave = shockwave;
+        _hasNapalmStrike = napalmStrike;
 
         // Tier 1: Bigger Boom — tăng bán kính nổ 30%
-        _damageRadius = _hasBiggerBoom ? _baseDamageRadius * 1.3f : _baseDamageRadius;
+        if (_hasBiggerBoom)
+        {
+            _damageRadius = _baseDamageRadius * 1.3f;
+            _explosionPrefab.transform.localScale = Vector3.one * 2.6f;
+        }
     }
 
     protected override void Boom(GameObject target)
     {
         this.gameObject.SetActive(false);
 
+        Vector2 explosionPos = this.transform.position;
+
         GameObject prefab = ObjectPooler.Instance.GetObject(_explosionPrefab);
-        prefab.transform.position = this.transform.position;
+        prefab.transform.position = explosionPos;
         prefab.SetActive(true);
         EffectManager.Instance.TriggerExplosion(prefab, _dmg, _damageRadius, _targetMask);
 
@@ -46,10 +69,35 @@ public class Bullet03 : BulletBase
         {
             SpawnClusterFragments();
         }
+
+        // Tier 4: Shockwave — slow tất cả enemy trong bán kính sau khi nổ
+        if (_hasShockwave)
+        {
+            EffectManager.Instance.ApplySlowInRadius(
+                explosionPos, _damageRadius, _targetMask,
+                _shockwaveSlowFactor, _shockwaveSlowDuration
+            );
+        }
+
+        // Tier 5: Napalm Strike — spawn vùng lửa tại vị trí nổ
+        if (_hasNapalmStrike && _burningZonePrefab != null)
+        {
+            GameObject burningZone = ObjectPooler.Instance.GetObject(_burningZonePrefab);
+            burningZone.transform.position = explosionPos;
+            burningZone.SetActive(true);
+
+            float napalmDmg = _dmg * _napalmDmgMultiplier;
+            EffectManager.Instance.StartCoroutine(
+                EffectManager.Instance.Burning(
+                    burningZone, napalmDmg, _napalmRange,
+                    _napalmDuration, _napalmTickInterval, _targetMask
+                )
+            );
+        }
     }
 
     /// <summary>
-    /// Spawn các mảnh đạn nhỏ tỏa đều xung quanh hướng đạn đang bay.
+    /// Spawn các mảnh đạn nhỏ tỏa đều xung quanh hướng đạn đang bay
     /// Mỗi mảnh gây 30% damage gốc.
     /// </summary>
     private void SpawnClusterFragments()

@@ -107,6 +107,13 @@ MonoBehaviour:
   _baseDmg: 1
   _explosionPrefab: {fileID: 8194992990867289339, guid: 99bc28c0d45f51c4fbac01080b73edc7, type: 3}
   _damageRadius: 2
+  _shockwaveSlowFactor: 0.3
+  _shockwaveSlowDuration: 2
+  _burningZonePrefab: {fileID: 1206498299807332555, guid: af6c1e3f046eecd4d81330aeb285600f, type: 3}
+  _napalmRange: 2
+  _napalmTickInterval: 0.5
+  _napalmDuration: 4
+  _napalmDmgMultiplier: 0.15
 --- !u!50 &-7734819530292499447
 Rigidbody2D:
   serializedVersion: 4
