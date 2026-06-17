@@ -41,11 +41,11 @@ public abstract class BulletBase : MonoBehaviour
         _damageMultiplier = multiplier;
         _dmg = _baseDmg * GameManager.Instance.Player.dmgMult * _damageMultiplier;
     }
-    private void OnEnable()
+    protected virtual void OnEnable()
     {
         _deactivateWait = StartCoroutine(RepeatLifeTime());
     }
-    private void OnDisable()
+    protected virtual void OnDisable()
     {
         if (_deactivateWait != null)
         {

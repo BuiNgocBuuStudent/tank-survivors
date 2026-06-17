@@ -103,12 +103,18 @@ MonoBehaviour:
   _targetMask:
     serializedVersion: 2
     m_Bits: 512
-  _lifeTime: 1
+  _lifeTime: 2
   _baseDmg: 1
-  _burningPrefab: {fileID: 4425129568585013132, guid: bbeeb0ddc21369746aaaae5c5c1c09cf, type: 3}
+  _toxicZonePrefab: {fileID: 4425129568585013132, guid: bbeeb0ddc21369746aaaae5c5c1c09cf, type: 3}
   _burningRange: 2
   _burningSpeed: 1
   _burningTime: 3
+  _trailInterval: 0.5
+  _miniZoneRange: 1
+  _miniZoneDmgMultiplier: 0.3
+  _miniZoneDuration: 2
+  _miniZoneTickInterval: 0.5
+  _plagueDetectRadius: 2
 --- !u!50 &6614671820435423062
 Rigidbody2D:
   serializedVersion: 4

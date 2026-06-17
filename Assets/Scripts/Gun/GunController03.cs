@@ -8,6 +8,8 @@ public class GunController03 : GunControllerBase
     [SerializeField] BulletBase _clusterBulletPrefab;
 
     private bool _hasClusterBomb;
+    private bool _hasShockwave;     // Tier 4
+    private bool _hasNapalmStrike;  // Tier 5
 
     void Update()
     {
@@ -26,6 +28,12 @@ public class GunController03 : GunControllerBase
 
         // Tier 3: Cluster Bomb — flag để Bullet03 biết spawn mảnh đạn
         _hasClusterBomb = HasSkill("Cluster Bomb");
+
+        // Tier 4: Shockwave — slow enemy sau khi nổ
+        _hasShockwave = HasSkill("Shockwave");
+
+        // Tier 5: Napalm Strike — spawn vùng lửa tại điểm nổ
+        _hasNapalmStrike = HasSkill("Napalm Strike");
     }
 
     protected override void Fire()
@@ -46,7 +54,9 @@ public class GunController03 : GunControllerBase
             bullet03.SetSkillFlags(
                 HasSkill("Bigger Boom"),
                 _hasClusterBomb,
-                _clusterBulletPrefab
+                _clusterBulletPrefab,
+                _hasShockwave,
+                _hasNapalmStrike
             );
         }
 
