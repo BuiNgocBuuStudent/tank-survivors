@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 911570679768972636}
   - component: {fileID: 7329417565138458330}
-  - component: {fileID: 8389626458020365212}
   - component: {fileID: 3559705662314268014}
+  - component: {fileID: 2448104262656491816}
   m_Layer: 9
   m_Name: Avatar
   m_TagString: Untagged
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 127245801
   m_SortingLayer: 7
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 44e170df313ff5b4e8b2fc0c8451980b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 27eda43259d96f247874a8608f9c81aa, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -86,27 +86,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!95 &8389626458020365212
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1818600940325480541}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: f9441c6b1aeefbe44b46c88ef6c5729b, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &3559705662314268014
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -121,6 +100,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _flashMaterial: {fileID: 2100000, guid: 12fa06a178a62ca48a5fad66c299b21e, type: 2}
   _duration: 0.125
+--- !u!95 &2448104262656491816
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1818600940325480541}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 95e68cdfa5f87b24bbf74c54f19cca75, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &3680402012277860845
 GameObject:
   m_ObjectHideFlags: 0
@@ -131,10 +131,9 @@ GameObject:
   m_Component:
   - component: {fileID: 8067326763072987388}
   - component: {fileID: 6981159788778402679}
-  - component: {fileID: 529668619563063293}
   - component: {fileID: 1241374044143755955}
   m_Layer: 9
-  m_Name: Enemy Drone 01
+  m_Name: Enemy 02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -183,23 +182,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &529668619563063293
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3680402012277860845}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65baa192ba4f88748863905e1002a7f6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _rb: {fileID: 6981159788778402679}
-  _flashEffect: {fileID: 0}
-  _enemyDataBase: {fileID: 11400000, guid: 2ce25f750aebcec48a56618e13773b5e, type: 2}
-  _currentHealth: 0
-  _speedMultiplier: 1
 --- !u!61 &1241374044143755955
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -232,16 +214,16 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.003295362, y: 0.05611004}
+  m_Offset: {x: -0.003295362, y: 0.028467312}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 0.62222224}
+    newSize: {x: 1, y: 0.62222224}
+    adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.9733025, y: 0.38042644}
+  m_Size: {x: 0.9733025, y: 0.4357119}
   m_EdgeRadius: 0

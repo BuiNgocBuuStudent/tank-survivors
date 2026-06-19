@@ -30,7 +30,7 @@ public class GameManager : Singleton<GameManager>
 
     public void Init()
     {
-        //EnemyManager.Init();
+        EnemyManager.Init();
         ExpManager.Init();
         //BoostManager.Init();
 

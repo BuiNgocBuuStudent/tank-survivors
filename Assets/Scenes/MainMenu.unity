@@ -5955,10 +5955,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Data Persistence Manager
       objectReference: {fileID: 0}
-    - target: {fileID: 1192702674763035909, guid: cb49771050caa894ba101b340d640e44, type: 3}
-      propertyPath: _initializeDataIfNull
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2027497013418283273, guid: cb49771050caa894ba101b340d640e44, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
