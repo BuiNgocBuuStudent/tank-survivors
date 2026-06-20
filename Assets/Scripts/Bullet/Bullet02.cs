@@ -10,7 +10,7 @@ public class Bullet02 : BulletBase
     // Mỗi enemy chỉ spawn đúng 1 explosion dù có nhiều bullet cùng trúng
     // Key = (frameCount, deathPos) — các handler trong cùng 1 event 
     // sẽ thấy key đã tồn tại và bỏ qua
-    private static readonly HashSet<(int, Vector3)> _processedDeaths = new HashSet<(int, Vector3)>();
+    private HashSet<(int, Vector3)> _processedDeaths = new HashSet<(int, Vector3)>();
 
     [Header("---------Tier 5: Chain Reaction Config---------")]
     [SerializeField] GameObject _explosionPrefab;

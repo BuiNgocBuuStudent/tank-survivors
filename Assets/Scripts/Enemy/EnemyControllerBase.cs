@@ -10,7 +10,7 @@ public abstract class EnemyControllerBase : MonoBehaviour, IGetHit
     private EnemyManager _enemyManager;
     [SerializeField] private Rigidbody2D _rb;
     [SerializeField] FlashEffect _flashEffect;
-    [SerializeField] EnemyConfig _enemyDataBase;
+    [SerializeField] EnemyConfigBase _enemyDataBase;
 
     [SerializeField] float _currentHealth;
     /// <summary>EnemySlowState sẽ điều chỉnh field này</summary>
@@ -19,6 +19,9 @@ public abstract class EnemyControllerBase : MonoBehaviour, IGetHit
     /// <summary>Khi true: ChaseTarget() bị bỏ qua, nhường cho knockback velocity</summary>
     private bool _isKnockedBack;
 
+    protected Rigidbody2D Rb => _rb;
+    protected PlayerControllerBase Player => _player;
+    protected EnemyConfigBase EnemyData => _enemyDataBase;
 
     /// <summary>
     /// Phát ra khi enemy chết. Truyền vị trí và damage của đòn cuối
@@ -37,14 +40,28 @@ public abstract class EnemyControllerBase : MonoBehaviour, IGetHit
 
         _currentHealth = _enemyDataBase.intialHealth;
         this.transform.position = randomSpawnPos;
+
+        OnInit();
     }
+
+    /// <summary>
+    /// Hook cho subclass khởi tạo thêm sau khi Init() chạy xong.
+    /// Override để reset state machine, timer... mỗi lần enemy được re-spawn.
+    /// </summary>
+    protected virtual void OnInit() { }
 
     private void FixedUpdate()
     {
         ChaseTarget();
+        UpdateBehavior();
     }
 
-    private void ChaseTarget()
+    /// <summary>
+    /// Di chuyển về phía player. Override trong subclass để thay đổi hoàn toàn
+    /// cách di chuyển (ví dụ: Shooter dừng lại khi trong range).
+    /// Nhớ gọi base.ChaseTarget() nếu muốn giữ nguyên hành vi chase gốc.
+    /// </summary>
+    protected virtual void ChaseTarget()
     {
         // Khi đang bị knockback: không ghi đè velocity, để physics tự xử lý
         if (_isKnockedBack) return;
@@ -58,6 +75,12 @@ public abstract class EnemyControllerBase : MonoBehaviour, IGetHit
 
         _rb.velocity = movement.normalized * (_enemyDataBase.moveSpeed * _speedMultiplier);
     }
+
+    /// <summary>
+    /// Hook cho subclass thêm logic Update mỗi FixedUpdate (timer, state, bắn đạn...).
+    /// Chạy sau ChaseTarget(). Mặc định không làm gì.
+    /// </summary>
+    protected virtual void UpdateBehavior() { }
 
     /// <summary>
     /// Inject knockback velocity trực tiếp vào Rigidbody.
@@ -75,7 +98,7 @@ public abstract class EnemyControllerBase : MonoBehaviour, IGetHit
         _isKnockedBack = false;
     }
 
-    public void GetHit(float dmg)
+    public virtual void GetHit(float dmg)
     {
         if (gameObject.activeSelf)
             _flashEffect.Flash();
@@ -83,12 +106,17 @@ public abstract class EnemyControllerBase : MonoBehaviour, IGetHit
         _currentHealth -= dmg;
         if (_currentHealth <= 0)
         {
-            OnEnemyDeath?.Invoke(this.transform.position, dmg);
-
-            this.gameObject.SetActive(false);
-            _flashEffect.ResetMaterial();
-            _enemyManager.SpawnExpGem(this.transform.position);
+            OnDie(dmg);
         }
+    }
+
+    protected virtual void OnDie(float lastDmg)
+    {
+        OnEnemyDeath?.Invoke(this.transform.position, lastDmg);
+
+        this.gameObject.SetActive(false);
+        _flashEffect.ResetMaterial();
+        _enemyManager.SpawnExpGem(this.transform.position);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
