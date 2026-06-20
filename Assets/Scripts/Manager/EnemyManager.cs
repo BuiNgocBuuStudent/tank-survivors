@@ -1,31 +1,35 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
 {
-    [SerializeField] EnemyControllerBase _enemyPrefab;
+    [Header("=== Gem ===")]
     [SerializeField] Gem _gemPrefab;
 
-    [SerializeField] float _enemySpawnRate;
+    [Header("=== Enemy Spawn Config ===")]
     [SerializeField] float _offset;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+
+    [SerializeField] List<EnemySpawnEntry> _enemyTypes;
+
     public void Init()
     {
-        StartCoroutine(SpawnEnemy());
+        foreach (var entry in _enemyTypes)
+        {
+            StartCoroutine(SpawnEnemyType(entry));
+        }
     }
-    IEnumerator SpawnEnemy()
+
+    private IEnumerator SpawnEnemyType(EnemySpawnEntry entry)
     {
+        yield return new WaitForSeconds(entry.unlockAtMinute);
+
         while (true)
         {
-            yield return new WaitForSeconds(_enemySpawnRate);
+            yield return new WaitForSeconds(entry.spawnInterval);
 
-            EnemyControllerBase enemy = ObjectPooler.Instance.GetComp(_enemyPrefab);
-            Vector2 randomPos = this.GetRandomSpawnPos();
+            EnemyControllerBase enemy = ObjectPooler.Instance.GetComp(entry.prefab);
+            Vector2 randomPos = GetRandomSpawnPos();
             enemy.Init(randomPos);
             enemy.gameObject.SetActive(true);
         }
@@ -37,14 +41,15 @@ public class EnemyManager : MonoBehaviour
         gem.transform.position = enemyDiePos;
         gem.gameObject.SetActive(true);
     }
+
     private Vector2 GetRandomSpawnPos()
     {
-        Vector2 screenTopRight = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height)); // góc trên cùng phải
-        Vector2 screenBottomLeft = Camera.main.ScreenToWorldPoint(new Vector3(0, 0)); // góc dưới cùng trái
+        Vector2 screenTopRight = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height));
+        Vector2 screenBottomLeft = Camera.main.ScreenToWorldPoint(new Vector3(0, 0));
 
         Vector2 randomPos = Vector2.zero;
 
-        // Chọn ngẫu nhiên 1 trong 4 cạnh
+        // Chọn ngẫu nhiên 1 trong 2 cạnh (trái/phải)
         int side = Random.Range(0, 2);
 
         switch (side)
@@ -61,5 +66,17 @@ public class EnemyManager : MonoBehaviour
 
         return randomPos;
     }
+}
 
+[System.Serializable]
+public struct EnemySpawnEntry
+{
+    [Tooltip("Prefab của enemy loại này")]
+    public EnemyControllerBase prefab;
+
+    [Tooltip("Giây giữa mỗi lần spawn (spawn rate)")]
+    public float spawnInterval;
+
+    [Tooltip("Phút bắt đầu spawn loại enemy này (0 = ngay từ đầu)")]
+    public float unlockAtMinute;
 }

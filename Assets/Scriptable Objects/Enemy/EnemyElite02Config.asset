@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5f950297b1557f4a8604dcc56f19b8d, type: 3}
+  m_Name: EnemyElite02Config
+  m_EditorClassIdentifier: 
+  moveSpeed: 0
+  damage: 0
+  intialHealth: 0
+  stopRange: 0
+  fireRate: 0
+  burstCount: 0
+  burstCooldown: 0
+  bulletSpeed: 0
+  bulletDamage: 0
+  bulletLifetime: 0
+  laneOffset: 0

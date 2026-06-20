@@ -1253,10 +1253,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 354b041e07f918944834da9288c90a3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyPrefab: {fileID: 529668619563063293, guid: b749f3f9575068d4eb71d213e2fac6f6, type: 3}
   _gemPrefab: {fileID: 1020351347292387989, guid: 70b8ed7672ff1ac409c119f13ebf8141, type: 3}
-  _enemySpawnRate: 2
   _offset: 2
+  _enemyTypes:
+  - prefab: {fileID: 529668619563063293, guid: b749f3f9575068d4eb71d213e2fac6f6, type: 3}
+    spawnInterval: 1
+    unlockAtMinute: 5
 --- !u!114 &919801891
 MonoBehaviour:
   m_ObjectHideFlags: 0
