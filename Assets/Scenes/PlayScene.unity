@@ -201,7 +201,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1192702674763035909, guid: cb49771050caa894ba101b340d640e44, type: 3}
       propertyPath: _initializeDataIfNull
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2027497013418283273, guid: cb49771050caa894ba101b340d640e44, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1257,8 +1257,11 @@ MonoBehaviour:
   _offset: 2
   _enemyTypes:
   - prefab: {fileID: 529668619563063293, guid: b749f3f9575068d4eb71d213e2fac6f6, type: 3}
-    spawnInterval: 1
-    unlockAtMinute: 5
+    spawnInterval: 3
+    spawnAtMinute: 0
+  - prefab: {fileID: 3255350989255560989, guid: 086da9f2ca5a51041bae260ed4d3903c, type: 3}
+    spawnInterval: 3
+    spawnAtMinute: 0.5
 --- !u!114 &919801891
 MonoBehaviour:
   m_ObjectHideFlags: 0

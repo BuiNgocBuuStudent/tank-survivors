@@ -22,7 +22,7 @@ public class EnemyManager : MonoBehaviour
 
     private IEnumerator SpawnEnemyType(EnemySpawnEntry entry)
     {
-        yield return new WaitForSeconds(entry.unlockAtMinute);
+        yield return new WaitForSeconds(entry.spawnAtMinute * 60f);
 
         while (true)
         {
@@ -71,12 +71,9 @@ public class EnemyManager : MonoBehaviour
 [System.Serializable]
 public struct EnemySpawnEntry
 {
-    [Tooltip("Prefab của enemy loại này")]
     public EnemyControllerBase prefab;
 
-    [Tooltip("Giây giữa mỗi lần spawn (spawn rate)")]
     public float spawnInterval;
 
-    [Tooltip("Phút bắt đầu spawn loại enemy này (0 = ngay từ đầu)")]
-    public float unlockAtMinute;
+    public float spawnAtMinute;
 }

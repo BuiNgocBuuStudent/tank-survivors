@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: EnemyConfigBase
   m_EditorClassIdentifier: 
   moveSpeed: 0.75
-  damage: 5
+  damage: 1
   intialHealth: 10

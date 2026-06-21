@@ -196,6 +196,7 @@ public class EnemyDOTState : MonoBehaviour
 
     private void OnDisable()
     {
+        Destroy(this);
         if (_dotCoroutine != null)
         {
             StopCoroutine(_dotCoroutine);

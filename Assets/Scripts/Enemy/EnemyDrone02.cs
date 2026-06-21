@@ -3,11 +3,78 @@ using UnityEngine;
 
 public class EnemyDrone02 : EnemyControllerBase
 {
+    private enum State
+    {
+        CHASING,
+        DASHING,
+        COOLDOWN
+    }
+    [SerializeField] private State _state = State.CHASING;
+    private float _timer;
+    private Vector2 _dashDir;
     private EnemyDrone02Config _config => (EnemyDrone02Config)EnemyData;
 
-    // TODO (Ngày 2): Implement state machine Chasing / Dashing / Cooldown
-    //   - Chase: dùng base.ChaseTarget() bình thường
-    //   - Dash: lock direction tại thời điểm bắt đầu, set Rb.velocity = dir * _config.dashSpeed
-    //   - Cooldown: Rb.velocity = Vector2.zero, chờ _config.dashCooldown rồi về Chase
-    // Tham khảo design doc: dashSpeed=9, dashDuration=0.4s, chaseTime=2s, cooldown=1.5s
+    protected override void OnInit()
+    {
+        _timer = _config.chaseTimeBeforeDash;
+    }
+    protected override void UpdateBehavior()
+    {
+        _timer -= Time.deltaTime;
+
+        switch (_state)
+        {
+            case State.CHASING:
+                if (_timer <= 0)
+                {
+                    _state = State.DASHING;
+                    StartDash();
+                }
+                break;
+            case State.DASHING:
+                Rb.velocity = _dashDir * _config.dashSpeed;
+                if (_timer <= 0)
+                {
+                    _state = State.COOLDOWN;
+                    EndDash();
+                }
+                break;
+            case State.COOLDOWN:
+                if (_timer <= 0)
+                {
+                    _state = State.CHASING;
+                    _timer = _config.chaseTimeBeforeDash;
+                }
+                break;
+        }
+    }
+
+    private void StartDash()
+    {
+        _dashDir = (Player.transform.position - this.transform.position).normalized;
+        _timer = _config.dashDuration;
+        Rb.velocity = _dashDir * _config.dashSpeed;
+    }
+
+    private void EndDash()
+    {
+        Rb.velocity = Vector2.zero;
+        _timer = _config.dashCooldown;
+    }
+
+    protected override void ChaseTarget()
+    {
+        if (_state == State.DASHING || _state == State.COOLDOWN) return;
+        base.ChaseTarget();
+    }
+    // Thêm vào EnemyDrone02.cs để debug
+    private void OnDrawGizmosSelected()
+    {
+        if (_state == State.DASHING)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawRay(this.transform.position, _dashDir * 2f);
+        }
+    }
+
 }
