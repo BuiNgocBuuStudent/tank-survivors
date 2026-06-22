@@ -17,7 +17,7 @@ public abstract class BulletBase : MonoBehaviour
     private float _damageMultiplier = 1f;
 
 
-    public void Init(float speed, Vector2 movement)
+    public virtual void Init(float speed, Vector2 movement)
     {
         if (_rb == null)
             _rb = this.GetComponent<Rigidbody2D>();

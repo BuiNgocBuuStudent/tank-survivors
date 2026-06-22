@@ -13,6 +13,4 @@ public class EnemyShooterConfig : EnemyConfigBase
 
     [Header("--- Bullet ---")]
     [Tooltip("Tốc độ đạn (gợi ý: 6.0)")] public float bulletSpeed;
-    [Tooltip("Damage đạn (gợi ý: 12)")] public float bulletDamage;
-    [Tooltip("Lifetime đạn (gợi ý: 3.0s)")] public float bulletLifetime;
 }

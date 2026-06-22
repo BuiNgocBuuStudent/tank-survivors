@@ -9,6 +9,7 @@ public class EnemyDrone02 : EnemyControllerBase
         DASHING,
         COOLDOWN
     }
+    [Header("-----Enemy Drone 02 Config------")]
     [SerializeField] private State _state = State.CHASING;
     private float _timer;
     private Vector2 _dashDir;

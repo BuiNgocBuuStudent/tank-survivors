@@ -29,7 +29,6 @@ public abstract class EnemyControllerBase : MonoBehaviour, IGetHit
     /// </summary>
     public static event Action<Vector3, float> OnEnemyDeath;
 
-
     public void Init(Vector2 randomSpawnPos)
     {
         if (_rb == null)

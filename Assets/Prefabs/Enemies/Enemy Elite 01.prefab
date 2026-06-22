@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 1241374044143755955}
   - component: {fileID: 3903372894271569323}
   m_Layer: 9
-  m_Name: Enemy 02
+  m_Name: Enemy Elite 01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -215,7 +215,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.003295362, y: 0.028467312}
+  m_Offset: {x: -0.0008607358, y: 0.028467312}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -226,7 +226,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.9733025, y: 0.4357119}
+  m_Size: {x: 0.30620745, y: 0.4357119}
   m_EdgeRadius: 0
 --- !u!114 &3903372894271569323
 MonoBehaviour:
