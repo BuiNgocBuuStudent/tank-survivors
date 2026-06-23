@@ -1263,6 +1263,9 @@ MonoBehaviour:
     spawnInterval: 100
     spawnAtMinute: 0.5
   - prefab: {fileID: 3917120204925567463, guid: 21b5289b956f05644bc100b176c95537, type: 3}
+    spawnInterval: 100
+    spawnAtMinute: 0
+  - prefab: {fileID: 7336486353368470891, guid: 1a50ca6f867e2d843be797f17a1ea662, type: 3}
     spawnInterval: 10
     spawnAtMinute: 0
 --- !u!114 &919801891

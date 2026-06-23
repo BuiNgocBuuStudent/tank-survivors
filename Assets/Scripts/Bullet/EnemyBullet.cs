@@ -9,7 +9,7 @@ public class EnemyBullet : BulletBase
         if (_rb == null)
             _rb = this.GetComponent<Rigidbody2D>();
 
-        _baseDmg = _dmg;
+        _dmg = _baseDmg;
         this._speed = speed;
         this._movement = movement;
     }

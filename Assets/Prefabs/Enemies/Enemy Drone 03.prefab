@@ -245,3 +245,4 @@ MonoBehaviour:
   _enemyDataBase: {fileID: 11400000, guid: 4cc90dc83dd3f084a9f8ae2f49a1b6ac, type: 2}
   _currentHealth: 0
   _speedMultiplier: 1
+  _enemyBulletPrefab: {fileID: 124490361264825382, guid: b145d32a0062d2140833bf0f3fe54575, type: 3}

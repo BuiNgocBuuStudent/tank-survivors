@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: EnemyDrone02Config
   m_EditorClassIdentifier: 
   moveSpeed: 1
-  damage: 2
+  damage: 5
   intialHealth: 5
   dashSpeed: 5
   dashDuration: 0.4
