@@ -4,8 +4,8 @@ using UnityEngine;
 /// Config cho EnemyElite02 — "Twin Gunner".
 /// Kế thừa EnemyConfigBase (có sẵn moveSpeed, damage, intialHealth).
 /// </summary>
-[CreateAssetMenu(fileName = "EnemyElite02Config", menuName = "Scriptable Objects/Enemy/Elite02 Twin Gunner")]
-public class EnemyElite02Config : EnemyConfigBase
+[CreateAssetMenu(fileName = "EnemyElite02Config", menuName = "Scriptable Objects/Enemy/Elite Twin Gunner")]
+public class EliteTwinGunnerConfig : EnemyConfigBase
 {
     [Header("--- Position ---")]
     [Tooltip("Khoảng cách dừng và bắn (gợi ý: 6.0)")] public float stopRange;

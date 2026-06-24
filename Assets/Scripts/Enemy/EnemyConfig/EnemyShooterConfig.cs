@@ -4,7 +4,7 @@ using UnityEngine;
 /// Config cho EnemyShooter01 — "Shooter".
 /// Kế thừa EnemyConfigBase (có sẵn moveSpeed, damage, intialHealth).
 /// </summary>
-[CreateAssetMenu(fileName = "EnemyShooterConfig", menuName = "Scriptable Objects/Enemy/Shooter01")]
+[CreateAssetMenu(fileName = "EnemyShooterConfig", menuName = "Scriptable Objects/Enemy/Shooter")]
 public class EnemyShooterConfig : EnemyConfigBase
 {
     [Header("--- Shoot Behavior ---")]

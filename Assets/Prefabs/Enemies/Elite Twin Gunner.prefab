@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 911570679768972636}
   - component: {fileID: 7329417565138458330}
   - component: {fileID: 3559705662314268014}
-  - component: {fileID: 2263403398273808444}
+  - component: {fileID: 2448104262656491816}
   m_Layer: 9
   m_Name: Avatar
   m_TagString: Untagged
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 127245801
   m_SortingLayer: 7
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: b5bd01e7e29ed184d97d3e8511c7b9a6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 27eda43259d96f247874a8608f9c81aa, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -100,7 +100,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _flashMaterial: {fileID: 2100000, guid: 12fa06a178a62ca48a5fad66c299b21e, type: 2}
   _duration: 0.125
---- !u!95 &2263403398273808444
+--- !u!95 &2448104262656491816
 Animator:
   serializedVersion: 5
   m_ObjectHideFlags: 0
@@ -110,7 +110,7 @@ Animator:
   m_GameObject: {fileID: 1818600940325480541}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: ee607ff6483c92647b7e85dea67fc17e, type: 2}
+  m_Controller: {fileID: 9100000, guid: 95e68cdfa5f87b24bbf74c54f19cca75, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -132,9 +132,9 @@ GameObject:
   - component: {fileID: 8067326763072987388}
   - component: {fileID: 6981159788778402679}
   - component: {fileID: 1241374044143755955}
-  - component: {fileID: 7336486353368470891}
+  - component: {fileID: 3903372894271569323}
   m_Layer: 9
-  m_Name: Enemy Drone 03
+  m_Name: Elite Twin Gunner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -215,7 +215,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.003295362, y: 0.028467312}
+  m_Offset: {x: -0.0008607358, y: 0.028467312}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -226,9 +226,9 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.9733025, y: 0.4357119}
+  m_Size: {x: 0.30620745, y: 0.4357119}
   m_EdgeRadius: 0
---- !u!114 &7336486353368470891
+--- !u!114 &3903372894271569323
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -237,12 +237,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 3680402012277860845}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e3c042edd5653d34b99ba41c2fdcc83f, type: 3}
+  m_Script: {fileID: 11500000, guid: f1ee027d7b7f1a54eb52a583e7aa3364, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _rb: {fileID: 0}
   _flashEffect: {fileID: 0}
-  _enemyDataBase: {fileID: 11400000, guid: 4cc90dc83dd3f084a9f8ae2f49a1b6ac, type: 2}
+  _enemyDataBase: {fileID: 11400000, guid: b4789055c24f63b4486fcae1bd2e2382, type: 2}
   _currentHealth: 0
   _speedMultiplier: 1
-  _enemyBulletPrefab: {fileID: 124490361264825382, guid: b145d32a0062d2140833bf0f3fe54575, type: 3}

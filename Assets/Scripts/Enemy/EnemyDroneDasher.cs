@@ -1,7 +1,7 @@
 using UnityEngine;
 
 
-public class EnemyDrone02 : EnemyControllerBase
+public class EnemyDroneDasher : EnemyControllerBase
 {
     private enum State
     {
@@ -13,7 +13,7 @@ public class EnemyDrone02 : EnemyControllerBase
     [SerializeField] private State _state = State.CHASING;
     private float _timer;
     private Vector2 _dashDir;
-    private EnemyDrone02Config _config => (EnemyDrone02Config)EnemyData;
+    private EnemyDroneDasherConfig _config => (EnemyDroneDasherConfig)EnemyData;
 
     protected override void OnInit()
     {

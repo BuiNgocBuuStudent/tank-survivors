@@ -1261,12 +1261,15 @@ MonoBehaviour:
     spawnAtMinute: 0
   - prefab: {fileID: 3255350989255560989, guid: 086da9f2ca5a51041bae260ed4d3903c, type: 3}
     spawnInterval: 100
-    spawnAtMinute: 0.5
+    spawnAtMinute: 0
   - prefab: {fileID: 3917120204925567463, guid: 21b5289b956f05644bc100b176c95537, type: 3}
     spawnInterval: 100
     spawnAtMinute: 0
   - prefab: {fileID: 7336486353368470891, guid: 1a50ca6f867e2d843be797f17a1ea662, type: 3}
-    spawnInterval: 10
+    spawnInterval: 100
+    spawnAtMinute: 0
+  - prefab: {fileID: 6666328765432932479, guid: b1997e1bf10537149b33b6dc5cf206a3, type: 3}
+    spawnInterval: 5
     spawnAtMinute: 0
 --- !u!114 &919801891
 MonoBehaviour:

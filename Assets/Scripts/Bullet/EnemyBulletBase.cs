@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyBullet : BulletBase
+public class EnemyBulletBase : BulletBase
 {
     public override void Init(float speed, Vector2 movement)
     {

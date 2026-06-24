@@ -141,6 +141,7 @@ public class PlayerControllerBase : MonoBehaviour, IGetHit, IDataPersistence
 
     public void GetHit(float dmg)
     {
+        Debug.LogError(dmg);
         if (gameObject.activeSelf)
             _flashEffect.Flash();
 

@@ -2,7 +2,7 @@ using UnityEngine;
 
 
 [CreateAssetMenu(fileName = "EnemyDrone02Config", menuName = "Scriptable Objects/Enemy/Drone02 Dasher")]
-public class EnemyDrone02Config : EnemyConfigBase
+public class EnemyDroneDasherConfig : EnemyConfigBase
 {
     [Header("--- Dash ---")]
     [Tooltip("Tốc độ lao (gợi ý: 9.0)")] public float dashSpeed;

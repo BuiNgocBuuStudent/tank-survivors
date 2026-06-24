@@ -1,9 +1,9 @@
 using UnityEngine;
 
-public class EnemyShooter01 : EnemyControllerBase
+public class EnemyShooter : EnemyControllerBase
 {
     [Header("-----Enemy Shooter 01 Config------")]
-    [SerializeField] private EnemyBullet _enemyBulletPrefab;
+    [SerializeField] private EnemyBulletBase _enemyBulletPrefab;
 
     private float _fireTimer;
 
@@ -27,7 +27,7 @@ public class EnemyShooter01 : EnemyControllerBase
 
     private void Shoot()
     {
-        EnemyBullet bullet = ObjectPooler.Instance.GetComp(_enemyBulletPrefab);
+        EnemyBulletBase bullet = ObjectPooler.Instance.GetComp(_enemyBulletPrefab);
 
         Vector2 shootDir = (Player.transform.position - this.transform.position).normalized;
         bullet.Init(_config.bulletSpeed, shootDir);

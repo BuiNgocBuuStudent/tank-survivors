@@ -5,7 +5,7 @@ using UnityEngine;
 /// Kế thừa EnemyConfigBase (có sẵn moveSpeed, damage, intialHealth).
 /// </summary>
 [CreateAssetMenu(fileName = "EnemyDrone03Config", menuName = "Scriptable Objects/Enemy/Drone03 Bomber")]
-public class EnemyDrone03Config : EnemyConfigBase
+public class EnemyDroneBomberConfig : EnemyConfigBase
 {
     [Header("--- Death Burst ---")]
     [Tooltip("Số đạn tỏa ra khi chết (gợi ý: 12)")] public int deathBulletCount;
