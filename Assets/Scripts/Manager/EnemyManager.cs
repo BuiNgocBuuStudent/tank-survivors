@@ -73,7 +73,7 @@ public struct EnemySpawnEntry
 {
     public EnemyControllerBase prefab;
 
-    public float spawnInterval;
-
     public float spawnAtMinute;
+
+    public float spawnInterval;
 }

@@ -131,8 +131,8 @@ MonoBehaviour:
   _targetMask:
     serializedVersion: 2
     m_Bits: 64
-  _lifeTime: 2.5
-  _baseDmg: 10
+  _lifeTime: 2.8
+  _baseDmg: 12
 --- !u!58 &5344260929075146204
 CircleCollider2D:
   m_ObjectHideFlags: 0

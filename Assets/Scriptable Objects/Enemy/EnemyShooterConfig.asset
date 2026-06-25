@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14b8866305d2b6644a87b69c1b877ad1, type: 3}
   m_Name: EnemyShooterConfig
   m_EditorClassIdentifier: 
-  moveSpeed: 1
+  moveSpeed: 1.5
   damage: 5
-  intialHealth: 10
-  stopRange: 5
-  fireRate: 2
-  bulletSpeed: 5
+  intialHealth: 35
+  stopRange: 5.5
+  fireRate: 1.5
+  bulletSpeed: 6

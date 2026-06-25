@@ -131,8 +131,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8067326763072987388}
   - component: {fileID: 6981159788778402679}
-  - component: {fileID: 1241374044143755955}
   - component: {fileID: 6666328765432932479}
+  - component: {fileID: 2174798508408203932}
   m_Layer: 9
   m_Name: Elite Artillery
   m_TagString: Untagged
@@ -183,8 +183,27 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!61 &1241374044143755955
-BoxCollider2D:
+--- !u!114 &6666328765432932479
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3680402012277860845}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 236b66055aabbc34b8e8b8c2f136b4a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rb: {fileID: 0}
+  _flashEffect: {fileID: 0}
+  _enemyDataBase: {fileID: 11400000, guid: 22a99a4c543641146acda3d465966aab, type: 2}
+  _currentHealth: 0
+  _speedMultiplier: 1
+  _warningCircle: {fileID: 3629630184782895015, guid: 4f3f3b1049332e34a8da52e9a4561144, type: 3}
+  _artilleryPrefab: {fileID: -3315908226238710061, guid: 1f01e6fc221c3894ab4317501a8a9030, type: 3}
+--- !u!70 &2174798508408203932
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -215,35 +234,6 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.003295347, y: 0.028467312}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 0.62222224}
-    newSize: {x: 1, y: 0.62222224}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.31107673, y: 0.4357119}
-  m_EdgeRadius: 0
---- !u!114 &6666328765432932479
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3680402012277860845}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 236b66055aabbc34b8e8b8c2f136b4a1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _rb: {fileID: 0}
-  _flashEffect: {fileID: 0}
-  _enemyDataBase: {fileID: 11400000, guid: 22a99a4c543641146acda3d465966aab, type: 2}
-  _currentHealth: 0
-  _speedMultiplier: 1
-  _warningCircle: {fileID: 3629630184782895015, guid: 4f3f3b1049332e34a8da52e9a4561144, type: 3}
-  _artilleryPrefab: {fileID: -3315908226238710061, guid: 1f01e6fc221c3894ab4317501a8a9030, type: 3}
+  m_Offset: {x: -0.010609686, y: 0.07826501}
+  m_Size: {x: 0.92358065, y: 1.0958134}
+  m_Direction: 0

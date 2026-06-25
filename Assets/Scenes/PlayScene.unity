@@ -1257,20 +1257,65 @@ MonoBehaviour:
   _offset: 2
   _enemyTypes:
   - prefab: {fileID: 529668619563063293, guid: b749f3f9575068d4eb71d213e2fac6f6, type: 3}
-    spawnInterval: 100
     spawnAtMinute: 0
+    spawnInterval: 3.5
+  - prefab: {fileID: 529668619563063293, guid: b749f3f9575068d4eb71d213e2fac6f6, type: 3}
+    spawnAtMinute: 1.5
+    spawnInterval: 2
   - prefab: {fileID: 3255350989255560989, guid: 086da9f2ca5a51041bae260ed4d3903c, type: 3}
-    spawnInterval: 100
-    spawnAtMinute: 0
-  - prefab: {fileID: 3917120204925567463, guid: 21b5289b956f05644bc100b176c95537, type: 3}
-    spawnInterval: 100
-    spawnAtMinute: 0
-  - prefab: {fileID: 7336486353368470891, guid: 1a50ca6f867e2d843be797f17a1ea662, type: 3}
-    spawnInterval: 100
-    spawnAtMinute: 0
-  - prefab: {fileID: 6666328765432932479, guid: b1997e1bf10537149b33b6dc5cf206a3, type: 3}
+    spawnAtMinute: 2
     spawnInterval: 5
-    spawnAtMinute: 0
+  - prefab: {fileID: 529668619563063293, guid: b749f3f9575068d4eb71d213e2fac6f6, type: 3}
+    spawnAtMinute: 4
+    spawnInterval: 1.2
+  - prefab: {fileID: 3917120204925567463, guid: 21b5289b956f05644bc100b176c95537, type: 3}
+    spawnAtMinute: 3.5
+    spawnInterval: 8
+  - prefab: {fileID: 3255350989255560989, guid: 086da9f2ca5a51041bae260ed4d3903c, type: 3}
+    spawnAtMinute: 4.5
+    spawnInterval: 3
+  - prefab: {fileID: 7336486353368470891, guid: 1a50ca6f867e2d843be797f17a1ea662, type: 3}
+    spawnAtMinute: 5
+    spawnInterval: 10
+  - prefab: {fileID: 3917120204925567463, guid: 21b5289b956f05644bc100b176c95537, type: 3}
+    spawnAtMinute: 6
+    spawnInterval: 4
+  - prefab: {fileID: 7336486353368470891, guid: 1a50ca6f867e2d843be797f17a1ea662, type: 3}
+    spawnAtMinute: 7
+    spawnInterval: 6
+  - prefab: {fileID: 6666328765432932479, guid: b1997e1bf10537149b33b6dc5cf206a3, type: 3}
+    spawnAtMinute: 7
+    spawnInterval: 20
+  - prefab: {fileID: 3255350989255560989, guid: 086da9f2ca5a51041bae260ed4d3903c, type: 3}
+    spawnAtMinute: 7.5
+    spawnInterval: 2
+  - prefab: {fileID: 6666328765432932479, guid: b1997e1bf10537149b33b6dc5cf206a3, type: 3}
+    spawnAtMinute: 9
+    spawnInterval: 12
+  - prefab: {fileID: 3903372894271569323, guid: 3caa86dab7d391641a9585bf0fec7ae5, type: 3}
+    spawnAtMinute: 9
+    spawnInterval: 25
+  - prefab: {fileID: 529668619563063293, guid: b749f3f9575068d4eb71d213e2fac6f6, type: 3}
+    spawnAtMinute: 10
+    spawnInterval: 0.8
+  - prefab: {fileID: 3917120204925567463, guid: 21b5289b956f05644bc100b176c95537, type: 3}
+    spawnAtMinute: 10
+    spawnInterval: 2.5
+  - prefab: {fileID: 7336486353368470891, guid: 1a50ca6f867e2d843be797f17a1ea662, type: 3}
+    spawnAtMinute: 11
+    spawnInterval: 4
+  - prefab: {fileID: 3903372894271569323, guid: 3caa86dab7d391641a9585bf0fec7ae5, type: 3}
+    spawnAtMinute: 12
+    spawnInterval: 15
+  - prefab: {fileID: 6666328765432932479, guid: b1997e1bf10537149b33b6dc5cf206a3, type: 3}
+    spawnAtMinute: 12
+    spawnInterval: 8
+  - prefab: {fileID: 3255350989255560989, guid: 086da9f2ca5a51041bae260ed4d3903c, type: 3}
+    spawnAtMinute: 13
+    spawnInterval: 1.2
+  - prefab: {fileID: 3903372894271569323, guid: 3caa86dab7d391641a9585bf0fec7ae5, type: 3}
+    spawnAtMinute: 14
+    spawnInterval: 10
 --- !u!114 &919801891
 MonoBehaviour:
   m_ObjectHideFlags: 0

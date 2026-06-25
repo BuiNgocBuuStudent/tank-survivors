@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecaa16e98cc26964f9b51fc597306a9a, type: 3}
   m_Name: EliteTwinGunnerConfig
   m_EditorClassIdentifier: 
-  moveSpeed: 1
-  damage: 7
-  intialHealth: 10
+  moveSpeed: 1.4
+  damage: 8
+  intialHealth: 150
   stopRange: 6
-  fireRate: 0.4
+  fireRate: 0.35
   burstCount: 6
-  burstCooldown: 2
-  bulletSpeed: 5
+  burstCooldown: 2.5
+  bulletSpeed: 5.5
   laneOffset: 0.3

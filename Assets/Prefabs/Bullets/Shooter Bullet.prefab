@@ -175,5 +175,5 @@ MonoBehaviour:
   _targetMask:
     serializedVersion: 2
     m_Bits: 64
-  _lifeTime: 2
-  _baseDmg: 5
+  _lifeTime: 3
+  _baseDmg: 10

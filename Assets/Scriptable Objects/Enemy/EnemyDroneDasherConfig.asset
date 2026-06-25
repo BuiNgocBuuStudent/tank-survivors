@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6badbaad137ae0049ab1f01e3d06657e, type: 3}
   m_Name: EnemyDroneDasherConfig
   m_EditorClassIdentifier: 
-  moveSpeed: 1
-  damage: 5
-  intialHealth: 5
-  dashSpeed: 5
-  dashDuration: 0.4
-  chaseTimeBeforeDash: 5
-  dashCooldown: 2
+  moveSpeed: 1.8
+  damage: 12
+  intialHealth: 20
+  dashSpeed: 10
+  dashDuration: 0.35
+  chaseTimeBeforeDash: 1.8
+  dashCooldown: 2.5

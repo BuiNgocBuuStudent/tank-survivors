@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fc898f5918c5884ba0ca3773545e6bc, type: 3}
   m_Name: EnemyDroneBomberConfig
   m_EditorClassIdentifier: 
-  moveSpeed: 1
-  damage: 5
-  intialHealth: 10
+  moveSpeed: 1.6
+  damage: 10
+  intialHealth: 40
   deathBulletCount: 12
   deathBulletSpeed: 4
