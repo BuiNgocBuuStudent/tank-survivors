@@ -60,7 +60,7 @@ public class EliteArtillery : EnemyControllerBase
             warningCircle.SetActive(true);
         }
 
-        // Animate scale WarningCircle 0 → 1 trong aimDuration
+        // Animate scale WarningCircle 0 → 6 trong aimDuration
         float elapsed = 0f;
         float aimDuration = _config.aimDuration;
 
