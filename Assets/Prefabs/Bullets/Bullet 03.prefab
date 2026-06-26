@@ -103,8 +103,8 @@ MonoBehaviour:
   _targetMask:
     serializedVersion: 2
     m_Bits: 512
-  _lifeTime: 2
-  _baseDmg: 1
+  _lifeTime: 1.8
+  _baseDmg: 30
   _explosionPrefab: {fileID: 8194992990867289339, guid: 99bc28c0d45f51c4fbac01080b73edc7, type: 3}
   _damageRadius: 2
   _shockwaveSlowFactor: 0.3

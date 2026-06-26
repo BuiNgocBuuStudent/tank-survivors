@@ -48,8 +48,8 @@ MonoBehaviour:
   _enemyLayerMask:
     serializedVersion: 2
     m_Bits: 512
-  _cooldownTime: 1
-  _bulletSpeed: 7
+  _cooldownTime: 0.8
+  _bulletSpeed: 10
   _activeSkills: []
   _isDoubleBullet: 0
 --- !u!1 &1535376653716283842

@@ -72,7 +72,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1781685961
-  m_SortingLayer: 7
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -616,7 +616,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   _cooldownTime: 3
-  _bulletSpeed: 6
+  _bulletSpeed: 5
   _activeSkills: []
   _clusterBulletPrefab: {fileID: 3329290608771731238, guid: 11250c12e1b5bfb4dad60a54aa3c7680, type: 3}
 --- !u!1 &8897846397362839959
@@ -691,7 +691,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1781685961
-  m_SortingLayer: 7
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

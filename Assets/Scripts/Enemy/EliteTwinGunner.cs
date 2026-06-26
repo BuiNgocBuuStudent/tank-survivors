@@ -29,6 +29,7 @@ public class EliteTwinGunner : EnemyControllerBase
             base.ChaseTarget();
         }
     }
+
     protected override void UpdateBehavior()
     {
         if (_isFiring) return;
@@ -39,6 +40,7 @@ public class EliteTwinGunner : EnemyControllerBase
             StartCoroutine(BurstSequence());
         }
     }
+
     private IEnumerator BurstSequence()
     {
         _isFiring = true;
@@ -46,7 +48,6 @@ public class EliteTwinGunner : EnemyControllerBase
         yield return new WaitForSeconds(0.3f);
         if (!gameObject.activeInHierarchy) yield break;
 
-        // Task 6.3 — Bắn burstCount lần
         for (int i = 0; i < _config.burstCount; i++)
         {
             if (!gameObject.activeInHierarchy) yield break;
@@ -63,6 +64,8 @@ public class EliteTwinGunner : EnemyControllerBase
 
         _isFiring = false;
     }
+
+
     private void ShootTwinLane()
     {
         Vector2 dir = (Player.transform.position - this.transform.position).normalized;
@@ -86,6 +89,7 @@ public class EliteTwinGunner : EnemyControllerBase
         bullet.transform.SetPositionAndRotation(spawnPos, this.transform.rotation);
         bullet.gameObject.SetActive(true);
     }
+
     private void FacePlayer()
     {
         Vector2 dir = Player.transform.position - this.transform.position;
@@ -94,12 +98,14 @@ public class EliteTwinGunner : EnemyControllerBase
         rot.eulerAngles = new Vector3(0f, 0f, angle);
         this.transform.rotation = rot;
     }
+
     protected override void OnDie(float lastDmg)
     {
         _isFiring = false;
         StopAllCoroutines();
         base.OnDie(lastDmg);
     }
+
 
     private void OnDrawGizmosSelected()
     {

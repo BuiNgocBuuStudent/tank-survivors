@@ -45,14 +45,12 @@ public class EffectManager : Singleton<EffectManager>
     }
 
     /// <summary>
-    /// Burning + Corrosive Cloud: enemy trong vùng bị giảm armor -> nhận thêm damage,
-    /// armorReduction = 20 -> enemy mất 20% armor khi ở trong vùng,
-    /// thực hiện bằng cách tăng damage lên thay vì sửa armor enemy
+    /// Burning + Corrosive Cloud
     /// </summary>
     public IEnumerator CorrosiveBurning(GameObject effect, float dmg, float range,
-        float time, float speed, LayerMask mask, float armorReduction)
+        float time, float speed, LayerMask mask, float dmgPercentage)
     {
-        float corrosiveMultiplier = 1f / (1f - armorReduction / 100f);
+        float corrosiveMultiplier = 1f + dmgPercentage / 100f;
         float corrosiveDmg = dmg * corrosiveMultiplier;
 
         float timer = 0f;

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillName: Corrosive Cloud
   description: "K\u1EBB \u0111\u1ECBch trong \u0111\xE1m m\xE2y \u0111\u1ED9c b\u1ECB
-    gi\u1EA3m 20% armor"
+    ch\u1ECBu th\xEAm 20% s\xE1t th\u01B0\u01A1ng"
   tier: 3
   cost: 600
   tankId: Tank04

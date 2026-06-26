@@ -11,7 +11,7 @@ public class GunController01 : GunControllerBase
     // Tier 5: Overcharge Shot
     private int _shotCounter;
     private bool _hasOverchargeShot;
-    private const int OverchargeInterval = 10;
+    private const int OverchargeInterval = 5;
 
     void Update()
     {

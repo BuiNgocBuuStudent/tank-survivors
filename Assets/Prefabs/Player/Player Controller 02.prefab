@@ -49,16 +49,16 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   _cooldownTime: 1
-  _bulletSpeed: 10
+  _bulletSpeed: 6
   _activeSkills: []
-  _numberBullet: 4
-  _attackRange: 40
+  _numberBullet: 5
+  _attackRange: 30
   _knockbackPrefab: {fileID: 2708598583397607911, guid: 655537574fe7e82439838daf7f303abc, type: 3}
   _enemyLayerMaskForKnockback:
     serializedVersion: 2
     m_Bits: 512
   _knockbackRadius: 2
-  _knockbackForce: 4
+  _knockbackForce: 8
 --- !u!1 &5150117226864979664
 GameObject:
   m_ObjectHideFlags: 0

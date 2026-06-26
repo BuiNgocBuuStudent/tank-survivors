@@ -59,10 +59,10 @@ public class Bullet04 : BulletBase
         _hasToxicTrail = toxicTrail;
         _hasPlagueCarrier = plagueCarrier;
 
-        // Tier 1: Toxic Expansion — tăng vùng độc 30%
+        // Tier 1: Toxic Expansion — tăng vùng độc 35%
         if (_hasToxicExpansion)
         {
-            _burningRange = _baseBurningRange * 1.3f;
+            _burningRange = _baseBurningRange * 1.35f;
             _toxicZonePrefab.transform.localScale = Vector3.one * 1.3f;
         }
         else
@@ -132,7 +132,7 @@ public class Bullet04 : BulletBase
         prefab.transform.position = _lastBoomPos;
         prefab.SetActive(true);
 
-        // Tier 3: Corrosive Cloud — dùng CorrosiveBurning thay vì Burning bình thường
+        // Tier 3: Corrosive Cloud: Enemy trong vùng độc bị nhận thêm 20% damage
         if (_hasCorrosiveCloud)
         {
             EffectManager.Instance.StartCoroutine(

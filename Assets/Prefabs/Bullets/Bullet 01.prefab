@@ -103,8 +103,8 @@ MonoBehaviour:
   _targetMask:
     serializedVersion: 2
     m_Bits: 512
-  _lifeTime: 2
-  _baseDmg: 10
+  _lifeTime: 2.5
+  _baseDmg: 18
 --- !u!50 &8441221223264147281
 Rigidbody2D:
   serializedVersion: 4

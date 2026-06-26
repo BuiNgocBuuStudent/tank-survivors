@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SkillUpgrade04
   m_EditorClassIdentifier: 
   skillName: Incendiary Ammo
-  description: "\u0110\u1EA1n ch\xE1y g\xE2y th\xEAm 20% damage trong 2s"
+  description: "\u0110\u1EA1n ch\xE1y g\xE2y th\xEAm 12% damage trong 2s"
   tier: 4
   cost: 1500
   tankId: Tank01

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Bullet02 : BulletBase
@@ -72,6 +73,7 @@ public class Bullet02 : BulletBase
     protected override void OnDisable()
     {
         base.OnDisable();
+        _processedDeaths.Clear();
         EnemyControllerBase.OnEnemyDeath -= OnEnemyDeathHandler;
     }
 

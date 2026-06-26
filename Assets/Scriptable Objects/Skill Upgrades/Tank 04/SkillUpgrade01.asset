@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SkillUpgrade01
   m_EditorClassIdentifier: 
   skillName: Toxic Expansion
-  description: "M\u1EDF r\u1ED9ng v\xF9ng \u0111\u1ED9c 30%"
+  description: "M\u1EDF r\u1ED9ng v\xF9ng \u0111\u1ED9c 35%"
   tier: 1
   cost: 100
   tankId: Tank04
