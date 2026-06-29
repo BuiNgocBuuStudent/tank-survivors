@@ -40,21 +40,28 @@ public class GameManager : Singleton<GameManager>
             return;
         }
 
-        // 1. Instantiate đúng tank đã chọn
         int tankId = _sessionData.selectedTankId;
         _player = Instantiate(_playerPrefabs[tankId], this.transform.position, Quaternion.identity);
 
-        // 2. Đăng ký load data cho player
         DataPersistenceManager.Instance.RegisterAndLoad(_player);
 
-        // 3. Init trước: resolve _rb, _gun, SlideBar references
         _player.Init();
 
-        // 4. Apply sau: ghi đè stats + sync bar + apply skills
-        _player.ApplySessionData(_sessionData);
-
+        // QUAN TRỌNG: OnPlayerReady phải được gọi TRƯỚC ApplySessionData.
+        // HUDController lắng nghe OnPlayerReady để BindToPlayer (subscribe vào
+        // player events). Nếu ApplySessionData chạy trước, các events
+        // OnMaxHealthSet / OnMaxEnergySet / OnHealthChanged sẽ fire khi HUD
+        // chưa subscribe → HUD miss toàn bộ data mới → bar không cập nhật.
         OnPlayerReady?.Invoke(_player);
 
+        _player.ApplySessionData(_sessionData);
+
         _player.gameObject.SetActive(true);
+    }
+    private void Update()
+    {
+        Vector3 followPos = _player.transform.position;
+        followPos.z = Camera.main.transform.position.z;
+        Camera.main.transform.position = followPos;
     }
 }

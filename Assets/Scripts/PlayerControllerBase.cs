@@ -18,6 +18,18 @@ public class PlayerControllerBase : MonoBehaviour, IGetHit, IDataPersistence
     [SerializeField] protected float _currentHealth, _currentEnergy;
     [SerializeField] protected float _moveSpeed, _rotateSpeed, _armorPercent;
     [SerializeField] protected bool _isFullEnergy;
+    // true khi năng lượng vừa cạn — chặn tăng tốc cho đến khi nạp lại ≥15%
+    // Tránh bug giữa MOVE/ACCELERATE do recharge coroutine trả lại energy từng chút
+    private bool _isEnergyDepleted;
+
+    [Header("-----Energy Config-----")]
+    [Tooltip("Năng lượng tiêu thụ mỗi giây khi tăng tốc")]
+    [SerializeField] protected float _drainRate = 5f;
+    [Tooltip("Tốc độ nạp lại năng lượng mỗi giây sau khi ngừng tăng tốc")]
+    [SerializeField] protected float _rechargeRate = 2.5f;
+    [Tooltip("Giây chờ sau khi ngừng tăng tốc trước khi bắt đầu nạp")]
+    [SerializeField] protected float _rechargeDelay = 2f;
+
     public float dmgMult;
     protected float _movement;
 
@@ -51,6 +63,7 @@ public class PlayerControllerBase : MonoBehaviour, IGetHit, IDataPersistence
             _flashEffect = this.GetComponentInChildren<FlashEffect>();
 
         _isFullEnergy = true;
+        _isEnergyDepleted = false;
         _playerState = PlayerState.IDLE;
         _gun.Init();
     }
@@ -93,16 +106,27 @@ public class PlayerControllerBase : MonoBehaviour, IGetHit, IDataPersistence
     private void Accelerate()
     {
         _moveSpeed = _initialSpeed;
+
         if (_currentEnergy <= 0)
         {
             _currentEnergy = 0;
+            _isEnergyDepleted = true;
             return;
+        }
+
+        // khi đã cạn năng lượng, chờ nạp lại >= 15% mới cho phép tăng tốc trở lại
+        if (_isEnergyDepleted)
+        {
+            if (_currentEnergy >= _initialEnergy * 0.15f)
+                _isEnergyDepleted = false;
+            else
+                return;
         }
 
         if (Input.GetKey(KeyCode.Space) && _movement > 0)
         {
             _moveSpeed = _accelerateSpeed;
-            _currentEnergy -= 2 * Time.deltaTime;
+            _currentEnergy -= _drainRate * Time.deltaTime;
             _isFullEnergy = false;
         }
     }
@@ -125,16 +149,18 @@ public class PlayerControllerBase : MonoBehaviour, IGetHit, IDataPersistence
 
     private IEnumerator RechargeEnergy()
     {
+        // Chờ một khoảng thời gian sau khi ngừng tăng tốc rồi mới bắt đầu nạp
+        yield return new WaitForSeconds(_rechargeDelay);
+
+
         while (_currentEnergy < _initialEnergy)
         {
-            Debug.Log("Recharging");
-            yield return new WaitForSeconds(Time.deltaTime);
-            _currentEnergy += Time.deltaTime;
+            _currentEnergy = Mathf.Min(_currentEnergy + _rechargeRate * Time.deltaTime,
+                                       _initialEnergy);
+            yield return null; // Chờ frame tiếp theo (thực hiện đúng 1 tick/frame)
         }
 
-        if (_initialEnergy - _currentEnergy < 0.2f)
-            _currentEnergy = _initialEnergy;
-
+        _currentEnergy = _initialEnergy;
         _rechargeCoroutine = null;
         _isFullEnergy = true;
     }
@@ -186,7 +212,7 @@ public class PlayerControllerBase : MonoBehaviour, IGetHit, IDataPersistence
         if (_gun != null)
             _gun.ApplySkills(sessionData.activeSkills);
 
-        Debug.Log($"[PlayerControllerBase] ApplySessionData: HP={_initialHealth}, " +
+        Debug.LogError($"[PlayerControllerBase] ApplySessionData: HP={_initialHealth}, " +
                   $"EN={_initialEnergy}, AR={_armorPercent}, DMG={dmgMult}, " +
                   $"Skills=[{string.Join(", ", sessionData.activeSkills)}]");
     }

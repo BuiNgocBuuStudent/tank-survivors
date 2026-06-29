@@ -201,7 +201,7 @@ MonoBehaviour:
   _currentHealth: 0
   _currentEnergy: 0
   _moveSpeed: 0
-  _rotateSpeed: 2
+  _rotateSpeed: 4
   _armorPercent: 0
   _isFullEnergy: 0
   dmgMult: 1
