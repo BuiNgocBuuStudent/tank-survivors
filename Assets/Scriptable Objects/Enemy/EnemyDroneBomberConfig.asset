@@ -15,5 +15,6 @@ MonoBehaviour:
   moveSpeed: 1.6
   damage: 10
   intialHealth: 40
+  coinDrop: 5
   deathBulletCount: 12
   deathBulletSpeed: 4

@@ -12,14 +12,10 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] EnemyManager _enemyManager;
     public EnemyManager EnemyManager => _enemyManager;
 
-    [SerializeField] ExpManager _expManager;
-    public ExpManager ExpManager => _expManager;
-
     [SerializeField] BoostManager _boostManager;
     public BoostManager BoostManager => _boostManager;
 
     [Header("===== Session Data (Scene Transfer) =====")]
-    [Tooltip("Cùng ScriptableObject asset với UpgradeManager — đã được ghi bởi PrepareForGame()")]
     [SerializeField] PlayerSessionData _sessionData;
 
     public static event Action<PlayerControllerBase> OnPlayerReady;
@@ -31,7 +27,6 @@ public class GameManager : Singleton<GameManager>
     public void Init()
     {
         EnemyManager.Init();
-        ExpManager.Init();
         //BoostManager.Init();
 
         if (_sessionData == null)

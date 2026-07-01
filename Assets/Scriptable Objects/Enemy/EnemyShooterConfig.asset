@@ -15,6 +15,7 @@ MonoBehaviour:
   moveSpeed: 1.5
   damage: 5
   intialHealth: 35
+  coinDrop: 5
   stopRange: 5.5
   fireRate: 1.5
   bulletSpeed: 6

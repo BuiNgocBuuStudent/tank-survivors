@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
 {
-    [Header("=== Gem ===")]
-    [SerializeField] Gem _gemPrefab;
 
     [Header("=== Enemy Spawn Config ===")]
     [SerializeField] float _offset;
@@ -33,13 +31,6 @@ public class EnemyManager : MonoBehaviour
             enemy.Init(randomPos);
             enemy.gameObject.SetActive(true);
         }
-    }
-
-    public void SpawnExpGem(Vector2 enemyDiePos)
-    {
-        Gem gem = ObjectPooler.Instance.GetComp(_gemPrefab);
-        gem.transform.position = enemyDiePos;
-        gem.gameObject.SetActive(true);
     }
 
     private Vector2 GetRandomSpawnPos()

@@ -15,3 +15,4 @@ MonoBehaviour:
   moveSpeed: 2.2
   damage: 8
   intialHealth: 25
+  coinDrop: 2
