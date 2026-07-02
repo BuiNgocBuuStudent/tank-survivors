@@ -24,7 +24,7 @@ public class SkillItemUI : MonoBehaviour
         _upgradeManager = upgradeManager;
         _skillIndex = skillIndex;
 
-        _skillNameText.text = $"Tier {config.tier}: {config.skillName}";
+        _skillNameText.text = config.skillName;
         _descriptionText.text = config.description;
 
         RefreshState();

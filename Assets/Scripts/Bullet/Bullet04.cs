@@ -63,7 +63,6 @@ public class Bullet04 : BulletBase
         if (_hasToxicExpansion)
         {
             _burningRange = _baseBurningRange * 1.35f;
-            _toxicZonePrefab.transform.localScale = Vector3.one * 1.3f;
         }
         else
         {
@@ -130,6 +129,11 @@ public class Bullet04 : BulletBase
 
         GameObject prefab = ObjectPooler.Instance.GetObject(_toxicZonePrefab);
         prefab.transform.position = _lastBoomPos;
+        if (_hasToxicExpansion)
+            prefab.transform.localScale = Vector3.one * 1.4f;
+        else
+            prefab.transform.localScale = Vector3.one;
+
         prefab.SetActive(true);
 
         // Tier 3: Corrosive Cloud: Enemy trong vùng độc bị nhận thêm 20% damage
@@ -169,7 +173,7 @@ public class Bullet04 : BulletBase
 
         GameObject miniZone = ObjectPooler.Instance.GetObject(_toxicZonePrefab);
         miniZone.transform.position = pos;
-        miniZone.transform.localScale = Vector3.one * 0.5f;
+        miniZone.transform.localScale = Vector3.one * 0.3f;
         miniZone.SetActive(true);
 
         float miniDmg = _dmg * 0.5f;
@@ -192,6 +196,6 @@ public class Bullet04 : BulletBase
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(this.transform.position, _burningRange);
-
+        Gizmos.DrawWireSphere(this.transform.position, _miniZoneRange);
     }
 }

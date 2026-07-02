@@ -1,16 +1,22 @@
+using TMPro;
 using UnityEngine;
 
-public class HUDController : MonoBehaviour // HUD: toàn bộ phần UI hiển thị trong khi chơi
+public class HUDController : Singleton<HUDController> // HUD: toàn bộ phần UI hiển thị trong khi chơi
 {
     [SerializeField] SlideBar _healthBar;
     [SerializeField] SlideBar _energyBar;
 
+    [SerializeField] CoinDrop _coinDropPrefab;
+    [SerializeField] TextMeshProUGUI _coinDropText;
+    private int _coinDrop;
+
     // Giữ reference để hủy đăng ký khi player bị destroy
     private PlayerControllerBase _boundPlayer;
 
-    private void Awake()
+    protected override void Awake()
     {
-        // Đăng ký vào static event — an toàn dù GameManager chưa tồn tại
+        base.Awake(); 
+
         GameManager.OnPlayerReady += OnPlayerReady;
     }
 
@@ -81,5 +87,20 @@ public class HUDController : MonoBehaviour // HUD: toàn bộ phần UI hiển t
         if (_energyBar == null) return;
         _energyBar.UpdateValue(currentEnergy);
     }
-#endregion
+    #endregion
+
+    #region Coin Drop
+
+    public void SpawnCoinDrop(Vector3 pos)
+    {
+        CoinDrop coinDrop = ObjectPooler.Instance.GetComp(_coinDropPrefab);
+        coinDrop.transform.position = pos;
+        coinDrop.gameObject.SetActive(true);
+    }
+    public void SetCoinDropText(int coinDrop)
+    {
+        _coinDrop += coinDrop;
+        _coinDropText.text = _coinDrop.ToString();
+    }
+    #endregion
 }

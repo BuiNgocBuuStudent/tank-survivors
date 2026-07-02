@@ -884,7 +884,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 10000
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4a8b22f2cf01d4644980581eb253e33d, type: 2}
   m_sharedMaterial: {fileID: -8810925074855268474, guid: 4a8b22f2cf01d4644980581eb253e33d, type: 2}
@@ -1306,7 +1306,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _healthBar: {fileID: 5551830132822919173}
   _energyBar: {fileID: 6920839550251999735}
-  _coinDropPrefab: {fileID: 1240137637809547934, guid: 70b8ed7672ff1ac409c119f13ebf8141, type: 3}
+  _coinDropPrefab: {fileID: 6723208846876375555, guid: 70b8ed7672ff1ac409c119f13ebf8141, type: 3}
   _coinDropText: {fileID: 726987187}
 --- !u!4 &970217495
 Transform:
