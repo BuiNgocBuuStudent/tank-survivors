@@ -108,6 +108,7 @@ public abstract class EnemyControllerBase : MonoBehaviour, IGetHit
         if (gameObject.activeSelf)
             _flashEffect.Flash();
 
+        Debug.LogError("Enemy take damage: " + dmg);
         _currentHealth -= dmg;
         if (_currentHealth <= 0)
         {
@@ -126,6 +127,7 @@ public abstract class EnemyControllerBase : MonoBehaviour, IGetHit
 
         HUDController.Instance.SetCoinDropText(_enemyDataBase.coinDrop);
         UpgradeManager.Instance.AddCoins(_enemyDataBase.coinDrop);
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

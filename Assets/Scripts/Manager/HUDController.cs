@@ -1,7 +1,10 @@
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class HUDController : Singleton<HUDController> // HUD: toàn bộ phần UI hiển thị trong khi chơi
+// HUD: toàn bộ phần UI hiển thị trong khi chơi
+public class HUDController : Singleton<HUDController>, IDataPersistence
 {
     [SerializeField] SlideBar _healthBar;
     [SerializeField] SlideBar _energyBar;
@@ -10,6 +13,7 @@ public class HUDController : Singleton<HUDController> // HUD: toàn bộ phần 
     [SerializeField] TextMeshProUGUI _coinDropText;
     private int _coinDrop;
 
+    [SerializeField] GameObject _pauseUI;
     // Giữ reference để hủy đăng ký khi player bị destroy
     private PlayerControllerBase _boundPlayer;
 
@@ -103,4 +107,31 @@ public class HUDController : Singleton<HUDController> // HUD: toàn bộ phần 
         _coinDropText.text = _coinDrop.ToString();
     }
     #endregion
+
+    #region Pause Game State
+    public void OnPauseBtnClicked()
+    {
+        Time.timeScale = 0f;
+        _pauseUI.gameObject.SetActive(true);
+    }
+    public void OnExitPlaySessionBtnClicked()
+    {
+        SceneManager.LoadSceneAsync("MainMenu");
+    }
+    public void OnCancelBtnClicked()
+    {
+        _pauseUI.gameObject.SetActive(false);
+        Time.timeScale = 1f;
+    }
+    #endregion
+    public void LoadData(GameData data)
+    {
+        
+    }
+
+    public void SaveData(GameData data)
+    {
+        data.playerCoins += _coinDrop;
+    }
+
 }

@@ -59,4 +59,6 @@ public class GameManager : Singleton<GameManager>
         followPos.z = Camera.main.transform.position.z;
         Camera.main.transform.position = followPos;
     }
+
+   
 }

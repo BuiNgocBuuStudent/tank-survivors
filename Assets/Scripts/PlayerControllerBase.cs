@@ -167,11 +167,12 @@ public class PlayerControllerBase : MonoBehaviour, IGetHit, IDataPersistence
 
     public void GetHit(float dmg)
     {
-        Debug.LogError(dmg);
         if (gameObject.activeSelf)
             _flashEffect.Flash();
 
-        _currentHealth = _currentHealth - (dmg * (1 - _armorPercent / 100));
+        float realDmg = dmg * (1 - _armorPercent / 100);
+        Debug.LogError("Player take damage: " + realDmg);
+        _currentHealth -= realDmg;
 
         OnHealthChanged?.Invoke(_currentHealth);
 
@@ -213,8 +214,8 @@ public class PlayerControllerBase : MonoBehaviour, IGetHit, IDataPersistence
             _gun.ApplySkills(sessionData.activeSkills);
 
         Debug.LogError($"[PlayerControllerBase] ApplySessionData: HP={_initialHealth}, " +
-                  $"EN={_initialEnergy}, AR={_armorPercent}, DMG={dmgMult}, " +
-                  $"Skills=[{string.Join(", ", sessionData.activeSkills)}]");
+                  $"ENERGY={_initialEnergy}, ARMOR={_armorPercent}, HỆ SỐ DMG={dmgMult}, " +
+                  $"SKILLS=[{string.Join(", ", sessionData.activeSkills)}]");
     }
 
 
@@ -243,26 +244,26 @@ public class PlayerControllerBase : MonoBehaviour, IGetHit, IDataPersistence
 
     public void SaveData(GameData data)
     {
-        data.initialHealth = this._initialHealth;
-        data.currentHealth = this._currentHealth;
+        //data.initialHealth = this._initialHealth;
+        //data.currentHealth = this._currentHealth;
 
-        data.armorPercentage = this._armorPercent;
+        //data.armorPercentage = this._armorPercent;
 
-        data.moveSpeed = this._moveSpeed;
+        //data.moveSpeed = this._moveSpeed;
 
-        data.initialEnergy = this._initialEnergy;
-        data.currentEnergy = this._currentEnergy;
+        //data.initialEnergy = this._initialEnergy;
+        //data.currentEnergy = this._currentEnergy;
 
-        data.dmgMult = this.dmgMult;
+        //data.dmgMult = this.dmgMult;
 
-        data.playerPosX = this.transform.position.x;
-        data.playerPosY = this.transform.position.y;
-        data.playerPosZ = this.transform.position.z;
+        //data.playerPosX = this.transform.position.x;
+        //data.playerPosY = this.transform.position.y;
+        //data.playerPosZ = this.transform.position.z;
 
-        Quaternion quaternion = this.transform.rotation;
-        data.playerRotationX = quaternion.eulerAngles.x;
-        data.playerRotationY = quaternion.eulerAngles.y;
-        data.playerRotationZ = quaternion.eulerAngles.z;
+        //Quaternion quaternion = this.transform.rotation;
+        //data.playerRotationX = quaternion.eulerAngles.x;
+        //data.playerRotationY = quaternion.eulerAngles.y;
+        //data.playerRotationZ = quaternion.eulerAngles.z;
     }
     #endregion
 }
