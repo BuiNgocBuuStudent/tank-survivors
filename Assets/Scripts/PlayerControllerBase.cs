@@ -179,6 +179,7 @@ public class PlayerControllerBase : MonoBehaviour, IGetHit, IDataPersistence
         if (_currentHealth <= 0)
         {
             this.gameObject.SetActive(false);
+            HUDController.Instance.OnGameOver();
         }
     }
 

@@ -35,18 +35,11 @@ public class MainMenu : MonoBehaviour
         DataPersistenceManager.Instance.NewGame();
         UpgradeManager.Instance.PrepareForGame(); // Ghi data vào SessionData trước khi đổi scene
         SceneManager.LoadSceneAsync("PlayScene");
-    }
-
-    public void OnContinueButtonClicked()
-    {
-        DisableButton();
-        UpgradeManager.Instance.PrepareForGame(); // Ghi data vào SessionData trước khi đổi scene
-        SceneManager.LoadSceneAsync("PlayScene");
+        Time.timeScale = 1f;
     }
 
     private void DisableButton()
     {
         _startBtn.interactable = false;
-        _continueBtn.interactable = false;
     }
 }

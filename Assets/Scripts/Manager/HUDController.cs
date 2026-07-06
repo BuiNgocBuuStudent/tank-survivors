@@ -10,10 +10,14 @@ public class HUDController : Singleton<HUDController>, IDataPersistence
     [SerializeField] SlideBar _energyBar;
 
     [SerializeField] CoinDrop _coinDropPrefab;
-    [SerializeField] TextMeshProUGUI _coinDropText;
+    [SerializeField] TextMeshProUGUI _coinsDropText;
     private int _coinDrop;
 
     [SerializeField] GameObject _pauseUI;
+
+    [SerializeField] GameObject _gameOverUI;
+    [SerializeField] TextMeshProUGUI _lastCoinsText;
+
     // Giữ reference để hủy đăng ký khi player bị destroy
     private PlayerControllerBase _boundPlayer;
 
@@ -104,17 +108,17 @@ public class HUDController : Singleton<HUDController>, IDataPersistence
     public void SetCoinDropText(int coinDrop)
     {
         _coinDrop += coinDrop;
-        _coinDropText.text = _coinDrop.ToString();
+        _coinsDropText.text = _coinDrop.ToString();
     }
     #endregion
 
-    #region Pause Game State
+    #region Pause/Over Game State
     public void OnPauseBtnClicked()
     {
         Time.timeScale = 0f;
         _pauseUI.gameObject.SetActive(true);
     }
-    public void OnExitPlaySessionBtnClicked()
+    public void OnHomeBtnClicked()
     {
         SceneManager.LoadSceneAsync("MainMenu");
     }
@@ -122,6 +126,18 @@ public class HUDController : Singleton<HUDController>, IDataPersistence
     {
         _pauseUI.gameObject.SetActive(false);
         Time.timeScale = 1f;
+    }
+    public void OnGameOver()
+    {
+        Time.timeScale = 0f;
+        _lastCoinsText.text = _coinDrop.ToString();
+        _gameOverUI.gameObject.SetActive(true);
+    }
+    public void OnRestartBtnClicked()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadSceneAsync("PlayScene");
+        _gameOverUI.gameObject.SetActive(false);
     }
     #endregion
     public void LoadData(GameData data)

@@ -126,7 +126,6 @@ public abstract class EnemyControllerBase : MonoBehaviour, IGetHit
         HUDController.Instance.SpawnCoinDrop(this.transform.position);
 
         HUDController.Instance.SetCoinDropText(_enemyDataBase.coinDrop);
-        UpgradeManager.Instance.AddCoins(_enemyDataBase.coinDrop);
 
     }
 
