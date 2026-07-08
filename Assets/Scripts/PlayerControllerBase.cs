@@ -135,7 +135,6 @@ public class PlayerControllerBase : MonoBehaviour, IGetHit, IDataPersistence
     {
         if (_isFullEnergy || _currentEnergy >= _initialEnergy)
         {
-            Debug.Log("Full energy");
             _rechargeCoroutine = null;
             return;
         }

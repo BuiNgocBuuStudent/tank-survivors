@@ -8,15 +8,20 @@ public class HUDController : Singleton<HUDController>, IDataPersistence
 {
     [SerializeField] SlideBar _healthBar;
     [SerializeField] SlideBar _energyBar;
-
-    [SerializeField] CoinDrop _coinDropPrefab;
-    [SerializeField] TextMeshProUGUI _coinsDropText;
-    private int _coinDrop;
-
     [SerializeField] GameObject _pauseUI;
 
+    [Header("-----Statistic UI------")]
+    [SerializeField] CoinDrop _coinDropPrefab;
+    [SerializeField] TextMeshProUGUI _coinsDropText;
+    [SerializeField] TextMeshProUGUI _timerText;
+    private float _elapsedTime;
+    private int _coinDrop;
+
+
+    [Header("-----Game Over UI------")]
     [SerializeField] GameObject _gameOverUI;
     [SerializeField] TextMeshProUGUI _lastCoinsText;
+    [SerializeField] TextMeshProUGUI _survivingTimeText;
 
     // Giữ reference để hủy đăng ký khi player bị destroy
     private PlayerControllerBase _boundPlayer;
@@ -27,7 +32,13 @@ public class HUDController : Singleton<HUDController>, IDataPersistence
 
         GameManager.OnPlayerReady += OnPlayerReady;
     }
-
+    private void Update()
+    {
+        _elapsedTime += Time.deltaTime;
+        int minutes = Mathf.FloorToInt(_elapsedTime / 60);
+        int seconds = Mathf.FloorToInt(_elapsedTime % 60);
+        _timerText.text = string.Format("{0:00} : {1:00}", minutes, seconds);
+    }
     private void OnDestroy()
     {
         GameManager.OnPlayerReady -= OnPlayerReady;
@@ -131,6 +142,7 @@ public class HUDController : Singleton<HUDController>, IDataPersistence
     {
         Time.timeScale = 0f;
         _lastCoinsText.text = _coinDrop.ToString();
+        _survivingTimeText.text = _timerText.text;
         _gameOverUI.gameObject.SetActive(true);
     }
     public void OnRestartBtnClicked()
