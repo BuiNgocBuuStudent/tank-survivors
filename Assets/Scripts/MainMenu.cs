@@ -2,7 +2,6 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using static UnityEditor.Timeline.TimelinePlaybackControls;
 
 public class MainMenu : MonoBehaviour
 {
@@ -11,6 +10,7 @@ public class MainMenu : MonoBehaviour
     [SerializeField] TextMeshProUGUI _coinText;
     private UpgradeManager _upgradeManager;
 
+    [SerializeField] GameObject _settingUI;
     private void OnDisable()
     {
         _upgradeManager.OnCoinsChanged -= UpdateCoinUI;
@@ -23,21 +23,36 @@ public class MainMenu : MonoBehaviour
         _upgradeManager = UpgradeManager.Instance;
         UpdateCoinUI(_upgradeManager.PlayCoins);
         _upgradeManager.OnCoinsChanged += UpdateCoinUI;
+
+        AudioManager.Instance.PlayMusic(MusicType.menuTheme);
     }
 
     private void UpdateCoinUI(int playerCoin)
     {
         _coinText.text = playerCoin.ToString();
     }
-    public void OnStartButtonClicked()
+    public void OnStartBtnClicked()
     {
+        AudioManager.Instance.PlaySFX(SFXType.btnPlay);
         DisableButton();
         DataPersistenceManager.Instance.NewGame();
         UpgradeManager.Instance.PrepareForGame(); // Ghi data vào SessionData trước khi đổi scene
         SceneManager.LoadSceneAsync("PlayScene");
+        int index = Random.Range(0, 3);
+        AudioManager.Instance.PlayMusic((MusicType)index);
         Time.timeScale = 1f;
     }
 
+    public void OnSettingBtnClicked()
+    {
+        AudioManager.Instance.PlaySFX(SFXType.btnClick);
+        _settingUI.SetActive(true);
+    }
+    public void OnCancelBtnClicked()
+    {
+        AudioManager.Instance.PlaySFX(SFXType.btnClick);
+        _settingUI.gameObject.SetActive(false);
+        }
     private void DisableButton()
     {
         _startBtn.interactable = false;

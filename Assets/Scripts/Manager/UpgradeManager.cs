@@ -216,6 +216,7 @@ public class UpgradeManager : Singleton<UpgradeManager>, IDataPersistence
         Debug.Log($"[UpgradeManager] Tank{_selectedTankId}.{statName} → Lv.{currentLevel + 1} (-{cost} coin)");
 
         OnUpgradeStatChanged?.Invoke();
+        AudioManager.Instance.PlaySFX(SFXType.btnUpgrade);
 
         return true;
     }
@@ -418,9 +419,9 @@ public class UpgradeManager : Singleton<UpgradeManager>, IDataPersistence
         _unlockedSkills.Add(skillIndex);
         Debug.Log($"[UpgradeManager] Unlock '{skill.skillName}' (Tier {skill.tier})! (-{skill.cost} coin)");
 
-        // 7. Thông báo UI
+        // 7. Thông báo UI, play sound
         OnUnlockSkillChanged?.Invoke();
-
+        AudioManager.Instance.PlaySFX(SFXType.btnUpgrade);
         return true;
     }
 

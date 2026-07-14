@@ -30,13 +30,9 @@ public class SkillItemUI : MonoBehaviour
         RefreshState();
     }
 
-    /// <summary>
-    /// Gắn vào Button OnClick trong prefab.
-    /// </summary>
     public void OnUnlockButtonClicked()
     {
         _upgradeManager.UnlockSkill(_skillIndex);
-        // UI sẽ refresh qua SkillController lắng nghe RefreshSkills
     }
 
     /// <summary>

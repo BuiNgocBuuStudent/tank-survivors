@@ -43,6 +43,7 @@ public class TankUnlockController : MonoBehaviour
 
     public void OnRightArrowClicked()
     {
+        AudioManager.Instance.PlaySFX(SFXType.btnClick);
         _currentSpriteIndex++;
 
         if (_currentSpriteIndex > _tankSprites.Length - 1)
@@ -59,6 +60,7 @@ public class TankUnlockController : MonoBehaviour
 
     public void OnLeftArrowClicked()
     {
+        AudioManager.Instance.PlaySFX(SFXType.btnClick);
         _currentSpriteIndex--;
 
         if (_currentSpriteIndex < 0)
@@ -75,6 +77,7 @@ public class TankUnlockController : MonoBehaviour
 
     public void OnSelectButtonClicked()
     {
+        AudioManager.Instance.PlaySFX(SFXType.btnClick);
         if (_upgradeManager.SetSelectedTank(_currentSpriteIndex))
         {
             _selectedTank = _currentSpriteIndex;
@@ -84,6 +87,7 @@ public class TankUnlockController : MonoBehaviour
 
     public void OnUnlockTankButtonClicked()
     {
+        AudioManager.Instance.PlaySFX(SFXType.btnUpgrade);
         if (_upgradeManager.UnlockTank(_currentSpriteIndex))
         {
             SetUnlockTankUI(true);

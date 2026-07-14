@@ -126,15 +126,18 @@ public class HUDController : Singleton<HUDController>, IDataPersistence
     #region Pause/Over Game State
     public void OnPauseBtnClicked()
     {
+        AudioManager.Instance.PlaySFX(SFXType.btnClick);
         Time.timeScale = 0f;
         _pauseUI.gameObject.SetActive(true);
     }
     public void OnHomeBtnClicked()
     {
+        AudioManager.Instance.PlaySFX(SFXType.btnClick);
         SceneManager.LoadSceneAsync("MainMenu");
     }
     public void OnCancelBtnClicked()
     {
+        AudioManager.Instance.PlaySFX(SFXType.btnClick);
         _pauseUI.gameObject.SetActive(false);
         Time.timeScale = 1f;
     }
@@ -147,6 +150,7 @@ public class HUDController : Singleton<HUDController>, IDataPersistence
     }
     public void OnRestartBtnClicked()
     {
+        AudioManager.Instance.PlaySFX(SFXType.btnClick);
         Time.timeScale = 1f;
         SceneManager.LoadSceneAsync("PlayScene");
         _gameOverUI.gameObject.SetActive(false);

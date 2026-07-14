@@ -63,6 +63,8 @@ public class GunController01 : GunControllerBase
         }
         else
             SpawnBaseBullet(this.transform.up, this.transform.position);
+
+        AudioManager.Instance.PlaySFX(SFXType.tank1Shoot);
     }
 
     private void SpawnBaseBullet(Vector2 direction, Vector3 spawnPos)

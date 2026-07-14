@@ -61,5 +61,7 @@ public class GunController03 : GunControllerBase
         }
 
         bullet.gameObject.SetActive(true);
+
+        AudioManager.Instance.PlaySFX(SFXType.tank3Shoot);
     }
 }

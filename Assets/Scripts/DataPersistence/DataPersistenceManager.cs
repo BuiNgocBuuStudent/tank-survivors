@@ -4,9 +4,8 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class DataPersistenceManager : MonoBehaviour
+public class DataPersistenceManager : Singleton<DataPersistenceManager>
 {
-    public static DataPersistenceManager Instance { get; private set; }
     private GameData _gameData;
     private List<IDataPersistence> _dataPersistenceObjects;
     private FileDataHandler _fileDataHandler;
@@ -18,14 +17,9 @@ public class DataPersistenceManager : MonoBehaviour
     [SerializeField] string _fileName;
     [SerializeField] bool _useEncryption;
 
-    private void Awake()
+    protected override void Awake()
     {
-        if(Instance != null)
-        {
-            Destroy(this.gameObject);
-            return;
-        }
-        Instance = this;
+        base.Awake();
         this._fileDataHandler = new FileDataHandler(Application.persistentDataPath, _fileName, _useEncryption);
         DontDestroyOnLoad(this.gameObject);
     }
