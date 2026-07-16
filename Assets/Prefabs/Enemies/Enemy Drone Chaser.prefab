@@ -200,6 +200,7 @@ MonoBehaviour:
   _enemyDataBase: {fileID: 11400000, guid: 2ce25f750aebcec48a56618e13773b5e, type: 2}
   _currentHealth: 0
   _speedMultiplier: 1
+  _floatingPoints: {fileID: 1907628811617383582, guid: 19fab244002839748821ae00fa888925, type: 3}
 --- !u!61 &1241374044143755955
 BoxCollider2D:
   m_ObjectHideFlags: 0

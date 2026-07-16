@@ -245,4 +245,5 @@ MonoBehaviour:
   _enemyDataBase: {fileID: 11400000, guid: 3788743c0a360cb4bb9a1bbe5fc69ddf, type: 2}
   _currentHealth: 0
   _speedMultiplier: 1
+  _floatingPoints: {fileID: 1907628811617383582, guid: 19fab244002839748821ae00fa888925, type: 3}
   _state: 0

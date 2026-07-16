@@ -32,6 +32,7 @@ public abstract class EnemyControllerBase : MonoBehaviour, IGetHit
     /// </summary>
     public static event Action<Vector3, float> OnEnemyDeath;
 
+    [SerializeField] FloatingTextHandler _floatingPoints;
     public void Init(Vector2 randomSpawnPos)
     {
         if (_rb == null)
@@ -110,6 +111,12 @@ public abstract class EnemyControllerBase : MonoBehaviour, IGetHit
 
         Debug.LogError("Enemy take damage: " + dmg);
         _currentHealth -= dmg;
+
+            FloatingTextHandler floatingDmg = ObjectPooler.Instance.GetComp(_floatingPoints);
+            floatingDmg.Init(Color.white, dmg.ToString());
+            floatingDmg.transform.position = this.transform.position;
+            floatingDmg.gameObject.SetActive(true);
+
         if (_currentHealth <= 0)
         {
             _isDead = true;

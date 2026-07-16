@@ -18,7 +18,8 @@ public class PlayerControllerBase : MonoBehaviour, IGetHit, IDataPersistence
     [SerializeField] protected float _currentHealth, _currentEnergy;
     [SerializeField] protected float _moveSpeed, _rotateSpeed, _armorPercent;
     [SerializeField] protected bool _isFullEnergy;
-    // true khi năng lượng vừa cạn — chặn tăng tốc cho đến khi nạp lại ≥15%
+
+    // true khi năng lượng vừa cạn - chặn tăng tốc cho đến khi nạp lại ≥ 15%
     // Tránh bug giữa MOVE/ACCELERATE do recharge coroutine trả lại energy từng chút
     private bool _isEnergyDepleted;
 
@@ -38,6 +39,8 @@ public class PlayerControllerBase : MonoBehaviour, IGetHit, IDataPersistence
 
     public event Action<float> OnMaxEnergySet;
     public event Action<float> OnEnergyChanged;
+
+    [SerializeField] FloatingTextHandler _floatingPoints;
 
     public enum PlayerState
     {
@@ -66,11 +69,6 @@ public class PlayerControllerBase : MonoBehaviour, IGetHit, IDataPersistence
         _isEnergyDepleted = false;
         _playerState = PlayerState.IDLE;
         _gun.Init();
-    }
-
-    void Update()
-    {
-
     }
 
     private void FixedUpdate()
@@ -172,6 +170,11 @@ public class PlayerControllerBase : MonoBehaviour, IGetHit, IDataPersistence
         float realDmg = dmg * (1 - _armorPercent / 100);
         Debug.LogError("Player take damage: " + realDmg);
         _currentHealth -= realDmg;
+
+        FloatingTextHandler floatingDmg = ObjectPooler.Instance.GetComp(_floatingPoints);
+        floatingDmg.Init(Color.red, realDmg.ToString());
+        floatingDmg.transform.position = this.transform.position;
+        floatingDmg.gameObject.SetActive(true);
 
         OnHealthChanged?.Invoke(_currentHealth);
 

@@ -141,7 +141,11 @@ MonoBehaviour:
   _rotateSpeed: 4
   _armorPercent: 0
   _isFullEnergy: 0
+  _drainRate: 5
+  _rechargeRate: 2.5
+  _rechargeDelay: 2
   dmgMult: 0
+  _floatingPoints: {fileID: 1907628811617383582, guid: 19fab244002839748821ae00fa888925, type: 3}
 --- !u!61 &1046251142695240368
 BoxCollider2D:
   m_ObjectHideFlags: 0

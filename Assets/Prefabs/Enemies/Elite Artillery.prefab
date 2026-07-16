@@ -200,6 +200,7 @@ MonoBehaviour:
   _enemyDataBase: {fileID: 11400000, guid: 22a99a4c543641146acda3d465966aab, type: 2}
   _currentHealth: 0
   _speedMultiplier: 1
+  _floatingPoints: {fileID: 1907628811617383582, guid: 19fab244002839748821ae00fa888925, type: 3}
   _warningCircle: {fileID: 3629630184782895015, guid: 4f3f3b1049332e34a8da52e9a4561144, type: 3}
   _artilleryPrefab: {fileID: -3315908226238710061, guid: 1f01e6fc221c3894ab4317501a8a9030, type: 3}
 --- !u!70 &2174798508408203932

@@ -200,6 +200,7 @@ MonoBehaviour:
   _enemyDataBase: {fileID: 11400000, guid: f865897178e3f8d4a90f3e23491c3498, type: 2}
   _currentHealth: 0
   _speedMultiplier: 1
+  _floatingPoints: {fileID: 1907628811617383582, guid: 19fab244002839748821ae00fa888925, type: 3}
   _enemyBulletPrefab: {fileID: 124490361264825382, guid: 1cc1f5c5c265250439f5e61030489287, type: 3}
 --- !u!70 &752139901509980748
 CapsuleCollider2D:
@@ -233,6 +234,6 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.013448864}
-  m_Size: {x: 0.5, y: 0.51968426}
+  m_Offset: {x: 0, y: 0.046821028}
+  m_Size: {x: 0.5, y: 0.5864286}
   m_Direction: 0
