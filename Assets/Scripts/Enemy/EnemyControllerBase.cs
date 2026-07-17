@@ -112,10 +112,13 @@ public abstract class EnemyControllerBase : MonoBehaviour, IGetHit
         Debug.LogError("Enemy take damage: " + dmg);
         _currentHealth -= dmg;
 
+        if (HUDController.Instance.isDisplayDamage)
+        {
             FloatingTextHandler floatingDmg = ObjectPooler.Instance.GetComp(_floatingPoints);
             floatingDmg.Init(Color.white, dmg.ToString());
             floatingDmg.transform.position = this.transform.position;
             floatingDmg.gameObject.SetActive(true);
+        }
 
         if (_currentHealth <= 0)
         {

@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class MainMenu : MonoBehaviour
 {
     [SerializeField] Button _startBtn;
-    [SerializeField] Button _continueBtn;
     [SerializeField] TextMeshProUGUI _coinText;
     private UpgradeManager _upgradeManager;
 
@@ -17,9 +16,6 @@ public class MainMenu : MonoBehaviour
     }
     private void Start()
     {
-        if (!DataPersistenceManager.Instance.HasGameData())
-            _continueBtn.interactable = false;
-
         _upgradeManager = UpgradeManager.Instance;
         UpdateCoinUI(_upgradeManager.PlayCoins);
         _upgradeManager.OnCoinsChanged += UpdateCoinUI;

@@ -26,9 +26,12 @@ public class HUDController : Singleton<HUDController>, IDataPersistence
     // Giữ reference để hủy đăng ký khi player bị destroy
     private PlayerControllerBase _boundPlayer;
 
+    public bool isDisplayDamage;
     protected override void Awake()
     {
-        base.Awake(); 
+        base.Awake();
+
+        isDisplayDamage = PlayerPrefs.GetInt("displayDamage", 0) == 1;
 
         GameManager.OnPlayerReady += OnPlayerReady;
     }

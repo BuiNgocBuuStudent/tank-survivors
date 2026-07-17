@@ -171,10 +171,13 @@ public class PlayerControllerBase : MonoBehaviour, IGetHit, IDataPersistence
         Debug.LogError("Player take damage: " + realDmg);
         _currentHealth -= realDmg;
 
-        FloatingTextHandler floatingDmg = ObjectPooler.Instance.GetComp(_floatingPoints);
-        floatingDmg.Init(Color.red, realDmg.ToString());
-        floatingDmg.transform.position = this.transform.position;
-        floatingDmg.gameObject.SetActive(true);
+        if (HUDController.Instance.isDisplayDamage)
+        {
+            FloatingTextHandler floatingDmg = ObjectPooler.Instance.GetComp(_floatingPoints);
+            floatingDmg.Init(Color.red, realDmg.ToString());
+            floatingDmg.transform.position = this.transform.position;
+            floatingDmg.gameObject.SetActive(true);
+        }
 
         OnHealthChanged?.Invoke(_currentHealth);
 
@@ -203,8 +206,8 @@ public class PlayerControllerBase : MonoBehaviour, IGetHit, IDataPersistence
         _currentHealth = sessionData.health;
         _initialEnergy = sessionData.energy;
         _currentEnergy = sessionData.energy;
-        _armorPercent  = sessionData.armor;
-        dmgMult        = sessionData.dmgMult;
+        _armorPercent = sessionData.armor;
+        dmgMult = sessionData.dmgMult;
 
         OnMaxHealthSet?.Invoke(_initialHealth);
         OnMaxEnergySet?.Invoke(_initialEnergy);
