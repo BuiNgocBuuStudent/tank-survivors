@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SkillUpgrade02
   m_EditorClassIdentifier: 
   skillName: Faster Reload
-  description: "Gi\u1EA3m cooldown 20%"
+  description: Reduced cooldown by 20%
   tier: 2
   cost: 250
   tankId: Tank03

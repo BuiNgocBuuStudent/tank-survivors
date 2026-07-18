@@ -410,7 +410,7 @@ MonoBehaviour:
   _rechargeRate: 2.5
   _rechargeDelay: 2
   dmgMult: 1
-  _floatingPoints: {fileID: 2720957077168771730, guid: 19fab244002839748821ae00fa888925, type: 3}
+  _floatingPoints: {fileID: 1907628811617383582, guid: 19fab244002839748821ae00fa888925, type: 3}
 --- !u!61 &2678187661344930175
 BoxCollider2D:
   m_ObjectHideFlags: 0

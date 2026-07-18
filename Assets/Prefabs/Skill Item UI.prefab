@@ -223,8 +223,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: '-'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 0d00892b3f30f514f8ecc9930591f309, type: 2}
+  m_sharedMaterial: {fileID: 4432979208782159518, guid: 0d00892b3f30f514f8ecc9930591f309, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -254,7 +254,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 1
+  m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -324,8 +324,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -91.222, y: -42.800507}
-  m_SizeDelta: {x: 815.44, y: 85.601}
+  m_AnchoredPosition: {x: -91.222, y: -31.725}
+  m_SizeDelta: {x: 815.44, y: 107.75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &214030123606397112
 CanvasRenderer:
@@ -355,10 +355,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "M\xF4 t\u1EA3"
+  m_text: Enemies who die within the poison zone will explode, creating an additional
+    small cloud of poison (50% radius, 50% damage, 50% duration)
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 0d00892b3f30f514f8ecc9930591f309, type: 2}
+  m_sharedMaterial: {fileID: 4432979208782159518, guid: 0d00892b3f30f514f8ecc9930591f309, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -390,7 +391,7 @@ MonoBehaviour:
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -458,7 +459,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -91.22153, y: 29.8497}
+  m_AnchoredPosition: {x: -91.224, y: 52}
   m_SizeDelta: {x: 815.4431, y: 59.6994}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6123546840850451537
@@ -491,15 +492,15 @@ MonoBehaviour:
       m_Calls: []
   m_text: Skill Name
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 0d00892b3f30f514f8ecc9930591f309, type: 2}
+  m_sharedMaterial: {fileID: 4432979208782159518, guid: 0d00892b3f30f514f8ecc9930591f309, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278255615
+  m_fontColor: {r: 1, g: 1, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -748,7 +749,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1083, y: 230}
+  m_SizeDelta: {x: 1083, y: 250}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8595857466094355564
 CanvasRenderer:

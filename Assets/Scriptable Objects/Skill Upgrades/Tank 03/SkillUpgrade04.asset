@@ -13,8 +13,7 @@ MonoBehaviour:
   m_Name: SkillUpgrade04
   m_EditorClassIdentifier: 
   skillName: Shockwave
-  description: "V\u1EE5 n\u1ED5 l\xE0m ch\u1EADm 30% t\u1EA5t c\u1EA3 k\u1EBB \u0111\u1ECBch
-    trong ph\u1EA1m vi trong 2s"
+  description: The explosion slows all enemies within range by 30% for 2 seconds
   tier: 4
   cost: 1500
   tankId: Tank03

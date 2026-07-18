@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: SkillUpgrade03
   m_EditorClassIdentifier: 
   skillName: Cluster Bomb
-  description: "\u0110\u1EA1n ph\xE1t n\u1ED5 t\u1EA1o th\xEAm 5 m\u1EA3nh \u0111\u1EA1n
-    nh\u1ECF g\xE2y 30% damage g\u1ED1c"
+  description: The exploding shell creates 5 small shrapnel fragments, dealing 30%
+    of the original damage
   tier: 3
   cost: 600
   tankId: Tank03

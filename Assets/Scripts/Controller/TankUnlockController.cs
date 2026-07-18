@@ -96,7 +96,7 @@ public class TankUnlockController : MonoBehaviour
 
     private void SetSelectTankText()
     {
-        _selectTankText.text = _selectedTank == _currentSpriteIndex ? "đã chọn" : "chọn";
+        _selectTankText.text = _selectedTank == _currentSpriteIndex ? "selected" : "select";
     }
 
     private void SetSwapTankUI()

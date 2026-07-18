@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SkillUpgrade01
   m_EditorClassIdentifier: 
   skillName: Bigger Boom
-  description: "T\u0103ng b\xE1n k\xEDnh n\u1ED5 30%"
+  description: Increase the blast radius by 30%
   tier: 1
   cost: 100
   tankId: Tank03

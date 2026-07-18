@@ -13,8 +13,7 @@ MonoBehaviour:
   m_Name: SkillUpgrade04
   m_EditorClassIdentifier: 
   skillName: Knockback Blast
-  description: "M\u1ED7i ph\xE1t b\u1EAFn t\u1EA1o s\xF3ng xung k\xEDch nh\u1ECF
-    \u0111\u1EA9y l\xF9i k\u1EBB \u0111\u1ECBch"
+  description: Each shot creates a small shock wave that pushes the enemy back
   tier: 4
   cost: 1500
   tankId: Tank02

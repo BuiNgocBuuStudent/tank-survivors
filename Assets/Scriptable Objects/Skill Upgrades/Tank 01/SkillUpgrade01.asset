@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SkillUpgrade01
   m_EditorClassIdentifier: 
   skillName: Rapid Fire
-  description: "Gi\u1EA3m cooldown 25%"
+  description: Reduced cooldown by 25%
   tier: 1
   cost: 100
   tankId: Tank01
