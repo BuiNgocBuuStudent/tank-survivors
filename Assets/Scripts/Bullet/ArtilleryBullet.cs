@@ -8,8 +8,9 @@ public class ArtilleryBullet : EnemyBulletBase
     [SerializeField] private GameObject _explosionEffectPrefab;
     [SerializeField] private float _explosionRadius;
 
-    protected override void Boom(GameObject target)
+    protected override void TriggerHit(GameObject target)
     {
+        base.TriggerHit(target);
         TriggerExplosion();
     }
 
@@ -36,7 +37,7 @@ public class ArtilleryBullet : EnemyBulletBase
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        this.Boom(collision.gameObject);
+        this.TriggerHit(collision.gameObject);
     }
 
     private void OnDrawGizmosSelected()

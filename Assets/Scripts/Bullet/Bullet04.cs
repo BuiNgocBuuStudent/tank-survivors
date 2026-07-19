@@ -120,7 +120,7 @@ public class Bullet04 : BulletBase
         );
     }
 
-    protected override void Boom(GameObject target)
+    private void Explode()
     {
         _lastBoomPos = this.transform.position;
         _hasBoomOccurred = true;
@@ -186,10 +186,18 @@ public class Bullet04 : BulletBase
             )
         );
     }
-
+    protected override IEnumerator RepeatLifeTime()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(_lifeTime);
+            this.Explode();
+            this.gameObject.SetActive(false);
+        }
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        this.Boom(collision.gameObject);
+        this.Explode();
     }
 
     private void OnDrawGizmosSelected()

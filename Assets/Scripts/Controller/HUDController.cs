@@ -111,7 +111,7 @@ public class HUDController : Singleton<HUDController>, IDataPersistence
     }
     #endregion
 
-    #region Coin Drop
+#region Coin Drop
 
     public void SpawnCoinDrop(Vector3 pos)
     {
@@ -126,7 +126,7 @@ public class HUDController : Singleton<HUDController>, IDataPersistence
     }
     #endregion
 
-    #region Pause/Over Game State
+#region Pause/Over Game State
     public void OnPauseBtnClicked()
     {
         AudioManager.Instance.PlaySFX(SFXType.btnClick);
@@ -154,9 +154,14 @@ public class HUDController : Singleton<HUDController>, IDataPersistence
     public void OnRestartBtnClicked()
     {
         AudioManager.Instance.PlaySFX(SFXType.btnClick);
-        Time.timeScale = 1f;
-        SceneManager.LoadSceneAsync("PlayScene");
         _gameOverUI.gameObject.SetActive(false);
+
+        SceneManager.LoadSceneAsync("PlayScene");
+
+        int index = Random.Range(0, 3);
+        AudioManager.Instance.PlayMusic((MusicType)index);
+
+        Time.timeScale = 1f;
     }
     #endregion
     public void LoadData(GameData data)

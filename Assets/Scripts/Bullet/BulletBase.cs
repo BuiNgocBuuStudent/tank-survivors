@@ -70,5 +70,12 @@ public abstract class BulletBase : MonoBehaviour
             this.gameObject.SetActive(false);
         }
     }
-    protected abstract void Boom(GameObject target);
+    protected virtual void TriggerHit(GameObject target)
+    {
+        this.gameObject.SetActive(false);
+
+        _isCanGetHit = target.GetComponent<IGetHit>();
+        _isCanGetHit?.GetHit(this._dmg);
+    }
+
 }

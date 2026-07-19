@@ -18,4 +18,4 @@ MonoBehaviour:
   coinDrop: 5
   stopRange: 5.5
   fireRate: 1.5
-  bulletSpeed: 6
+  bulletSpeed: 5

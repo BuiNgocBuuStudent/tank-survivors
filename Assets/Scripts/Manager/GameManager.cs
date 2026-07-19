@@ -12,9 +12,6 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] EnemyManager _enemyManager;
     public EnemyManager EnemyManager => _enemyManager;
 
-    [SerializeField] BoostManager _boostManager;
-    public BoostManager BoostManager => _boostManager;
-
     [Header("===== Session Data (Scene Transfer) =====")]
     [SerializeField] PlayerSessionData _sessionData;
 

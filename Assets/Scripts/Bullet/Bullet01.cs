@@ -22,7 +22,7 @@ public class Bullet01 : BulletBase
         _hasIncendiaryAmmo = active;
     }
 
-    protected override void Boom(GameObject target)
+    protected override void TriggerHit(GameObject target)
     {
         _isCanGetHit = target.GetComponent<IGetHit>();
         _isCanGetHit?.GetHit(this._dmg);
@@ -47,6 +47,6 @@ public class Bullet01 : BulletBase
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        this.Boom(collision.gameObject);
+        this.TriggerHit(collision.gameObject);
     }
 }

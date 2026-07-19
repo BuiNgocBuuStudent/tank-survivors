@@ -47,7 +47,7 @@ public class GunController03 : GunControllerBase
         bullet.Init(_bulletSpeed, this.transform.up);
         bullet.transform.SetPositionAndRotation(this.transform.position, this.transform.rotation);
 
-        // Tier 1: Bigger Boom — truyền flag vào Bullet03
+        // Tier 1: Bigger TriggerHit — truyền flag vào Bullet03
         Bullet03 bullet03 = bullet as Bullet03;
         if (bullet03 != null)
         {

@@ -5,6 +5,8 @@ public class EliteArtillery : EnemyControllerBase
 {
     [Header("--- Enemy Elite Artillery Config ---")]
     [SerializeField] private GameObject _warningCircle;
+    private GameObject _activeWarningCircle;
+
     [SerializeField] private ArtilleryBullet _artilleryPrefab;
 
     private EliteArtilleryConfig _config => (EliteArtilleryConfig)EnemyData;
@@ -53,6 +55,7 @@ public class EliteArtillery : EnemyControllerBase
 
         Vector3 targetPos = Player.transform.position;
         GameObject warningCircle = ObjectPooler.Instance.GetObject(_warningCircle);
+        _activeWarningCircle = warningCircle;
         if (warningCircle != null)
         {
             warningCircle.transform.position = targetPos;
@@ -66,7 +69,8 @@ public class EliteArtillery : EnemyControllerBase
 
         while (elapsed < aimDuration)
         {
-            if (!gameObject.activeInHierarchy) yield break;
+            if (!gameObject.activeInHierarchy)
+                yield break;
 
             elapsed += Time.deltaTime;
             float t = Mathf.Clamp01(elapsed / aimDuration);
@@ -82,6 +86,7 @@ public class EliteArtillery : EnemyControllerBase
 
         if (warningCircle != null)
             warningCircle.SetActive(false);
+        _activeWarningCircle = null;
 
         Shoot(targetPos);
 
@@ -102,8 +107,11 @@ public class EliteArtillery : EnemyControllerBase
 
     protected override void OnDie(float lastDmg)
     {
-        if (_warningCircle != null)
-            _warningCircle.SetActive(false);
+        if (_activeWarningCircle != null)
+        {
+            _activeWarningCircle.SetActive(false);
+            _activeWarningCircle = null;
+        }
 
         _isFiring = false;
         StopAllCoroutines();

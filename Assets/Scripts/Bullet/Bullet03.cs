@@ -45,7 +45,7 @@ public class Bullet03 : BulletBase
         _hasShockwave = shockwave;
         _hasNapalmStrike = napalmStrike;
 
-        // Tier 1: Bigger Boom — tăng bán kính nổ 30%
+        // Tier 1: Bigger TriggerHit — tăng bán kính nổ 30%
         if (_hasBiggerBoom)
         {
             _damageRadius = _baseDamageRadius * 1.3f;
@@ -56,8 +56,7 @@ public class Bullet03 : BulletBase
             _damageRadius = _baseDamageRadius;
         }
     }
-
-    protected override void Boom(GameObject target)
+    private void Explode()
     {
         this.gameObject.SetActive(false);
 
@@ -99,7 +98,10 @@ public class Bullet03 : BulletBase
             );
         }
     }
-
+    protected override void TriggerHit(GameObject target)
+    {
+        
+    }
     /// <summary>
     /// Spawn các mảnh đạn nhỏ tỏa đều xung quanh hướng đạn đang bay
     /// Mỗi mảnh gây 30% damage gốc.
@@ -134,14 +136,13 @@ public class Bullet03 : BulletBase
         while (true)
         {
             yield return new WaitForSeconds(_lifeTime);
+            this.Explode();
             this.gameObject.SetActive(false);
-            if (_hasClusterBomb)
-                SpawnClusterFragments();
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        this.Boom(collision.gameObject);
+        this.Explode();
     }
 
     private void OnDrawGizmosSelected()

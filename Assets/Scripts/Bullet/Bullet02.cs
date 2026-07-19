@@ -27,12 +27,9 @@ public class Bullet02 : BulletBase
         _enemyMask = enemyMask;
     }
 
-    protected override void Boom(GameObject target)
+    protected override void TriggerHit(GameObject target)
     {
-        this.gameObject.SetActive(false);
-
-        _isCanGetHit = target.GetComponent<IGetHit>();
-        _isCanGetHit?.GetHit(this._dmg);
+        base.TriggerHit(target);
 
         // Tier 5: Chain Reaction — chỉ subscribe SAU KHI bullet trúng enemy
         if (_hasChainReaction)
@@ -79,7 +76,7 @@ public class Bullet02 : BulletBase
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        this.Boom(collision.gameObject);
+        this.TriggerHit(collision.gameObject);
     }
 
     private void OnDrawGizmosSelected()

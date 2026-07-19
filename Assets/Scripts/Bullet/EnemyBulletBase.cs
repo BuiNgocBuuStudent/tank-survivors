@@ -13,15 +13,13 @@ public class EnemyBulletBase : BulletBase
         this._speed = speed;
         this._movement = movement;
     }
-    protected override void Boom(GameObject target)
+    protected override void TriggerHit(GameObject target)
     {
-        this.gameObject.SetActive(false);
-        _isCanGetHit = target.GetComponent<IGetHit>();
-        _isCanGetHit?.GetHit(this._dmg);
+        base.TriggerHit(target);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        this.Boom(collision.gameObject);
+        this.TriggerHit(collision.gameObject);
     }
 }
