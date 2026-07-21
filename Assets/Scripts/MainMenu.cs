@@ -10,6 +10,8 @@ public class MainMenu : MonoBehaviour
     private UpgradeManager _upgradeManager;
 
     [SerializeField] GameObject _settingUI;
+
+    [SerializeField] GameObject _controlUI;
     private void OnDisable()
     {
         _upgradeManager.OnCoinsChanged -= UpdateCoinUI;
@@ -44,11 +46,17 @@ public class MainMenu : MonoBehaviour
         AudioManager.Instance.PlaySFX(SFXType.btnClick);
         _settingUI.SetActive(true);
     }
+    public void OnControlBtnClicked()
+    {
+        AudioManager.Instance.PlaySFX(SFXType.btnClick);
+        _controlUI.SetActive(true);
+    }
     public void OnCancelBtnClicked()
     {
         AudioManager.Instance.PlaySFX(SFXType.btnClick);
-        _settingUI.gameObject.SetActive(false);
-        }
+        _settingUI.SetActive(false);
+        _controlUI.SetActive(false);
+    }
     private void DisableButton()
     {
         _startBtn.interactable = false;
