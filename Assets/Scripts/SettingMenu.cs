@@ -31,6 +31,7 @@ public class SettingMenu : MonoBehaviour
 
     public void OnDisplayDmgBtnClicked()
     {
+        AudioManager.Instance.PlaySFX(SFXType.btnClick);
         PlayerPrefs.SetInt("displayDamage", _displayDmgToggle.isOn ? 1 : 0);
     }
 }
