@@ -14,7 +14,7 @@ public class SettingMenu : MonoBehaviour
     private void OnEnable()
     {
         _musicSlider.value = PlayerPrefs.GetFloat("music", 1f);
-        _sfxSlider.value   = PlayerPrefs.GetFloat("sfx",   1f);
+        _sfxSlider.value = PlayerPrefs.GetFloat("sfx", 1f);
         _displayDmgToggle.isOn = PlayerPrefs.GetInt("displayDamage", 0) == 1;
     }
 

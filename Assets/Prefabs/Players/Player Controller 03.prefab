@@ -358,7 +358,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0fdd2f326ac8f34eb4fb1b865bee5b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _trackAnim: {fileID: 0}
+  _trackAnim: {fileID: 1087410638488640105}
   _leftExhaustAnim: {fileID: 5659420186174680468}
   _rightExhaustAnim: {fileID: 6674233337255376317}
 --- !u!1 &8881788333888614334
@@ -576,6 +576,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a16ee8cb8b8333d4b9c057841170bf60, type: 3}
+--- !u!95 &1087410638488640105 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 1627981318683232797, guid: a16ee8cb8b8333d4b9c057841170bf60, type: 3}
+  m_PrefabInstance: {fileID: 1837611948092330100}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1391970613073536805 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 779623775196510033, guid: a16ee8cb8b8333d4b9c057841170bf60, type: 3}
