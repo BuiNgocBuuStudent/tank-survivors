@@ -216,6 +216,7 @@ public class UpgradeManager : Singleton<UpgradeManager>, IDataPersistence
         Debug.Log($"[UpgradeManager] Tank{_selectedTankId}.{statName} → Lv.{currentLevel + 1} (-{cost} coin)");
 
         OnUpgradeStatChanged?.Invoke();
+        AudioManager.Instance.PlaySFX(SFXType.btnUpgrade);
 
         return true;
     }
@@ -418,9 +419,9 @@ public class UpgradeManager : Singleton<UpgradeManager>, IDataPersistence
         _unlockedSkills.Add(skillIndex);
         Debug.Log($"[UpgradeManager] Unlock '{skill.skillName}' (Tier {skill.tier})! (-{skill.cost} coin)");
 
-        // 7. Thông báo UI
+        // 7. Thông báo UI, play sound
         OnUnlockSkillChanged?.Invoke();
-
+        AudioManager.Instance.PlaySFX(SFXType.btnUpgrade);
         return true;
     }
 
@@ -475,10 +476,10 @@ public class UpgradeManager : Singleton<UpgradeManager>, IDataPersistence
                 _sessionData.activeSkills.Add(_skillConfigs[i].skillName);
         }
 
-        Debug.Log($"[UpgradeManager] PrepareForGame → Tank{_selectedTankId}: " +
-                  $"HP={_sessionData.health}, EN={_sessionData.energy}, " +
-                  $"AR={_sessionData.armor}, DMG={_sessionData.dmgMult}, " +
-                  $"Skills=[{string.Join(", ", _sessionData.activeSkills)}]");
+        Debug.LogError($"[UpgradeManager] PrepareForGame → TANK{_selectedTankId}: " +
+                  $"HP={_sessionData.health}, ENERGY={_sessionData.energy}, " +
+                  $"ARMOR={_sessionData.armor}, DMG MULT={_sessionData.dmgMult}, " +
+                  $"SKILLlS=[{string.Join(", ", _sessionData.activeSkills)}]");
     }
 
     #endregion
@@ -515,7 +516,7 @@ public class UpgradeManager : Singleton<UpgradeManager>, IDataPersistence
             : new List<int>();
 
 
-        Debug.Log($"[UpgradeManager] Loaded: {_playerCoins} coins, " +
+        Debug.LogError($"[UpgradeManager] Loaded: {_playerCoins} coins, " +
                   $"{_statLevels.Count} stats, {_unlockedSkills.Count} skills, " +
                   $"{_unlockedTanksId.Count} tanks");
 

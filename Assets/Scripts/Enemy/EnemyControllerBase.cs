@@ -13,11 +13,14 @@ public abstract class EnemyControllerBase : MonoBehaviour, IGetHit
     [SerializeField] EnemyConfigBase _enemyDataBase;
 
     [SerializeField] float _currentHealth;
-    /// <summary>EnemySlowState sẽ điều chỉnh field này</summary>
+    // EnemySlowState sẽ điều chỉnh field này
     [SerializeField] float _speedMultiplier = 1f;
 
-    /// <summary>Khi true: ChaseTarget() bị bỏ qua, nhường cho knockback velocity</summary>
+    // Khi true: ChaseTarget() bị bỏ qua, nhường cho knockback velocity
     private bool _isKnockedBack;
+
+    //flat chống OnDie bị gọi nhiều lần khi shotgun bắn nhiều viên cùng frame
+    private bool _isDead;
 
     protected Rigidbody2D Rb => _rb;
     protected PlayerControllerBase Player => _player;
@@ -29,7 +32,7 @@ public abstract class EnemyControllerBase : MonoBehaviour, IGetHit
     /// </summary>
     public static event Action<Vector3, float> OnEnemyDeath;
 
-
+    [SerializeField] FloatingTextHandler _floatingPoints;
     public void Init(Vector2 randomSpawnPos)
     {
         if (_rb == null)
@@ -39,6 +42,7 @@ public abstract class EnemyControllerBase : MonoBehaviour, IGetHit
         _enemyManager = GameManager.Instance.EnemyManager;
 
         _currentHealth = _enemyDataBase.intialHealth;
+        _isDead = false;
         this.transform.position = randomSpawnPos;
 
         OnInit();
@@ -100,12 +104,25 @@ public abstract class EnemyControllerBase : MonoBehaviour, IGetHit
 
     public virtual void GetHit(float dmg)
     {
+        if (_isDead) return;
+
         if (gameObject.activeSelf)
             _flashEffect.Flash();
 
+        Debug.LogError("Enemy take damage: " + dmg);
         _currentHealth -= dmg;
+
+        if (HUDController.Instance.isDisplayDamage)
+        {
+            FloatingTextHandler floatingDmg = ObjectPooler.Instance.GetComp(_floatingPoints);
+            floatingDmg.Init(Color.white, dmg.ToString());
+            floatingDmg.transform.position = this.transform.position;
+            floatingDmg.gameObject.SetActive(true);
+        }
+
         if (_currentHealth <= 0)
         {
+            _isDead = true;
             OnDie(dmg);
         }
     }
@@ -113,10 +130,13 @@ public abstract class EnemyControllerBase : MonoBehaviour, IGetHit
     protected virtual void OnDie(float lastDmg)
     {
         OnEnemyDeath?.Invoke(this.transform.position, lastDmg);
-
-        this.gameObject.SetActive(false);
         _flashEffect.ResetMaterial();
-        _enemyManager.SpawnExpGem(this.transform.position);
+        this.gameObject.SetActive(false);
+
+        HUDController.Instance.SpawnCoinDrop(this.transform.position);
+
+        HUDController.Instance.SetCoinDropText(_enemyDataBase.coinDrop);
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SkillUpgrade02
   m_EditorClassIdentifier: 
   skillName: Piercing Rounds
-  description: "\u0110\u1EA1n xuy\xEAn qua 1 k\u1EBB \u0111\u1ECBch"
+  description: The bullet pierced through an enemy
   tier: 2
   cost: 250
   tankId: Tank01

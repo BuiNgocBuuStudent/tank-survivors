@@ -13,8 +13,7 @@ MonoBehaviour:
   m_Name: SkillUpgrade05
   m_EditorClassIdentifier: 
   skillName: Chain Reaction
-  description: "K\u1EBB \u0111\u1ECBch b\u1ECB ti\xEAu di\u1EC7t ph\xE1t n\u1ED5
-    g\xE2y 50% damage cho k\u1EBB \u0111\u1ECBch xung quanh"
+  description: Destroyed enemies explode, dealing 50% damage to surrounding enemies
   tier: 5
   cost: 3500
   tankId: Tank02

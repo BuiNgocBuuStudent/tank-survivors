@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SkillUpgrade01
   m_EditorClassIdentifier: 
   skillName: Wider Spread
-  description: "T\u0103ng ph\u1EA1m vi t\u1EA5n c\xF4ng l\xEAn 30%"
+  description: Increase attack range by 30%
   tier: 1
   cost: 100
   tankId: Tank02

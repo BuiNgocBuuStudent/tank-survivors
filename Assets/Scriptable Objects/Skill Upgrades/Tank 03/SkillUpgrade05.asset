@@ -13,9 +13,8 @@ MonoBehaviour:
   m_Name: SkillUpgrade05
   m_EditorClassIdentifier: 
   skillName: Napalm Strike
-  description: "V\u1EE5 n\u1ED5 \u0111\u1EC3 l\u1EA1i v\xF9ng l\u1EEDa t\u1EA1i ch\u1ED7
-    n\u1ED5, g\xE2y 15% damage \u0111\u1ED1t ch\xE1y k\u1EBB \u0111\u1ECBch trong
-    v\xF2ng 4s"
+  description: The explosion leaves a fiery zone at the blast site, dealing 15% burning
+    damage to enemies for 4 seconds
   tier: 5
   cost: 3500
   tankId: Tank03

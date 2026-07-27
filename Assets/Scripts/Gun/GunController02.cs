@@ -103,6 +103,8 @@ public class GunController02 : GunControllerBase
             bullet.transform.SetPositionAndRotation(this.transform.position, this.transform.rotation);
             bullet.gameObject.SetActive(true);
         }
+
+        AudioManager.Instance.PlaySFX(SFXType.tank2Shoot);
     }
 
     /// <summary>

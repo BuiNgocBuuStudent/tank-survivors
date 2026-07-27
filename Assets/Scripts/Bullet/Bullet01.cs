@@ -22,7 +22,7 @@ public class Bullet01 : BulletBase
         _hasIncendiaryAmmo = active;
     }
 
-    protected override void Boom(GameObject target)
+    protected override void TriggerHit(GameObject target)
     {
         _isCanGetHit = target.GetComponent<IGetHit>();
         _isCanGetHit?.GetHit(this._dmg);
@@ -30,7 +30,7 @@ public class Bullet01 : BulletBase
         // Tier 4: Incendiary Ammo
         if (_hasIncendiaryAmmo)
         {
-            float dotDmgPerTick = _dmg * 0.2f;
+            float dotDmgPerTick = _dmg * 0.12f;
             EffectManager.Instance.ApplyDOT(target, dotDmgPerTick, tickInterval: 0.5f, duration: 2f);
         }
 
@@ -47,6 +47,6 @@ public class Bullet01 : BulletBase
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        this.Boom(collision.gameObject);
+        this.TriggerHit(collision.gameObject);
     }
 }

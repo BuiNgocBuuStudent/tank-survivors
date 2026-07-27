@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: SkillUpgrade04
   m_EditorClassIdentifier: 
   skillName: Toxic Trail
-  description: "\u0110\u1EA1n bay \u0111\u1EC3 l\u1EA1i v\u1EC7t kh\xF3i \u0111\u1ED9c
-    tr\xEAn \u0111\u01B0\u1EDDng bay, g\xE2y 30% damage trong v\xF2ng 1.5s"
+  description: The projectile leaves a trail of toxic smoke in its flight path, dealing
+    30% damage over 1.5 seconds
   tier: 4
   cost: 1500
   tankId: Tank04

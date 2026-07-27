@@ -3,7 +3,9 @@ using UnityEngine;
 
 public class GunController01 : GunControllerBase
 {
-    [SerializeField] bool _isDoubleBullet;
+    [Header("-----Tier 3: Double Barrel------")]
+    [SerializeField] float _bulletsDistance;
+    private bool _isDoubleBullet;
 
     // Tier 4: Incendiary Ammo
     private bool _hasIncendiaryAmmo;
@@ -11,7 +13,7 @@ public class GunController01 : GunControllerBase
     // Tier 5: Overcharge Shot
     private int _shotCounter;
     private bool _hasOverchargeShot;
-    private const int OverchargeInterval = 10;
+    private const int OverchargeInterval = 5;
 
     void Update()
     {
@@ -57,12 +59,14 @@ public class GunController01 : GunControllerBase
         if (_isDoubleBullet)
         {
             // Bắn 2 viên lệch nhẹ sang 2 bên
-            Vector3 offset = this.transform.right * 0.15f;
+            Vector3 offset = this.transform.right * _bulletsDistance;
             SpawnBaseBullet(this.transform.up, this.transform.position + offset);
             SpawnBaseBullet(this.transform.up, this.transform.position - offset);
         }
         else
             SpawnBaseBullet(this.transform.up, this.transform.position);
+
+        AudioManager.Instance.PlaySFX(SFXType.tank1Shoot);
     }
 
     private void SpawnBaseBullet(Vector2 direction, Vector3 spawnPos)

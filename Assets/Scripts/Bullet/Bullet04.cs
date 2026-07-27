@@ -59,11 +59,10 @@ public class Bullet04 : BulletBase
         _hasToxicTrail = toxicTrail;
         _hasPlagueCarrier = plagueCarrier;
 
-        // Tier 1: Toxic Expansion — tăng vùng độc 30%
+        // Tier 1: Toxic Expansion — tăng vùng độc 35%
         if (_hasToxicExpansion)
         {
-            _burningRange = _baseBurningRange * 1.3f;
-            _toxicZonePrefab.transform.localScale = Vector3.one * 1.3f;
+            _burningRange = _baseBurningRange * 1.35f;
         }
         else
         {
@@ -121,7 +120,7 @@ public class Bullet04 : BulletBase
         );
     }
 
-    protected override void Boom(GameObject target)
+    private void Explode()
     {
         _lastBoomPos = this.transform.position;
         _hasBoomOccurred = true;
@@ -130,9 +129,14 @@ public class Bullet04 : BulletBase
 
         GameObject prefab = ObjectPooler.Instance.GetObject(_toxicZonePrefab);
         prefab.transform.position = _lastBoomPos;
+        if (_hasToxicExpansion)
+            prefab.transform.localScale = Vector3.one * 1.4f;
+        else
+            prefab.transform.localScale = Vector3.one;
+
         prefab.SetActive(true);
 
-        // Tier 3: Corrosive Cloud — dùng CorrosiveBurning thay vì Burning bình thường
+        // Tier 3: Corrosive Cloud: Enemy trong vùng độc bị nhận thêm 20% damage
         if (_hasCorrosiveCloud)
         {
             EffectManager.Instance.StartCoroutine(
@@ -169,7 +173,7 @@ public class Bullet04 : BulletBase
 
         GameObject miniZone = ObjectPooler.Instance.GetObject(_toxicZonePrefab);
         miniZone.transform.position = pos;
-        miniZone.transform.localScale = Vector3.one * 0.5f;
+        miniZone.transform.localScale = Vector3.one * 0.3f;
         miniZone.SetActive(true);
 
         float miniDmg = _dmg * 0.5f;
@@ -182,16 +186,24 @@ public class Bullet04 : BulletBase
             )
         );
     }
-
+    protected override IEnumerator RepeatLifeTime()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(_lifeTime);
+            this.Explode();
+            this.gameObject.SetActive(false);
+        }
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        this.Boom(collision.gameObject);
+        this.Explode();
     }
 
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(this.transform.position, _burningRange);
-
+        Gizmos.DrawWireSphere(this.transform.position, _miniZoneRange);
     }
 }

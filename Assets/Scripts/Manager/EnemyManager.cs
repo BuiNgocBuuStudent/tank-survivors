@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
 {
-    [Header("=== Gem ===")]
-    [SerializeField] Gem _gemPrefab;
 
     [Header("=== Enemy Spawn Config ===")]
     [SerializeField] float _offset;
@@ -22,7 +20,7 @@ public class EnemyManager : MonoBehaviour
 
     private IEnumerator SpawnEnemyType(EnemySpawnEntry entry)
     {
-        yield return new WaitForSeconds(entry.unlockAtMinute);
+        yield return new WaitForSeconds(entry.spawnAtMinute * 60f);
 
         while (true)
         {
@@ -33,13 +31,6 @@ public class EnemyManager : MonoBehaviour
             enemy.Init(randomPos);
             enemy.gameObject.SetActive(true);
         }
-    }
-
-    public void SpawnExpGem(Vector2 enemyDiePos)
-    {
-        Gem gem = ObjectPooler.Instance.GetComp(_gemPrefab);
-        gem.transform.position = enemyDiePos;
-        gem.gameObject.SetActive(true);
     }
 
     private Vector2 GetRandomSpawnPos()
@@ -71,12 +62,9 @@ public class EnemyManager : MonoBehaviour
 [System.Serializable]
 public struct EnemySpawnEntry
 {
-    [Tooltip("Prefab của enemy loại này")]
     public EnemyControllerBase prefab;
 
-    [Tooltip("Giây giữa mỗi lần spawn (spawn rate)")]
-    public float spawnInterval;
+    public float spawnAtMinute;
 
-    [Tooltip("Phút bắt đầu spawn loại enemy này (0 = ngay từ đầu)")]
-    public float unlockAtMinute;
+    public float spawnInterval;
 }

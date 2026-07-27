@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SkillUpgrade02
   m_EditorClassIdentifier: 
   skillName: Extra Pellets
-  description: "T\u0103ng th\xEAm 3 vi\xEAn \u0111\u1EA1n"
+  description: Add 3 more bullets
   tier: 2
   cost: 250
   tankId: Tank02

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SkillUpgrade02
   m_EditorClassIdentifier: 
   skillName: Lingering Fumes
-  description: "V\xF9ng \u0111\u1ED9c t\u1ED3n t\u1EA1i l\xE2u h\u01A1n 50%"
+  description: The toxic zone persists for 50% longer
   tier: 2
   cost: 250
   tankId: Tank04
